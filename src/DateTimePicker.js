@@ -101,9 +101,9 @@ class DateTimePicker extends React.Component {
     }
     render() {
         let {openPicker, daysCount, selectedDay, currentMonth, selectedYear, selectedMonthFirstDay, inputValue, selectedTime} = this.state;
-        let {id, placeholder} = this.props;
+        let {id, placeholder, disableFromUnix} = this.props;
         return (
-            <div>
+            <div style={{textAlign: "initial"}}>
                 <input type="text" id={id} placeholder={placeholder} dir="ltr" style={{textAlign: "right"}} readOnly value={inputValue} onClick={()=>{this.setState({openPicker: !openPicker})}} />
                 {openPicker && <div className="JDatePicker">
                     <div className="JDheader">
@@ -111,7 +111,7 @@ class DateTimePicker extends React.Component {
                             <Years changeEvent={(returnedYear)=>this.yearSelected(returnedYear)} year={selectedYear} />
                         </div>
                         <div className="left">
-                            <TimePicker changeEvent={(returnedTime)=>this.timeSelected(returnedTime)} selectedTime={selectedTime} />
+                            <TimePicker disableFromUnix={disableFromUnix} selectedYear={selectedYear} selectedDay={selectedDay} currentMonth={currentMonth} changeEvent={(returnedTime)=>this.timeSelected(returnedTime)} selectedTime={selectedTime} />
                         </div>
                     </div>
                     <Months clickEvent={(returnedMonth)=>this.monthsClicked(returnedMonth)} month={currentMonth} />
@@ -124,8 +124,8 @@ class DateTimePicker extends React.Component {
                         <div>پ</div>
                         <div>ج</div>
                     </div>
-                    <Days selectedYear={selectedYear} selectedDay={selectedDay} currentMonth={currentMonth} daysCount={daysCount}  firstDay={selectedMonthFirstDay} clickEvent={(day, momentDay)=>this.daysClicked(day, momentDay)}/>
-                    <div><button onClick={this.submitHandler} className="JDsubmit">تایید</button><button className="JDcancel" onClick={this.canclePicker}>لغو</button></div>
+                    <Days disableFromUnix={disableFromUnix} selectedYear={selectedYear} selectedDay={selectedDay} currentMonth={currentMonth} daysCount={daysCount}  firstDay={selectedMonthFirstDay} clickEvent={(day, momentDay)=>this.daysClicked(day, momentDay)}/>
+                    <div><button onClick={this.submitHandler} className="JDsubmit">تایید</button><button className="JDcancel" onClick={this.canclePicker}>بستن</button></div>
                 </div>}
             </div>
         )

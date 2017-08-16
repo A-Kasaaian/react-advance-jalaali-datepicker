@@ -210,7 +210,7 @@
 
                 return _react2.default.createElement(
                     "div",
-                    null,
+                    { style: { textAlign: "initial" } },
                     _react2.default.createElement("input", { type: "text", id: idStart, placeholder: placeholder, dir: "ltr", style: { textAlign: "right" }, readOnly: true, value: inputValue, onClick: function onClick() {
                             _this2.setState({ openPicker: !openPicker });
                         } }),

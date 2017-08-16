@@ -1,9 +1,9 @@
 import React from 'react';
 import moment from "moment-jalaali";
-import DatePicker from "./index.js";
+import DateTimePicker from "./DateTimePicker.js";
 
 
-class DateRangePicker extends React.Component {
+class DateTimeRangePicker extends React.Component {
     constructor(props){
         super(props);
         this.change = this.change.bind(this);
@@ -27,14 +27,14 @@ class DateRangePicker extends React.Component {
         if(!idStart) idStart="";
         if(!idEnd) idEnd="";
         return (
-            <div className="jdtrp" style={{textAlign: "initial"}}>
-                <DatePicker placeholder={placeholderStart} format={format} onChange={this.change} id={idStart} />
+            <div  className="jdtrp" style={{textAlign: "initial"}}>
+                <DateTimePicker placeholder={placeholderStart} format={format} onChange={this.change} id={idStart} />
                 <div>{"->"}</div>
                 {!disableFromUnix && <div>{placeholderEnd}</div>}
-                {!!disableFromUnix && <DatePicker placeholder={placeholderEnd} disableFromUnix={disableFromUnix} format={format} onChange={this.secondchange} id="datePicker" />}
+                {!!disableFromUnix && <DateTimePicker placeholder={placeholderEnd} disableFromUnix={disableFromUnix} format={format} onChange={this.secondchange} id="datePicker" />}
             </div>
         )
     }
     }
 
-export default DateRangePicker;
+export default DateTimeRangePicker;

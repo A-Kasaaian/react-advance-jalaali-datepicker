@@ -23,6 +23,7 @@ let Styles= (nDays)=>{
         }
         .JDatePicker .monthPicker {
             position: absolute;
+            right: -6px;
             width: 100%;
             background: #fff;
             text-align: center;
@@ -32,8 +33,12 @@ let Styles= (nDays)=>{
             box-shadow: 0px 0px 7px -2px #000;
             z-index: 1;
         }
+        .JDatePicker .month-items:hover, .JDatePicker .month-items.selected {
+            background: aliceblue;
+            color: #ccc;
+        }
         .JDatePicker .month-items {
-            width: 33.3%;
+            width: 32.5%;
             float: right;
             text-align: center;
             cursor: pointer;
@@ -86,11 +91,24 @@ let Styles= (nDays)=>{
         .JDatePicker .JDheader .left{
             text-align: center;
         }
-        .JDatePicker .JDheader .right input[type="tel"], .JDatePicker .JDheader .right .number {
+        .JDatePicker .JDheader .right .number {
             width: 70%;
             direction: ltr;
             text-align: center;
             display: inline-block;
+        }
+        .JDatePicker .JDheader .right .number:hover {
+            border: 1px solid #ccc;
+            cursor: text !important;
+        }
+        .JDatePicker .JDheader .right input[type="tel"] {
+            width: 40%;
+            z-index: 2;
+            direction: ltr;
+            text-align: center;
+            display: inline-block;
+            top: 8px;
+            position: absolute;
         }
         .JDatePicker .JC-tooltip {
             position: absolute;
@@ -109,6 +127,10 @@ let Styles= (nDays)=>{
         }
         .JDatePicker .JDsubmit{
             background: #7fc6ff;
+        }
+        .jdtrp > div {
+            display: initial;
+            margin: 0 6px;
         }
         `
     )

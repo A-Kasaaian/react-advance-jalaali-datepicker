@@ -227,11 +227,12 @@
                     selectedTime = _state2.selectedTime;
                 var _props3 = this.props,
                     id = _props3.id,
-                    placeholder = _props3.placeholder;
+                    placeholder = _props3.placeholder,
+                    disableFromUnix = _props3.disableFromUnix;
 
                 return _react2.default.createElement(
                     "div",
-                    null,
+                    { style: { textAlign: "initial" } },
                     _react2.default.createElement("input", { type: "text", id: id, placeholder: placeholder, dir: "ltr", style: { textAlign: "right" }, readOnly: true, value: inputValue, onClick: function onClick() {
                             _this2.setState({ openPicker: !openPicker });
                         } }),
@@ -251,7 +252,7 @@
                             _react2.default.createElement(
                                 "div",
                                 { className: "left" },
-                                _react2.default.createElement(_TimePicker2.default, { changeEvent: function changeEvent(returnedTime) {
+                                _react2.default.createElement(_TimePicker2.default, { disableFromUnix: disableFromUnix, selectedYear: selectedYear, selectedDay: selectedDay, currentMonth: currentMonth, changeEvent: function changeEvent(returnedTime) {
                                         return _this2.timeSelected(returnedTime);
                                     }, selectedTime: selectedTime })
                             )
@@ -298,7 +299,7 @@
                                 "\u062C"
                             )
                         ),
-                        _react2.default.createElement(_Days2.default, { selectedYear: selectedYear, selectedDay: selectedDay, currentMonth: currentMonth, daysCount: daysCount, firstDay: selectedMonthFirstDay, clickEvent: function clickEvent(day, momentDay) {
+                        _react2.default.createElement(_Days2.default, { disableFromUnix: disableFromUnix, selectedYear: selectedYear, selectedDay: selectedDay, currentMonth: currentMonth, daysCount: daysCount, firstDay: selectedMonthFirstDay, clickEvent: function clickEvent(day, momentDay) {
                                 return _this2.daysClicked(day, momentDay);
                             } }),
                         _react2.default.createElement(
@@ -312,7 +313,7 @@
                             _react2.default.createElement(
                                 "button",
                                 { className: "JDcancel", onClick: this.canclePicker },
-                                "\u0644\u063A\u0648"
+                                "\u0628\u0633\u062A\u0646"
                             )
                         )
                     )

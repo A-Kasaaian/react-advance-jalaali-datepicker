@@ -13,10 +13,15 @@ var _DateRangePicker = require('./dist/DateRangePicker');
 
 var _DateRangePicker2 = _interopRequireDefault(_DateRangePicker);
 
+var _DateTimeRangePicker = require('./dist/DateTimeRangePicker');
+
+var _DateTimeRangePicker2 = _interopRequireDefault(_DateTimeRangePicker);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = {
   DatePicker: _DatePicker2.default,
   DateTimePicker: _DateTimePicker2.default,
-  DateRangePicker: _DateRangePicker2.default
+  DateRangePicker: _DateRangePicker2.default,
+  DateTimeRangePicker: _DateTimeRangePicker2.default
 };

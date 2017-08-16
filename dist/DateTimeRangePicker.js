@@ -1,16 +1,16 @@
 (function (global, factory) {
     if (typeof define === "function" && define.amd) {
-        define(["exports", "react", "moment-jalaali", "./index.js"], factory);
+        define(["exports", "react", "moment-jalaali", "./DateTimePicker.js"], factory);
     } else if (typeof exports !== "undefined") {
-        factory(exports, require("react"), require("moment-jalaali"), require("./index.js"));
+        factory(exports, require("react"), require("moment-jalaali"), require("./DateTimePicker.js"));
     } else {
         var mod = {
             exports: {}
         };
-        factory(mod.exports, global.react, global.momentJalaali, global.index);
-        global.DateRangePicker = mod.exports;
+        factory(mod.exports, global.react, global.momentJalaali, global.DateTimePicker);
+        global.DateTimeRangePicker = mod.exports;
     }
-})(this, function (exports, _react, _momentJalaali, _index) {
+})(this, function (exports, _react, _momentJalaali, _DateTimePicker) {
     "use strict";
 
     Object.defineProperty(exports, "__esModule", {
@@ -21,7 +21,7 @@
 
     var _momentJalaali2 = _interopRequireDefault(_momentJalaali);
 
-    var _index2 = _interopRequireDefault(_index);
+    var _DateTimePicker2 = _interopRequireDefault(_DateTimePicker);
 
     function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : {
@@ -77,13 +77,13 @@
         if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
     }
 
-    var DateRangePicker = function (_React$Component) {
-        _inherits(DateRangePicker, _React$Component);
+    var DateTimeRangePicker = function (_React$Component) {
+        _inherits(DateTimeRangePicker, _React$Component);
 
-        function DateRangePicker(props) {
-            _classCallCheck(this, DateRangePicker);
+        function DateTimeRangePicker(props) {
+            _classCallCheck(this, DateTimeRangePicker);
 
-            var _this = _possibleConstructorReturn(this, (DateRangePicker.__proto__ || Object.getPrototypeOf(DateRangePicker)).call(this, props));
+            var _this = _possibleConstructorReturn(this, (DateTimeRangePicker.__proto__ || Object.getPrototypeOf(DateTimeRangePicker)).call(this, props));
 
             _this.change = _this.change.bind(_this);
             _this.secondchange = _this.secondchange.bind(_this);
@@ -91,7 +91,7 @@
             return _this;
         }
 
-        _createClass(DateRangePicker, [{
+        _createClass(DateTimeRangePicker, [{
             key: "change",
             value: function change(unix, formatted) {
                 var onChangeStart = this.props.onChangeStart;
@@ -124,7 +124,7 @@
                 return _react2.default.createElement(
                     "div",
                     { className: "jdtrp", style: { textAlign: "initial" } },
-                    _react2.default.createElement(_index2.default, { placeholder: placeholderStart, format: format, onChange: this.change, id: idStart }),
+                    _react2.default.createElement(_DateTimePicker2.default, { placeholder: placeholderStart, format: format, onChange: this.change, id: idStart }),
                     _react2.default.createElement(
                         "div",
                         null,
@@ -135,13 +135,13 @@
                         null,
                         placeholderEnd
                     ),
-                    !!disableFromUnix && _react2.default.createElement(_index2.default, { placeholder: placeholderEnd, disableFromUnix: disableFromUnix, format: format, onChange: this.secondchange, id: "datePicker" })
+                    !!disableFromUnix && _react2.default.createElement(_DateTimePicker2.default, { placeholder: placeholderEnd, disableFromUnix: disableFromUnix, format: format, onChange: this.secondchange, id: "datePicker" })
                 );
             }
         }]);
 
-        return DateRangePicker;
+        return DateTimeRangePicker;
     }(_react2.default.Component);
 
-    exports.default = DateRangePicker;
+    exports.default = DateTimeRangePicker;
 });

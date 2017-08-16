@@ -144,7 +144,8 @@
                             } },
                         yearString
                     ),
-                    editable && _react2.default.createElement("input", { type: "tel", ref: "year", placeholder: "\u0633\u0627\u0644", onChange: this.yearChanged, value: year }),
+                    editable && _react2.default.createElement("input", { type: "tel", ref: "year", placeholder: "\u0633\u0627\u0644", onChange: this.yearChanged, onBlur: this.yearChanged, value: year }),
+                    editable && _react2.default.createElement("div", { onClick: this.yearChanged, style: { content: "&quot;&quot", position: "absolute", width: "100%", height: "100%", top: "0px", zIndex: "1", left: "0px" } }),
                     error && _react2.default.createElement(
                         "div",
                         { className: "JC-tooltip" },
