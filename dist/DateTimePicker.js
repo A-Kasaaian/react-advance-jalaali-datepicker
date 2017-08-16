@@ -105,7 +105,7 @@
                 currentMonth: parseInt((0, _momentJalaali2.default)().format("jMM")),
                 selectedMonthFirstDay: (0, _momentJalaali2.default)((0, _momentJalaali2.default)().format("jYYYY") + "/" + (0, _momentJalaali2.default)().format("jMM") + "/01", "jYYYY/jMM/jDD").weekday(),
                 selectedDay: "",
-                selectedTime: (0, _momentJalaali2.default)().format("hh:mm"),
+                selectedTime: (0, _momentJalaali2.default)().format("HH:mm"),
                 inputValue: ""
             };
 
@@ -146,8 +146,8 @@
                     format = _props.format;
                 var selectedTime = this.state.selectedTime;
 
-                if (!format) format = "jYYYY-jMM-jDD hh:mm";
-                if (this.state.selectedDay != momentDay) this.setState({ selectedDay: momentDay, inputValue: (0, _momentJalaali2.default)(momentDay + " " + selectedTime, "jYYYYjMMjDD hh:mm").format(format) });
+                if (!format) format = "jYYYY-jMM-jDD HH:mm";
+                if (this.state.selectedDay != momentDay) this.setState({ selectedDay: momentDay, inputValue: (0, _momentJalaali2.default)(momentDay + " " + selectedTime, "jYYYYjMMjDD HH:mm").format(format) });
             }
         }, {
             key: "monthsClicked",
@@ -184,8 +184,8 @@
                 var format = this.props.format;
                 var selectedDay = this.state.selectedDay;
 
-                if (!format) format = "jYYYY-jMM-jDD hh:mm";
-                this.setState({ selectedTime: time, inputValue: (0, _momentJalaali2.default)(selectedDay + " " + time, "jYYYYjMMjDD hh:mm").format(format) });
+                if (!format) format = "jYYYY-jMM-jDD HH:mm";
+                this.setState({ selectedTime: time, inputValue: (0, _momentJalaali2.default)(selectedDay + " " + time, "jYYYYjMMjDD HH:mm").format(format) });
             }
         }, {
             key: "submitHandler",
@@ -201,8 +201,8 @@
                 if (!!selectedDay && !!selectedTime) {
                     this.setState({ openPicker: false });
                     var formatted = void 0;
-                    if (!!format) formatted = (0, _momentJalaali2.default)(selectedDay + " " + selectedTime, "jYYYYjMMjDD hh:mm").format(format);
-                    if (onChange) this.props.onChange((0, _momentJalaali2.default)(selectedDay + " " + selectedTime, "jYYYYjMMjDD hh:mm").unix(), formatted);
+                    if (!!format) formatted = (0, _momentJalaali2.default)(selectedDay + " " + selectedTime, "jYYYYjMMjDD HH:mm").format(format);
+                    if (onChange) this.props.onChange((0, _momentJalaali2.default)(selectedDay + " " + selectedTime, "jYYYYjMMjDD HH:mm").unix(), formatted);
                 }
             }
         }, {

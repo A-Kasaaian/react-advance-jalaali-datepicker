@@ -23,7 +23,7 @@ class DateTimePicker extends React.Component {
             currentMonth: parseInt(moment().format("jMM")),
             selectedMonthFirstDay: moment(moment().format("jYYYY")+"/"+moment().format("jMM")+"/01","jYYYY/jMM/jDD").weekday(),
             selectedDay: "",
-            selectedTime: moment().format("hh:mm"),
+            selectedTime: moment().format("HH:mm"),
             inputValue: ""
         };
 
@@ -55,8 +55,8 @@ class DateTimePicker extends React.Component {
     daysClicked(day, momentDay){
         let {onChange, format} = this.props;
         let {selectedTime} = this.state
-        if(!format) format = "jYYYY-jMM-jDD hh:mm"
-        if(this.state.selectedDay != momentDay)this.setState({selectedDay: momentDay, inputValue: moment(momentDay+" "+selectedTime, "jYYYYjMMjDD hh:mm").format(format)});
+        if(!format) format = "jYYYY-jMM-jDD HH:mm"
+        if(this.state.selectedDay != momentDay)this.setState({selectedDay: momentDay, inputValue: moment(momentDay+" "+selectedTime, "jYYYYjMMjDD HH:mm").format(format)});
     }
     monthsClicked(month){
         let {selectedYear} = this.state;
@@ -81,8 +81,8 @@ class DateTimePicker extends React.Component {
     timeSelected(time){
         let {format} = this.props;
         let {selectedDay} = this.state
-        if(!format) format = "jYYYY-jMM-jDD hh:mm"
-        this.setState({selectedTime: time, inputValue: moment(selectedDay+" "+time, "jYYYYjMMjDD hh:mm").format(format)});
+        if(!format) format = "jYYYY-jMM-jDD HH:mm"
+        this.setState({selectedTime: time, inputValue: moment(selectedDay+" "+time, "jYYYYjMMjDD HH:mm").format(format)});
     }
     submitHandler(e){
         e.preventDefault();
@@ -91,8 +91,8 @@ class DateTimePicker extends React.Component {
         if(!!selectedDay && !!selectedTime){
             this.setState({openPicker: false});
             let formatted;
-            if(!!format) formatted = moment(selectedDay+" "+selectedTime, "jYYYYjMMjDD hh:mm").format(format);
-            if(onChange)this.props.onChange(moment(selectedDay+" "+selectedTime, "jYYYYjMMjDD hh:mm").unix(), formatted)
+            if(!!format) formatted = moment(selectedDay+" "+selectedTime, "jYYYYjMMjDD HH:mm").format(format);
+            if(onChange)this.props.onChange(moment(selectedDay+" "+selectedTime, "jYYYYjMMjDD HH:mm").unix(), formatted)
         }
     }
     canclePicker(e){

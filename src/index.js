@@ -20,9 +20,9 @@ class JDatePicker extends React.Component {
             currentMonth: parseInt(moment().format("jMM")),
             selectedMonthFirstDay: moment(moment().format("jYYYY")+"/"+moment().format("jMM")+"/01","jYYYY/jMM/jDD").weekday(),
             selectedDay: "",
+            selectedDay: "",
             inputValue: ""
         };
-
         this.state.daysCount= this.daysInMonth(moment().format("jMM"), moment().format("jYYYY"));
     }
     daysInMonth(month, selectedYear){
@@ -33,7 +33,7 @@ class JDatePicker extends React.Component {
     }
     componentWillMount() {
         let {selectedMonthFirstDay} =this.state;
-    if(canUseDOM){
+        if(canUseDOM){
             let css = Styles(selectedMonthFirstDay),
             head = document.head || document.getElementsByTagName('head')[0],
             style = document.createElement('style');
@@ -79,7 +79,7 @@ class JDatePicker extends React.Component {
     }
     render() {
         let {openPicker, daysCount, selectedDay, currentMonth, selectedYear, selectedMonthFirstDay, inputValue} = this.state;
-        let {idStart, placeholder} = this.props;
+        let {idStart, placeholder, disableFromUnix} = this.props;
         return (
             <div>
                 <input type="text" id={idStart} placeholder={placeholder} dir="ltr" style={{textAlign: "right"}} readOnly value={inputValue} onClick={()=>{this.setState({openPicker: !openPicker})}} />
@@ -101,7 +101,7 @@ class JDatePicker extends React.Component {
                         <div>پ</div>
                         <div>ج</div>
                     </div>
-                    <Days selectedYear={selectedYear} selectedDay={selectedDay} currentMonth={currentMonth} daysCount={daysCount}  firstDay={selectedMonthFirstDay} clickEvent={(day, momentDay)=>this.daysClicked(day, momentDay)}/>
+                    <Days disableFromUnix={disableFromUnix} selectedYear={selectedYear} selectedDay={selectedDay} currentMonth={currentMonth} daysCount={daysCount}  firstDay={selectedMonthFirstDay} clickEvent={(day, momentDay)=>this.daysClicked(day, momentDay)}/>
                 </div>}
             </div>
         )
