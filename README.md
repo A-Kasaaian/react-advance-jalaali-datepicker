@@ -1,1 +1,6 @@
-react-jalaali-datepicker-git
+# Date Time Picker for jalali calender.
+
+
+## License
+
+MIT
