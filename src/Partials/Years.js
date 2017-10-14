@@ -37,7 +37,8 @@ class Years extends React.Component {
             <div className="JC-years">
                 <span>سال: </span>
                 {!editable && <span className="number" style={{cursor: "pointer"}} onClick={()=>this.setState({editable: true})}>{yearString}</span>}
-                {editable && <input type="tel" ref="year" placeholder="سال" onChange={this.yearChanged} value={year} />}
+                {editable && <input type="tel" ref="year" placeholder="سال" onChange={this.yearChanged} onBlur={this.yearChanged} value={year} />}
+                {editable && <div onClick={this.yearChanged} style={{content: "&quot;&quot", position: "absolute", width: "100%", height: "100%", top: "0px", zIndex: "1", left: "0px"}}></div>}
                 {error && <div className="JC-tooltip"><p style={{color: "red"}}>{error}</p></div>}
             </div>
         )

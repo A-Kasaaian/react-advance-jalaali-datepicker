@@ -1,16 +1,16 @@
 (function (global, factory) {
     if (typeof define === "function" && define.amd) {
-        define(['exports', 'react'], factory);
+        define(['exports', 'react', 'moment-jalaali'], factory);
     } else if (typeof exports !== "undefined") {
-        factory(exports, require('react'));
+        factory(exports, require('react'), require('moment-jalaali'));
     } else {
         var mod = {
             exports: {}
         };
-        factory(mod.exports, global.react);
+        factory(mod.exports, global.react, global.momentJalaali);
         global.Days = mod.exports;
     }
-})(this, function (exports, _react) {
+})(this, function (exports, _react, _momentJalaali) {
     'use strict';
 
     Object.defineProperty(exports, "__esModule", {
@@ -18,6 +18,8 @@
     });
 
     var _react2 = _interopRequireDefault(_react);
+
+    var _momentJalaali2 = _interopRequireDefault(_momentJalaali);
 
     function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : {
@@ -95,7 +97,15 @@
 
             var _this = _possibleConstructorReturn(this, (Days.__proto__ || Object.getPrototypeOf(Days)).call(this, props));
 
-            _this.state = { selectedDay: "", daysCount: _this.props.daysCount };
+            _this.state = { selectedDay: "", daysCount: _this.props.daysCount, selectedYear: _this.props.selectedYear };
+
+            var unix = "";
+            if (!!_this.props.disableFromUnix) unix = _this.props.disableFromUnix;
+            if (!!unix) {
+                _this.state.disableFromYear = (0, _momentJalaali2.default)(unix * 1000).format("jYYYY");
+                _this.state.disableFromMonth = (0, _momentJalaali2.default)(unix * 1000).format("jMM");
+                _this.state.disableFromDay = (0, _momentJalaali2.default)(unix * 1000).format("jDD");
+            }
             return _this;
         }
 
@@ -117,13 +127,20 @@
                 var _props = this.props,
                     firstDay = _props.firstDay,
                     currentMonth = _props.currentMonth,
-                    selectedYear = _props.selectedYear,
                     selectedDay = _props.selectedDay;
-                var daysCount = this.state.daysCount;
+                var _state = this.state,
+                    daysCount = _state.daysCount,
+                    disableFromYear = _state.disableFromYear,
+                    disableFromMonth = _state.disableFromMonth,
+                    disableFromDay = _state.disableFromDay,
+                    selectedYear = _state.selectedYear;
 
                 var year = selectedYear.toString();
                 var month = currentMonth.toString();
                 if (month.length == 1) month = "0" + month;
+                var enable = true;
+                var check = false;
+                if (disableFromYear > year) enable = false;else if (disableFromYear == year && disableFromMonth > month) enable = false;else if (disableFromYear == year && disableFromMonth == month) check = true;
                 var result = [];
 
                 var _loop = function _loop(i) {
@@ -136,7 +153,14 @@
                     if (i == 1) marginRight = firstDay * 14.28 + "%";
                     if (i < 10) date = year + month + "0" + i.toString();else date = year + month + i.toString();
                     if (date == selectedDay) addedClass = " selected";
-                    result.push(_react2.default.createElement(
+                    if (check) {
+                        if (i < disableFromDay) enable = false;else enable = true;
+                    }
+                    if (!enable) result.push(_react2.default.createElement(
+                        'div',
+                        { className: "day-items" + addedClass, style: { background: "#ccc", cursor: "default", marginRight: marginRight }, ref: date, key: i },
+                        number
+                    ));else if (enable) result.push(_react2.default.createElement(
                         'div',
                         { className: "day-items" + addedClass, ref: date, style: { marginRight: marginRight }, key: i, onClick: function onClick() {
                                 return _this2.dayClicked(1, date);
@@ -159,7 +183,7 @@
                     this.setState({ daysCount: 0 });
                     var that = this;
                     window.setTimeout(function () {
-                        _this3.setState({ daysCount: nextProps.daysCount });
+                        _this3.setState({ daysCount: nextProps.daysCount, selectedYear: nextProps.selectedYear });
                     }, 10);
                 }
             }

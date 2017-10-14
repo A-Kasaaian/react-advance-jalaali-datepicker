@@ -1,16 +1,16 @@
 (function (global, factory) {
     if (typeof define === "function" && define.amd) {
-        define(["exports", "react"], factory);
+        define(["exports", "react", "moment-jalaali"], factory);
     } else if (typeof exports !== "undefined") {
-        factory(exports, require("react"));
+        factory(exports, require("react"), require("moment-jalaali"));
     } else {
         var mod = {
             exports: {}
         };
-        factory(mod.exports, global.react);
+        factory(mod.exports, global.react, global.momentJalaali);
         global.TimePicker = mod.exports;
     }
-})(this, function (exports, _react) {
+})(this, function (exports, _react, _momentJalaali) {
     "use strict";
 
     Object.defineProperty(exports, "__esModule", {
@@ -18,6 +18,8 @@
     });
 
     var _react2 = _interopRequireDefault(_react);
+
+    var _momentJalaali2 = _interopRequireDefault(_momentJalaali);
 
     function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : {
@@ -94,14 +96,24 @@
 
             var _this = _possibleConstructorReturn(this, (TimePicker.__proto__ || Object.getPrototypeOf(TimePicker)).call(this, props));
 
-            _this.timeChanged = _this.timeChanged.bind(_this);
-            _this.state = { editable: false, minuteEnable: true, time: _this.props.selectedTime, error: "", minute: Math.floor(parseInt(_this.props.selectedTime.substring(3, 5)) / 5) * 5, hour: _this.props.selectedTime.substring(0, 2) };
+            _this.minuteChanged = _this.minuteChanged.bind(_this);
+            _this.hourChanged = _this.hourChanged.bind(_this);
+            _this.state = { editable: false, minuteDisabled: true, time: _this.props.selectedTime, error: "", minute: Math.floor(parseInt(_this.props.selectedTime.substring(3, 5)) / 5) * 5, hour: _this.props.selectedTime.substring(0, 2) };
+            var unix = "";
+            if (!!_this.props.disableFromUnix) unix = _this.props.disableFromUnix;
+            if (!!unix) {
+                _this.state.disableFromYear = (0, _momentJalaali2.default)(unix * 1000).format("jYYYY");
+                _this.state.disableFromMonth = (0, _momentJalaali2.default)(unix * 1000).format("jMM");
+                _this.state.disableFromDay = (0, _momentJalaali2.default)(unix * 1000).format("jDD");
+                _this.state.disableFromHour = (0, _momentJalaali2.default)(unix * 1000).format("HH");
+                _this.state.disableFromMinute = (0, _momentJalaali2.default)(unix * 1000).format("mm");
+            }
             return _this;
         }
 
         _createClass(TimePicker, [{
-            key: "timeChanged",
-            value: function timeChanged() {
+            key: "minuteChanged",
+            value: function minuteChanged() {
                 var _refs = this.refs,
                     minute = _refs.minute,
                     hour = _refs.hour;
@@ -121,6 +133,23 @@
                 }
             }
         }, {
+            key: "hourChanged",
+            value: function hourChanged() {
+                var _refs2 = this.refs,
+                    minute = _refs2.minute,
+                    hour = _refs2.hour;
+                var changeEvent = this.props.changeEvent;
+
+                var minuteInt = parseInt(minute.value);
+                var houraInt = parseInt(hour.value);
+                if (houraInt > 0 && houraInt < 24) {
+                    if (!!changeEvent) changeEvent(hour.value + ":" + minute.value);
+                    this.setState({ error: "", minuteDisabled: false, hour: hour.value });
+                } else {
+                    this.setState({ error: "ساعت حداکثر ۲۴ باشد" });
+                }
+            }
+        }, {
             key: "componentWillReceiveProps",
             value: function componentWillReceiveProps(nextprops) {
                 this.setState({ time: nextprops.selectedTime });
@@ -128,21 +157,34 @@
         }, {
             key: "TimePicker",
             value: function TimePicker() {
-                var _this2 = this;
-
                 var _state = this.state,
                     minute = _state.minute,
                     hour = _state.hour,
-                    minuteEnable = _state.minuteEnable;
+                    minuteDisabled = _state.minuteDisabled,
+                    disableFromMinute = _state.disableFromMinute,
+                    disableFromHour = _state.disableFromHour,
+                    disableFromYear = _state.disableFromYear,
+                    disableFromMonth = _state.disableFromMonth,
+                    disableFromDay = _state.disableFromDay;
+                var _props = this.props,
+                    selectedYear = _props.selectedYear,
+                    currentMonth = _props.currentMonth,
+                    selectedDay = _props.selectedDay;
 
                 var hourOptions = [];
+                var initCheck = false;
+                if (currentMonth < 10) currentMonth = "0" + currentMonth;
+                if (!!selectedDay) selectedDay = (0, _momentJalaali2.default)(selectedDay, "jYYYYjMMjDD").format("jDD");
+                if (selectedYear == disableFromYear && currentMonth == disableFromMonth && selectedDay == disableFromDay) initCheck = true;
                 for (var i = 0; 23 >= i; i++) {
                     var number = i.toString();
+                    var enable = true;
                     if (i < 10) number = "0" + number;
                     var persianNumber = number.replace(/1|2|3|4|5|6|7|8|9|0/gi, function (e) {
                         return mapObj[e];
                     });
-                    hourOptions.push(_react2.default.createElement(
+                    if (initCheck && number <= disableFromHour) enable = false;
+                    if (enable) hourOptions.push(_react2.default.createElement(
                         "option",
                         { key: i, value: number },
                         persianNumber
@@ -150,9 +192,7 @@
                 }
                 var hourElement = _react2.default.createElement(
                     "select",
-                    { onChange: function onChange(e) {
-                            _this2.setState({ minuteEnable: false, hour: e.target.value });
-                        }, value: hour, ref: "hour" },
+                    { onChange: this.hourChanged, value: hour, ref: "hour" },
                     hourOptions
                 );
 
@@ -172,7 +212,7 @@
                 }
                 var minuteElement = _react2.default.createElement(
                     "select",
-                    { disabled: minuteEnable, value: minute, onChange: this.timeChanged, ref: "minute" },
+                    { disabled: minuteDisabled, value: minute, onChange: this.minuteChanged, ref: "minute" },
                     minuteOptions
                 );
 
@@ -195,12 +235,13 @@
         }, {
             key: "render",
             value: function render() {
-                var _this3 = this;
+                var _this2 = this;
 
                 var _state2 = this.state,
                     error = _state2.error,
                     time = _state2.time,
                     editable = _state2.editable;
+                var selectedDay = this.props.selectedDay;
 
                 var timeString = time.toString().replace(/1|2|3|4|5|6|7|8|9|0/gi, function (e) {
                     return mapObj[e];
@@ -211,11 +252,16 @@
                     !editable && _react2.default.createElement(
                         "div",
                         { className: "number", style: { cursor: "pointer" }, onClick: function onClick() {
-                                return _this3.setState({ editable: true });
+                                return _this2.setState({ editable: true });
                             } },
                         timeString
                     ),
-                    editable && this.TimePicker(),
+                    !!selectedDay && editable && this.TimePicker(),
+                    editable && !selectedDay && _react2.default.createElement(
+                        "p",
+                        { style: { color: "darkorange", fontSize: "12px" } },
+                        "\u0627\u0628\u062A\u062F\u0627 \u06CC\u06A9 \u062A\u0627\u0631\u06CC\u062E \u0627\u0646\u062A\u062E\u0627\u0628 \u0646\u0645\u0627\u06CC\u06CC\u062F"
+                    ),
                     error && _react2.default.createElement(
                         "div",
                         { className: "JC-tooltip" },

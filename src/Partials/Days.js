@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from "moment-jalaali";
 const canUseDOM = !!(
   (typeof window !== 'undefined' &&
   window.document && window.document.createElement)
@@ -19,7 +20,15 @@ const mapObj = {
 class Days extends React.Component {
     constructor(props) {
         super(props);
-        this.state={selectedDay: "", daysCount: this.props.daysCount}
+        this.state={selectedDay: "", daysCount: this.props.daysCount, selectedYear: this.props.selectedYear}
+
+        let unix = "";
+        if(!!this.props.disableFromUnix) unix =this.props.disableFromUnix;
+        if(!!unix){
+            this.state.disableFromYear= moment(unix*1000).format("jYYYY");
+            this.state.disableFromMonth= moment(unix*1000).format("jMM");
+            this.state.disableFromDay= moment(unix*1000).format("jDD");
+        }
     }
     dayClicked(i, element){
         let {clickEvent} = this.props;
@@ -29,11 +38,16 @@ class Days extends React.Component {
         this.refs[element].className += " selected";
     }
     renderDays(){
-        let {firstDay, currentMonth, selectedYear, selectedDay} = this.props;
-        let {daysCount} = this.state;
+        let {firstDay, currentMonth, selectedDay} = this.props;
+        let {daysCount, disableFromYear, disableFromMonth, disableFromDay, selectedYear} = this.state;
         let year = selectedYear.toString();
         let month = currentMonth.toString();
         if(month.length == 1)month = "0"+month;
+        let enable = true;
+        let check = false;
+        if(disableFromYear > year) enable = false;
+        else if(disableFromYear == year && disableFromMonth > month) enable = false;
+        else if(disableFromYear == year && disableFromMonth == month) check = true;
         let result= []
         for(let i = 1; daysCount >= i; i++){
             let addedClass= ""
@@ -44,7 +58,12 @@ class Days extends React.Component {
             if(i < 10) date=year+month+"0"+i.toString();
             else date=year+month+i.toString();
             if(date == selectedDay)addedClass = " selected";
-            result.push(<div className={"day-items"+addedClass} ref={date} style={{marginRight: marginRight}} key={i} onClick={()=>this.dayClicked(1, date)}>{number}</div>)
+            if(check){
+                if(i < disableFromDay) enable = false;
+                else enable = true;
+            }
+            if(!enable)  result.push(<div className={"day-items"+addedClass} style={{background: "#ccc", cursor: "default", marginRight: marginRight}} ref={date} key={i}>{number}</div>)
+            else if (enable) result.push(<div className={"day-items"+addedClass} ref={date} style={{marginRight: marginRight}} key={i} onClick={()=>this.dayClicked(1, date)}>{number}</div>)
         }
         return result;
     }
@@ -52,7 +71,7 @@ class Days extends React.Component {
         if(canUseDOM){
             this.setState({daysCount: 0});
             let that = this;
-            window.setTimeout(()=>{this.setState({daysCount: nextProps.daysCount})},10);
+            window.setTimeout(()=>{this.setState({daysCount: nextProps.daysCount, selectedYear: nextProps.selectedYear})},10);
         }
         
     }

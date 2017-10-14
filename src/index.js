@@ -14,15 +14,17 @@ class JDatePicker extends React.Component {
     constructor(props) {
         super(props);
         this.daysInMonth = this.daysInMonth.bind(this);
+        let preSelected= ""
+        if(this.props.preSelected) preSelected= this.props.preSelected;
         this.state = {
             openPicker: false,
             selectedYear: parseInt(moment().format("jYYYY")),
             currentMonth: parseInt(moment().format("jMM")),
             selectedMonthFirstDay: moment(moment().format("jYYYY")+"/"+moment().format("jMM")+"/01","jYYYY/jMM/jDD").weekday(),
             selectedDay: "",
-            inputValue: ""
+            selectedDay: "",
+            inputValue: preSelected
         };
-
         this.state.daysCount= this.daysInMonth(moment().format("jMM"), moment().format("jYYYY"));
     }
     daysInMonth(month, selectedYear){
@@ -33,12 +35,13 @@ class JDatePicker extends React.Component {
     }
     componentWillMount() {
         let {selectedMonthFirstDay} =this.state;
-    if(canUseDOM){
+        if(canUseDOM  && !document.getElementById("jdstyle")){
             let css = Styles(selectedMonthFirstDay),
             head = document.head || document.getElementsByTagName('head')[0],
             style = document.createElement('style');
 
             style.type = 'text/css';
+            style.id= "jdstyle";
             if (style.styleSheet){
             style.styleSheet.cssText = css;
             } else {
@@ -79,9 +82,9 @@ class JDatePicker extends React.Component {
     }
     render() {
         let {openPicker, daysCount, selectedDay, currentMonth, selectedYear, selectedMonthFirstDay, inputValue} = this.state;
-        let {idStart, placeholder} = this.props;
+        let {idStart, placeholder, disableFromUnix} = this.props;
         return (
-            <div>
+            <div style={{textAlign: "initial"}}>
                 <input type="text" id={idStart} placeholder={placeholder} dir="ltr" style={{textAlign: "right"}} readOnly value={inputValue} onClick={()=>{this.setState({openPicker: !openPicker})}} />
                 {openPicker && <div className="JDatePicker">
                     <div className="JDheader">
@@ -101,7 +104,7 @@ class JDatePicker extends React.Component {
                         <div>پ</div>
                         <div>ج</div>
                     </div>
-                    <Days selectedYear={selectedYear} selectedDay={selectedDay} currentMonth={currentMonth} daysCount={daysCount}  firstDay={selectedMonthFirstDay} clickEvent={(day, momentDay)=>this.daysClicked(day, momentDay)}/>
+                    <Days disableFromUnix={disableFromUnix} selectedYear={selectedYear} selectedDay={selectedDay} currentMonth={currentMonth} daysCount={daysCount}  firstDay={selectedMonthFirstDay} clickEvent={(day, momentDay)=>this.daysClicked(day, momentDay)}/>
                 </div>}
             </div>
         )

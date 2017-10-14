@@ -5,19 +5,21 @@ class Months extends React.Component {
         super(props);
         this.state={
             months: ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"],
-            monthPickerView: false
+            monthPickerView: false,
+            selectedMonth: this.props.month
         }
     }
-    monthClicked(i){
+    monthClicked(i,e){
         let {clickEvent} = this.props;
         if(clickEvent)clickEvent(i);
-        this.setState({monthPickerView: false})
+        this.setState({monthPickerView: false, selectedMonth: i})
     }
     renderMonths(){
-        let {months} = this.state;
+        let {months, selectedMonth} = this.state;
         let result= []
         for(let i = 1; months.length >= i; i++){
-            result.push(<div key={i} className="month-items" onClick={()=>this.monthClicked(i)}>{months[i-1]}</div>)
+            if(selectedMonth == i) result.push(<div key={i} className="month-items selected">{months[i-1]}</div>)
+            else result.push(<div key={i} className="month-items" onClick={(e)=>this.monthClicked(i,e)}>{months[i-1]}</div>)
         }
         return result;
     }

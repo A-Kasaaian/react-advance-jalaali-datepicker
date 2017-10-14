@@ -99,14 +99,16 @@
             _this.daysInMonth = _this.daysInMonth.bind(_this);
             _this.canclePicker = _this.canclePicker.bind(_this);
             _this.submitHandler = _this.submitHandler.bind(_this);
+            var preSelected = "";
+            if (_this.props.preSelected) preSelected = _this.props.preSelected;
             _this.state = {
                 openPicker: false,
                 selectedYear: parseInt((0, _momentJalaali2.default)().format("jYYYY")),
                 currentMonth: parseInt((0, _momentJalaali2.default)().format("jMM")),
                 selectedMonthFirstDay: (0, _momentJalaali2.default)((0, _momentJalaali2.default)().format("jYYYY") + "/" + (0, _momentJalaali2.default)().format("jMM") + "/01", "jYYYY/jMM/jDD").weekday(),
                 selectedDay: "",
-                selectedTime: (0, _momentJalaali2.default)().format("hh:mm"),
-                inputValue: ""
+                selectedTime: (0, _momentJalaali2.default)().format("HH:mm"),
+                inputValue: preSelected
             };
 
             _this.state.daysCount = _this.daysInMonth((0, _momentJalaali2.default)().format("jMM"), (0, _momentJalaali2.default)().format("jYYYY"));
@@ -123,12 +125,13 @@
             value: function componentWillMount() {
                 var selectedMonthFirstDay = this.state.selectedMonthFirstDay;
 
-                if (canUseDOM) {
+                if (canUseDOM && !document.getElementById("jdstyle")) {
                     var css = (0, _Styles2.default)(selectedMonthFirstDay),
                         head = document.head || document.getElementsByTagName('head')[0],
                         style = document.createElement('style');
 
                     style.type = 'text/css';
+                    style.id = "jdstyle";
                     if (style.styleSheet) {
                         style.styleSheet.cssText = css;
                     } else {
@@ -146,8 +149,8 @@
                     format = _props.format;
                 var selectedTime = this.state.selectedTime;
 
-                if (!format) format = "jYYYY-jMM-jDD hh:mm";
-                if (this.state.selectedDay != momentDay) this.setState({ selectedDay: momentDay, inputValue: (0, _momentJalaali2.default)(momentDay + " " + selectedTime, "jYYYYjMMjDD hh:mm").format(format) });
+                if (!format) format = "jYYYY-jMM-jDD HH:mm";
+                if (this.state.selectedDay != momentDay) this.setState({ selectedDay: momentDay, inputValue: (0, _momentJalaali2.default)(momentDay + " " + selectedTime, "jYYYYjMMjDD HH:mm").format(format) });
             }
         }, {
             key: "monthsClicked",
@@ -184,8 +187,8 @@
                 var format = this.props.format;
                 var selectedDay = this.state.selectedDay;
 
-                if (!format) format = "jYYYY-jMM-jDD hh:mm";
-                this.setState({ selectedTime: time, inputValue: (0, _momentJalaali2.default)(selectedDay + " " + time, "jYYYYjMMjDD hh:mm").format(format) });
+                if (!format) format = "jYYYY-jMM-jDD HH:mm";
+                this.setState({ selectedTime: time, inputValue: (0, _momentJalaali2.default)(selectedDay + " " + time, "jYYYYjMMjDD HH:mm").format(format) });
             }
         }, {
             key: "submitHandler",
@@ -201,8 +204,8 @@
                 if (!!selectedDay && !!selectedTime) {
                     this.setState({ openPicker: false });
                     var formatted = void 0;
-                    if (!!format) formatted = (0, _momentJalaali2.default)(selectedDay + " " + selectedTime, "jYYYYjMMjDD hh:mm").format(format);
-                    if (onChange) this.props.onChange((0, _momentJalaali2.default)(selectedDay + " " + selectedTime, "jYYYYjMMjDD hh:mm").unix(), formatted);
+                    if (!!format) formatted = (0, _momentJalaali2.default)(selectedDay + " " + selectedTime, "jYYYYjMMjDD HH:mm").format(format);
+                    if (onChange) this.props.onChange((0, _momentJalaali2.default)(selectedDay + " " + selectedTime, "jYYYYjMMjDD HH:mm").unix(), formatted);
                 }
             }
         }, {
@@ -227,11 +230,12 @@
                     selectedTime = _state2.selectedTime;
                 var _props3 = this.props,
                     id = _props3.id,
-                    placeholder = _props3.placeholder;
+                    placeholder = _props3.placeholder,
+                    disableFromUnix = _props3.disableFromUnix;
 
                 return _react2.default.createElement(
                     "div",
-                    null,
+                    { style: { textAlign: "initial" } },
                     _react2.default.createElement("input", { type: "text", id: id, placeholder: placeholder, dir: "ltr", style: { textAlign: "right" }, readOnly: true, value: inputValue, onClick: function onClick() {
                             _this2.setState({ openPicker: !openPicker });
                         } }),
@@ -251,7 +255,7 @@
                             _react2.default.createElement(
                                 "div",
                                 { className: "left" },
-                                _react2.default.createElement(_TimePicker2.default, { changeEvent: function changeEvent(returnedTime) {
+                                _react2.default.createElement(_TimePicker2.default, { disableFromUnix: disableFromUnix, selectedYear: selectedYear, selectedDay: selectedDay, currentMonth: currentMonth, changeEvent: function changeEvent(returnedTime) {
                                         return _this2.timeSelected(returnedTime);
                                     }, selectedTime: selectedTime })
                             )
@@ -298,7 +302,7 @@
                                 "\u062C"
                             )
                         ),
-                        _react2.default.createElement(_Days2.default, { selectedYear: selectedYear, selectedDay: selectedDay, currentMonth: currentMonth, daysCount: daysCount, firstDay: selectedMonthFirstDay, clickEvent: function clickEvent(day, momentDay) {
+                        _react2.default.createElement(_Days2.default, { disableFromUnix: disableFromUnix, selectedYear: selectedYear, selectedDay: selectedDay, currentMonth: currentMonth, daysCount: daysCount, firstDay: selectedMonthFirstDay, clickEvent: function clickEvent(day, momentDay) {
                                 return _this2.daysClicked(day, momentDay);
                             } }),
                         _react2.default.createElement(
@@ -312,7 +316,7 @@
                             _react2.default.createElement(
                                 "button",
                                 { className: "JDcancel", onClick: this.canclePicker },
-                                "\u0644\u063A\u0648"
+                                "\u0628\u0633\u062A\u0646"
                             )
                         )
                     )

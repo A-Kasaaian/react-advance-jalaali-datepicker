@@ -83,33 +83,40 @@
 
             _this.state = {
                 months: ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"],
-                monthPickerView: false
+                monthPickerView: false,
+                selectedMonth: _this.props.month
             };
             return _this;
         }
 
         _createClass(Months, [{
             key: "monthClicked",
-            value: function monthClicked(i) {
+            value: function monthClicked(i, e) {
                 var clickEvent = this.props.clickEvent;
 
                 if (clickEvent) clickEvent(i);
-                this.setState({ monthPickerView: false });
+                this.setState({ monthPickerView: false, selectedMonth: i });
             }
         }, {
             key: "renderMonths",
             value: function renderMonths() {
                 var _this2 = this;
 
-                var months = this.state.months;
+                var _state = this.state,
+                    months = _state.months,
+                    selectedMonth = _state.selectedMonth;
 
                 var result = [];
 
                 var _loop = function _loop(i) {
-                    result.push(_react2.default.createElement(
+                    if (selectedMonth == i) result.push(_react2.default.createElement(
                         "div",
-                        { key: i, className: "month-items", onClick: function onClick() {
-                                return _this2.monthClicked(i);
+                        { key: i, className: "month-items selected" },
+                        months[i - 1]
+                    ));else result.push(_react2.default.createElement(
+                        "div",
+                        { key: i, className: "month-items", onClick: function onClick(e) {
+                                return _this2.monthClicked(i, e);
                             } },
                         months[i - 1]
                     ));
@@ -126,9 +133,9 @@
                 var _this3 = this;
 
                 var month = this.props.month;
-                var _state = this.state,
-                    months = _state.months,
-                    monthPickerView = _state.monthPickerView;
+                var _state2 = this.state,
+                    months = _state2.months,
+                    monthPickerView = _state2.monthPickerView;
 
                 return _react2.default.createElement(
                     "div",

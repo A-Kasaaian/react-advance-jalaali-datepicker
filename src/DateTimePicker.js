@@ -17,14 +17,16 @@ class DateTimePicker extends React.Component {
         this.daysInMonth = this.daysInMonth.bind(this);
         this.canclePicker = this.canclePicker.bind(this);
         this.submitHandler = this.submitHandler.bind(this);
+        let preSelected= ""
+        if(this.props.preSelected) preSelected= this.props.preSelected;
         this.state = {
             openPicker: false,
             selectedYear: parseInt(moment().format("jYYYY")),
             currentMonth: parseInt(moment().format("jMM")),
             selectedMonthFirstDay: moment(moment().format("jYYYY")+"/"+moment().format("jMM")+"/01","jYYYY/jMM/jDD").weekday(),
             selectedDay: "",
-            selectedTime: moment().format("hh:mm"),
-            inputValue: ""
+            selectedTime: moment().format("HH:mm"),
+            inputValue: preSelected
         };
 
         this.state.daysCount= this.daysInMonth(moment().format("jMM"), moment().format("jYYYY"));
@@ -37,12 +39,13 @@ class DateTimePicker extends React.Component {
     }
     componentWillMount() {
         let {selectedMonthFirstDay} =this.state;
-    if(canUseDOM){
+    if(canUseDOM && !document.getElementById("jdstyle")){
             let css = Styles(selectedMonthFirstDay),
             head = document.head || document.getElementsByTagName('head')[0],
             style = document.createElement('style');
 
             style.type = 'text/css';
+            style.id= "jdstyle";
             if (style.styleSheet){
             style.styleSheet.cssText = css;
             } else {
@@ -55,8 +58,8 @@ class DateTimePicker extends React.Component {
     daysClicked(day, momentDay){
         let {onChange, format} = this.props;
         let {selectedTime} = this.state
-        if(!format) format = "jYYYY-jMM-jDD hh:mm"
-        if(this.state.selectedDay != momentDay)this.setState({selectedDay: momentDay, inputValue: moment(momentDay+" "+selectedTime, "jYYYYjMMjDD hh:mm").format(format)});
+        if(!format) format = "jYYYY-jMM-jDD HH:mm"
+        if(this.state.selectedDay != momentDay)this.setState({selectedDay: momentDay, inputValue: moment(momentDay+" "+selectedTime, "jYYYYjMMjDD HH:mm").format(format)});
     }
     monthsClicked(month){
         let {selectedYear} = this.state;
@@ -81,8 +84,8 @@ class DateTimePicker extends React.Component {
     timeSelected(time){
         let {format} = this.props;
         let {selectedDay} = this.state
-        if(!format) format = "jYYYY-jMM-jDD hh:mm"
-        this.setState({selectedTime: time, inputValue: moment(selectedDay+" "+time, "jYYYYjMMjDD hh:mm").format(format)});
+        if(!format) format = "jYYYY-jMM-jDD HH:mm"
+        this.setState({selectedTime: time, inputValue: moment(selectedDay+" "+time, "jYYYYjMMjDD HH:mm").format(format)});
     }
     submitHandler(e){
         e.preventDefault();
@@ -91,8 +94,8 @@ class DateTimePicker extends React.Component {
         if(!!selectedDay && !!selectedTime){
             this.setState({openPicker: false});
             let formatted;
-            if(!!format) formatted = moment(selectedDay+" "+selectedTime, "jYYYYjMMjDD hh:mm").format(format);
-            if(onChange)this.props.onChange(moment(selectedDay+" "+selectedTime, "jYYYYjMMjDD hh:mm").unix(), formatted)
+            if(!!format) formatted = moment(selectedDay+" "+selectedTime, "jYYYYjMMjDD HH:mm").format(format);
+            if(onChange)this.props.onChange(moment(selectedDay+" "+selectedTime, "jYYYYjMMjDD HH:mm").unix(), formatted)
         }
     }
     canclePicker(e){
@@ -101,9 +104,9 @@ class DateTimePicker extends React.Component {
     }
     render() {
         let {openPicker, daysCount, selectedDay, currentMonth, selectedYear, selectedMonthFirstDay, inputValue, selectedTime} = this.state;
-        let {id, placeholder} = this.props;
+        let {id, placeholder, disableFromUnix} = this.props;
         return (
-            <div>
+            <div style={{textAlign: "initial"}}>
                 <input type="text" id={id} placeholder={placeholder} dir="ltr" style={{textAlign: "right"}} readOnly value={inputValue} onClick={()=>{this.setState({openPicker: !openPicker})}} />
                 {openPicker && <div className="JDatePicker">
                     <div className="JDheader">
@@ -111,7 +114,7 @@ class DateTimePicker extends React.Component {
                             <Years changeEvent={(returnedYear)=>this.yearSelected(returnedYear)} year={selectedYear} />
                         </div>
                         <div className="left">
-                            <TimePicker changeEvent={(returnedTime)=>this.timeSelected(returnedTime)} selectedTime={selectedTime} />
+                            <TimePicker disableFromUnix={disableFromUnix} selectedYear={selectedYear} selectedDay={selectedDay} currentMonth={currentMonth} changeEvent={(returnedTime)=>this.timeSelected(returnedTime)} selectedTime={selectedTime} />
                         </div>
                     </div>
                     <Months clickEvent={(returnedMonth)=>this.monthsClicked(returnedMonth)} month={currentMonth} />
@@ -124,8 +127,8 @@ class DateTimePicker extends React.Component {
                         <div>پ</div>
                         <div>ج</div>
                     </div>
-                    <Days selectedYear={selectedYear} selectedDay={selectedDay} currentMonth={currentMonth} daysCount={daysCount}  firstDay={selectedMonthFirstDay} clickEvent={(day, momentDay)=>this.daysClicked(day, momentDay)}/>
-                    <div><button onClick={this.submitHandler} className="JDsubmit">تایید</button><button className="JDcancel" onClick={this.canclePicker}>لغو</button></div>
+                    <Days disableFromUnix={disableFromUnix} selectedYear={selectedYear} selectedDay={selectedDay} currentMonth={currentMonth} daysCount={daysCount}  firstDay={selectedMonthFirstDay} clickEvent={(day, momentDay)=>this.daysClicked(day, momentDay)}/>
+                    <div><button onClick={this.submitHandler} className="JDsubmit">تایید</button><button className="JDcancel" onClick={this.canclePicker}>بستن</button></div>
                 </div>}
             </div>
         )

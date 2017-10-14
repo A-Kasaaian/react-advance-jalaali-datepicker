@@ -1,7 +1,7 @@
 {
-    "name": "react-jalaali-datepicker",
+    "name": "react-advance-jalaali-datepicker",
     "version": "0.1.0",
-    "description": "Jalaali React Date Picker developed with love in Soroush IM team",
+    "description": "Jalaali React Date Picker developed with love by Soroush IM team",
     "repository": {
         "type": "git",
         "url": "https://github.com/A-Kasaaian/react-jalaali-datepicker.git"
