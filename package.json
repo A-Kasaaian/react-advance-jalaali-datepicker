@@ -1,10 +1,10 @@
 {
     "name": "react-advance-jalaali-datepicker",
     "version": "0.1.0",
-    "description": "Jalaali React Date Picker developed with love by Soroush IM team",
+    "description": "Jalaali React Date Picker developed with love by Alireza Kasaaian",
     "repository": {
         "type": "git",
-        "url": "https://github.com/A-Kasaaian/react-jalaali-datepicker.git"
+        "url": "https://github.com/A-Kasaaian/react-advance-jalaali-datepicker.git"
     },
     "author": "Alireza Kasaaian",
     "license": "MIT",
@@ -14,7 +14,11 @@
     "homepage": "https://github.com/A-Kasaaian/react-npm-boilerplate",
     "keywords": [
         "react-component",
-        "react"
+        "react",
+        "react-datepicker",
+        "jalaali-datepicker",
+        "range-datepicker",
+        "date-time-picker"
     ],
     "options": {
         "mocha": "--require scripts/mocha_runner src/**/__tests__/**/*.js"
