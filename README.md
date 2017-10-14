@@ -11,7 +11,7 @@ Use `npm i react-advance-jalaali-datepicker` in order to install the module.
 ## Usage
 In order to use thi module, import the packege into your react component and use the module as below. The belowing example is the code used in the sample usage video below.
 
-![demo of react advance jalaali datepicker](../demo.gif)
+![demo of react advance jalaali datepicker](https://raw.githubusercontent.com/A-Kasaaian/react-advance-jalaali-datepicker/master//demo.gif)
 
 ```javascript
 	import {DatePicker, DateTimePicker, DateRangePicker, DateTimeRangePicker} from "react-advance-jalaali-datepicker";
