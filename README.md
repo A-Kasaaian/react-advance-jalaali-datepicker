@@ -2,7 +2,8 @@
 
 It contains 3 types of jalaali (persian) date pickers, which are range (from, to) date and time pickerو range date picker, date picker and date and time picker.
 
-این ماژول شامل ۳ نوع مختلف از باکس انتخاب تاریخ و زمان جلالی (شمسی) است. بازه تاریخ و زمان (از، تا)، بازه تاریخ، انتخاب تاریخ و انتخاب تاریخ زمان.
+<p dir="rtl">
+این ماژول شامل ۳ نوع مختلف از باکس انتخاب تاریخ و زمان جلالی (شمسی) است. بازه تاریخ و زمان (از، تا)، بازه تاریخ، انتخاب تاریخ و انتخاب تاریخ زمان.</p>
 
 This module is written using  [moment-jalali](https://github.com/jalaali/moment-jalaali), which is relied on [momentjs](http://momentjs.com/).
 
