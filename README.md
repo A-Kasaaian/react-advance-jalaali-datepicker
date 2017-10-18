@@ -9,7 +9,7 @@ This module is written using  [moment-jalali](https://github.com/jalaali/moment-
 
 ## Instalation
 
-Use `npm i react-advance-jalaali-datepicker` in order to install the module.
+Use `npm i react-advance-jalaali-datepicker` in order to install the module. Yes that's it. There is no extera font or css file to include. It's designed simple to prevent any issue during customization. Customize it in any way you want.
 
 ## Usage
 In order to use this module, import the packege into your react component and use the module as below. The belowing example is the code  that is used in the sample usage video below.
@@ -73,6 +73,11 @@ Each type has its' own options.
 | onChangeStart, onChangeEnd | On change call of inputs |
 | idStart, idEnd | Add id attributes to the input elments |
 
+## More
+
+More features will be provided.
+
+I'll be glad to help if you faced any issue. Please, report issues [here](https://github.com/A-Kasaaian/react-advance-jalaali-datepicker/issues/new).
 
 ## License
 
