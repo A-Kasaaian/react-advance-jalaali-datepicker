@@ -1,8 +1,8 @@
-# Advance Date and Time Picker for jalali calender
+# Advance Date and Time Picker for jalaali (persian, shamsi) calender
 
-It contains 3 types of date pickers, which are range (from, to) date and time pickerو range date picker, date picker and date and time picker.
+It contains 3 types of jalaali (persian) date pickers, which are range (from, to) date and time pickerو range date picker, date picker and date and time picker.
 
-این ماژول شامل ۳ نوع باکس انتخاب تاریخ و زمان است. بازه تاریخ و زمان (از، تا)، بازه تاریخ، انتخاب تاریخ و انتخاب تاریخ زمان.
+این ماژول شامل ۳ نوع مختلف از باکس انتخاب تاریخ و زمان جلالی (شمسی) است. بازه تاریخ و زمان (از، تا)، بازه تاریخ، انتخاب تاریخ و انتخاب تاریخ زمان.
 
 This module is written using  [moment-jalali](https://github.com/jalaali/moment-jalaali), which is relied on [momentjs](http://momentjs.com/).
 
@@ -11,9 +11,9 @@ This module is written using  [moment-jalali](https://github.com/jalaali/moment-
 Use `npm i react-advance-jalaali-datepicker` in order to install the module.
 
 ## Usage
-In order to use thi module, import the packege into your react component and use the module as below. The belowing example is the code used in the sample usage video below.
+In order to use this module, import the packege into your react component and use the module as below. The belowing example is the code  that is used in the sample usage video below.
 
-![demo of react advance jalaali datepicker](https://raw.githubusercontent.com/A-Kasaaian/react-advance-jalaali-datepicker/master//demo.gif)
+![demo of react advance jalaali (persian) datepicker](https://raw.githubusercontent.com/A-Kasaaian/react-advance-jalaali-datepicker/master//demo.gif)
 
 ```javascript
 	import {DatePicker, DateTimePicker, DateRangePicker, DateTimeRangePicker} from "react-advance-jalaali-datepicker";
