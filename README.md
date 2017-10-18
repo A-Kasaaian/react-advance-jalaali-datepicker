@@ -1,7 +1,9 @@
 # Advance Date and Time Picker for jalali calender
 
 It contains 3 types of date pickers, which are range (from, to) date and time pickerو range date picker, date picker and date and time picker.
-این ماژول شامل ۳ نوع باکس انتخاب تاریخ و زمان است. بازه تاریخ و زمان (از، تا)، بازه تاریخ، انتخاب تاریخ و انتخاب تاریخ زمان
+
+این ماژول شامل ۳ نوع باکس انتخاب تاریخ و زمان است. بازه تاریخ و زمان (از، تا)، بازه تاریخ، انتخاب تاریخ و انتخاب تاریخ زمان.
+
 This module is written using  [moment-jalali](https://github.com/jalaali/moment-jalaali), which is relied on [momentjs](http://momentjs.com/).
 
 ## Instalation
