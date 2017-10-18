@@ -1,4 +1,4 @@
-# Advance Date and Time Picker for jalaali (persian, shamsi) calender
+# Advance React Date and Time Picker for jalaali (persian, shamsi) calender
 
 It contains 3 types of jalaali (persian) date pickers, which are range (from, to) date and time pickerو range date picker, date picker and date and time picker.
 
