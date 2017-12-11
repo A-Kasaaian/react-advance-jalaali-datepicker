@@ -114,7 +114,9 @@
                     placeholderStart = _props.placeholderStart,
                     idStart = _props.idStart,
                     idEnd = _props.idEnd,
-                    format = _props.format;
+                    format = _props.format,
+                    customClassEnd = _props.customClassEnd,
+                    customClassStart = _props.customClassStart;
                 var disableFromUnix = this.state.disableFromUnix;
 
                 if (!placeholderStart) placeholderStart = "";
@@ -124,7 +126,7 @@
                 return _react2.default.createElement(
                     "div",
                     { className: "jdtrp", style: { textAlign: "initial" } },
-                    _react2.default.createElement(_index2.default, { placeholder: placeholderStart, format: format, onChange: this.change, id: idStart }),
+                    _react2.default.createElement(_index2.default, { customClass: customClassStart, placeholder: placeholderStart, format: format, onChange: this.change, id: idStart }),
                     _react2.default.createElement(
                         "div",
                         null,
@@ -135,7 +137,7 @@
                         null,
                         placeholderEnd
                     ),
-                    !!disableFromUnix && _react2.default.createElement(_index2.default, { placeholder: placeholderEnd, disableFromUnix: disableFromUnix, format: format, onChange: this.secondchange, id: "datePicker" })
+                    !!disableFromUnix && _react2.default.createElement(_index2.default, { customClass: customClassEnd, placeholder: placeholderEnd, disableFromUnix: disableFromUnix, format: format, onChange: this.secondchange, id: "datePicker" })
                 );
             }
         }]);

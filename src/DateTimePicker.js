@@ -104,11 +104,11 @@ class DateTimePicker extends React.Component {
     }
     render() {
         let {openPicker, daysCount, selectedDay, currentMonth, selectedYear, selectedMonthFirstDay, inputValue, selectedTime} = this.state;
-        let {id, placeholder, disableFromUnix} = this.props;
+        let {id, placeholder, disableFromUnix, customClass} = this.props;
         return (
             <div style={{textAlign: "initial"}}>
                 <input type="text" id={id} placeholder={placeholder} dir="ltr" style={{textAlign: "right"}} readOnly value={inputValue} onClick={()=>{this.setState({openPicker: !openPicker})}} />
-                {openPicker && <div className="JDatePicker">
+                {openPicker && <div className={"JDatePicker "+customClass}>
                     <div className="JDheader">
                         <div className="right">
                             <Years changeEvent={(returnedYear)=>this.yearSelected(returnedYear)} year={selectedYear} />

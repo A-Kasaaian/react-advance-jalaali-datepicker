@@ -54,11 +54,11 @@ class JDatePicker extends React.Component {
     daysClicked(day, momentDay){
         let {onChange, format} = this.props;
         if(!format) format = "jYYYY-jMM-jDD"
-        if(this.state.selectedDay != momentDay)this.setState({selectedDay: momentDay, inputValue: moment(momentDay, "jYYYYjMMjDD").format(format)}),
+        if(this.state.selectedDay != momentDay)this.setState({selectedDay: momentDay, inputValue: moment(momentDay+" 23:59:59", "jYYYYjMMjDD HH:mm:ss").format(format)}),
         this.setState({openPicker: false});
         let formatted;
-        if(!!format) formatted = moment(momentDay, "jYYYYjMMjDD").format(format);
-        if(onChange)this.props.onChange(moment(momentDay, "jYYYYjMMjDD").unix(), formatted)
+        if(!!format) formatted = moment(momentDay+" 23:59:59", "jYYYYjMMjDD HH:mm:ss").format(format);
+        if(onChange)this.props.onChange(moment(momentDay+" 23:59:59", "jYYYYjMMjDD HH:mm:ss").unix(), formatted)
     }
     monthsClicked(month){
         let {selectedYear} = this.state;
@@ -82,11 +82,12 @@ class JDatePicker extends React.Component {
     }
     render() {
         let {openPicker, daysCount, selectedDay, currentMonth, selectedYear, selectedMonthFirstDay, inputValue} = this.state;
-        let {idStart, placeholder, disableFromUnix} = this.props;
+        let {idStart, placeholder, disableFromUnix, customClass} = this.props;
+        debugger;
         return (
             <div style={{textAlign: "initial"}}>
                 <input type="text" id={idStart} placeholder={placeholder} dir="ltr" style={{textAlign: "right"}} readOnly value={inputValue} onClick={()=>{this.setState({openPicker: !openPicker})}} />
-                {openPicker && <div className="JDatePicker">
+                {openPicker && <div className={"JDatePicker "+ customClass}>
                     <div className="JDheader">
                         <div className="right">
                             <Years changeEvent={(returnedYear)=>this.yearSelected(returnedYear)} year={selectedYear} />

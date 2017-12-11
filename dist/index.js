@@ -159,10 +159,10 @@
                     format = _props.format;
 
                 if (!format) format = "jYYYY-jMM-jDD";
-                if (this.state.selectedDay != momentDay) this.setState({ selectedDay: momentDay, inputValue: (0, _momentJalaali2.default)(momentDay, "jYYYYjMMjDD").format(format) }), this.setState({ openPicker: false });
+                if (this.state.selectedDay != momentDay) this.setState({ selectedDay: momentDay, inputValue: (0, _momentJalaali2.default)(momentDay + " 23:59:59", "jYYYYjMMjDD HH:mm:ss").format(format) }), this.setState({ openPicker: false });
                 var formatted = void 0;
-                if (!!format) formatted = (0, _momentJalaali2.default)(momentDay, "jYYYYjMMjDD").format(format);
-                if (onChange) this.props.onChange((0, _momentJalaali2.default)(momentDay, "jYYYYjMMjDD").unix(), formatted);
+                if (!!format) formatted = (0, _momentJalaali2.default)(momentDay + " 23:59:59", "jYYYYjMMjDD HH:mm:ss").format(format);
+                if (onChange) this.props.onChange((0, _momentJalaali2.default)(momentDay + " 23:59:59", "jYYYYjMMjDD HH:mm:ss").unix(), formatted);
             }
         }, {
             key: "monthsClicked",
@@ -209,8 +209,10 @@
                 var _props2 = this.props,
                     idStart = _props2.idStart,
                     placeholder = _props2.placeholder,
-                    disableFromUnix = _props2.disableFromUnix;
+                    disableFromUnix = _props2.disableFromUnix,
+                    customClass = _props2.customClass;
 
+                debugger;
                 return _react2.default.createElement(
                     "div",
                     { style: { textAlign: "initial" } },
@@ -219,7 +221,7 @@
                         } }),
                     openPicker && _react2.default.createElement(
                         "div",
-                        { className: "JDatePicker" },
+                        { className: "JDatePicker " + customClass },
                         _react2.default.createElement(
                             "div",
                             { className: "JDheader" },

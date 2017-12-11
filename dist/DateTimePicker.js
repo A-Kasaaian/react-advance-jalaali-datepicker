@@ -231,7 +231,8 @@
                 var _props3 = this.props,
                     id = _props3.id,
                     placeholder = _props3.placeholder,
-                    disableFromUnix = _props3.disableFromUnix;
+                    disableFromUnix = _props3.disableFromUnix,
+                    customClass = _props3.customClass;
 
                 return _react2.default.createElement(
                     "div",
@@ -241,7 +242,7 @@
                         } }),
                     openPicker && _react2.default.createElement(
                         "div",
-                        { className: "JDatePicker" },
+                        { className: "JDatePicker " + customClass },
                         _react2.default.createElement(
                             "div",
                             { className: "JDheader" },

@@ -63,6 +63,7 @@ Each type has its' own options.
 | onChange | On change call of the input (required) |
 | id | Adds id attribute to the input elment |
 | preSelected | Previously selected date, it should be formatted exactly the same as the format option | 
+| customClass | To add "className" to the datepicker | 
 
 **DateRangePicker:**
 
@@ -72,6 +73,7 @@ Each type has its' own options.
 | format      | Format of showing date in the input. Applies on both inputs. Accepts moment-jalali formats (required) |
 | onChangeStart, onChangeEnd | On change call of inputs |
 | idStart, idEnd | Add id attributes to the input elments |
+| customClassStart, customClassEnd | To add class name to start and end dattepickers | 
 
 ## More
 
