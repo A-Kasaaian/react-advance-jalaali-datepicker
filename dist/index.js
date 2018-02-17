@@ -212,7 +212,6 @@
                     disableFromUnix = _props2.disableFromUnix,
                     customClass = _props2.customClass;
 
-                debugger;
                 return _react2.default.createElement(
                     "div",
                     { style: { textAlign: "initial" } },
