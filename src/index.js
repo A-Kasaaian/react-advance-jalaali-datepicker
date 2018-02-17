@@ -83,7 +83,6 @@ class JDatePicker extends React.Component {
     render() {
         let {openPicker, daysCount, selectedDay, currentMonth, selectedYear, selectedMonthFirstDay, inputValue} = this.state;
         let {idStart, placeholder, disableFromUnix, customClass} = this.props;
-        debugger;
         return (
             <div style={{textAlign: "initial"}}>
                 <input type="text" id={idStart} placeholder={placeholder} dir="ltr" style={{textAlign: "right"}} readOnly value={inputValue} onClick={()=>{this.setState({openPicker: !openPicker})}} />
