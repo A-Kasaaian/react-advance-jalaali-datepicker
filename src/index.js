@@ -82,10 +82,11 @@ class JDatePicker extends React.Component {
     }
     render() {
         let {openPicker, daysCount, selectedDay, currentMonth, selectedYear, selectedMonthFirstDay, inputValue} = this.state;
-        let {idStart, placeholder, disableFromUnix, customClass} = this.props;
+        let {idStart, placeholder, disableFromUnix, customClass, containerClass, inputTextAlign} = this.props;
+		let inputAlign = !!inputTextAlign && typeof inputTextAlign != "undefined" ? inputTextAlign :"right";
         return (
-            <div style={{textAlign: "initial"}}>
-                <input type="text" id={idStart} placeholder={placeholder} dir="ltr" style={{textAlign: "right"}} readOnly value={inputValue} onClick={()=>{this.setState({openPicker: !openPicker})}} />
+            <div style={{textAlign: "initial"}} className={containerClass}>
+                <input type="text" id={idStart} placeholder={placeholder} dir="ltr" style={{textAlign: inputAlign}} readOnly value={inputValue} onClick={()=>{this.setState({openPicker: !openPicker})}} />
                 {openPicker && <div className={"JDatePicker "+ customClass}>
                     <div className="JDheader">
                         <div className="right">

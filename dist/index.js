@@ -210,12 +210,15 @@
                     idStart = _props2.idStart,
                     placeholder = _props2.placeholder,
                     disableFromUnix = _props2.disableFromUnix,
-                    customClass = _props2.customClass;
+                    customClass = _props2.customClass,
+                    containerClass = _props2.containerClass,
+                    inputTextAlign = _props2.inputTextAlign;
 
+                var inputAlign = !!inputTextAlign && typeof inputTextAlign != "undefined" ? inputTextAlign : "right";
                 return _react2.default.createElement(
                     "div",
-                    { style: { textAlign: "initial" } },
-                    _react2.default.createElement("input", { type: "text", id: idStart, placeholder: placeholder, dir: "ltr", style: { textAlign: "right" }, readOnly: true, value: inputValue, onClick: function onClick() {
+                    { style: { textAlign: "initial" }, className: containerClass },
+                    _react2.default.createElement("input", { type: "text", id: idStart, placeholder: placeholder, dir: "ltr", style: { textAlign: inputAlign }, readOnly: true, value: inputValue, onClick: function onClick() {
                             _this2.setState({ openPicker: !openPicker });
                         } }),
                     openPicker && _react2.default.createElement(

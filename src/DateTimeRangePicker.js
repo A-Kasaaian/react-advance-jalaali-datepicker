@@ -20,7 +20,7 @@ class DateTimeRangePicker extends React.Component {
         if(!!onChangeEnd) onChangeEnd(unix, formatted)
     }
     render() {
-        let {placeholderEnd, placeholderStart, idStart, idEnd, format, customClassStart, customClassEnd} = this.props;
+        let {placeholderEnd, placeholderStart, idStart, idEnd, format, customClassStart, customClassEnd, containerClass, inputTextAlign} = this.props;
         let { disableFromUnix } = this.state;
         if(!placeholderStart) placeholderStart= "";
         if(!placeholderEnd) placeholderEnd= "";
@@ -28,10 +28,10 @@ class DateTimeRangePicker extends React.Component {
         if(!idEnd) idEnd="";
         return (
             <div  className="jdtrp" style={{textAlign: "initial"}}>
-                <DateTimePicker customClass={customClassStart} placeholder={placeholderStart} format={format} onChange={this.change} id={idStart} />
+                <DateTimePicker containerClass={containerClass} inputTextAlign={inputTextAlign} customClass={customClassStart} placeholder={placeholderStart} format={format} onChange={this.change} id={idStart} />
                 <div>{"->"}</div>
                 {!disableFromUnix && <div>{placeholderEnd}</div>}
-                {!!disableFromUnix && <DateTimePicker customClass={customClassEnd} placeholder={placeholderEnd} disableFromUnix={disableFromUnix} format={format} onChange={this.secondchange} id="datePicker" />}
+                {!!disableFromUnix && <DateTimePicker containerClass={containerClass} inputTextAlign={inputTextAlign} customClass={customClassEnd} placeholder={placeholderEnd} disableFromUnix={disableFromUnix} format={format} onChange={this.secondchange} id="datePicker" />}
             </div>
         )
     }

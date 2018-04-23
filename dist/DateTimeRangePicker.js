@@ -116,7 +116,9 @@
                     idEnd = _props.idEnd,
                     format = _props.format,
                     customClassStart = _props.customClassStart,
-                    customClassEnd = _props.customClassEnd;
+                    customClassEnd = _props.customClassEnd,
+                    containerClass = _props.containerClass,
+                    inputTextAlign = _props.inputTextAlign;
                 var disableFromUnix = this.state.disableFromUnix;
 
                 if (!placeholderStart) placeholderStart = "";
@@ -126,7 +128,7 @@
                 return _react2.default.createElement(
                     "div",
                     { className: "jdtrp", style: { textAlign: "initial" } },
-                    _react2.default.createElement(_DateTimePicker2.default, { customClass: customClassStart, placeholder: placeholderStart, format: format, onChange: this.change, id: idStart }),
+                    _react2.default.createElement(_DateTimePicker2.default, { containerClass: containerClass, inputTextAlign: inputTextAlign, customClass: customClassStart, placeholder: placeholderStart, format: format, onChange: this.change, id: idStart }),
                     _react2.default.createElement(
                         "div",
                         null,
@@ -137,7 +139,7 @@
                         null,
                         placeholderEnd
                     ),
-                    !!disableFromUnix && _react2.default.createElement(_DateTimePicker2.default, { customClass: customClassEnd, placeholder: placeholderEnd, disableFromUnix: disableFromUnix, format: format, onChange: this.secondchange, id: "datePicker" })
+                    !!disableFromUnix && _react2.default.createElement(_DateTimePicker2.default, { containerClass: containerClass, inputTextAlign: inputTextAlign, customClass: customClassEnd, placeholder: placeholderEnd, disableFromUnix: disableFromUnix, format: format, onChange: this.secondchange, id: "datePicker" })
                 );
             }
         }]);
