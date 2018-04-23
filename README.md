@@ -65,7 +65,7 @@ Each type has its' own options.
 | preSelected | Previously selected date, it should be formatted exactly the same as the format option | 
 | customClass | To add "className" to the datepicker | 
 | inputTextAlign | Texte align of the date input. default "right" | 
-| containerClass | To add "className" to the datepicker | 
+| containerClass | To add "className" to the datepicker input container | 
 
 **DateRangePicker:**
 
@@ -77,7 +77,7 @@ Each type has its' own options.
 | idStart, idEnd | Add id attributes to the input elments |
 | customClassStart, customClassEnd | To add class name to start and end dattepickers | 
 | inputTextAlign | Texte align of the date input. default "right" | 
-| containerClass | To add "className" to the datepicker | 
+| containerClass | To add "className" to the datepicker input container | 
 
 ## More
 
