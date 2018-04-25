@@ -56,28 +56,30 @@ Each type has its' own options.
 
 **"DatePicker" and "DateTimePicker":**
 
-| Name          | Description  |
-| ------------- |-------------|
-| placeholder   | Placeholder of the datepicker input |
-| format      | Format of showing date in the input and styled output. Accepts moment-jalali formats (required) |
-| onChange | On change call of the input (required) |
-| id | Adds id attribute to the input elment |
-| preSelected | Previously selected date, it should be formatted exactly the same as the format option | 
-| customClass | To add "className" to the datepicker | 
-| inputTextAlign | Texte align of the date input. default "right" | 
-| containerClass | To add "className" to the datepicker input container | 
+| Name          | type  | Description  |
+| ------------- |-------------|-------------|
+| placeholder   | string | Placeholder of the datepicker input |
+| format      | string | Format of showing date in the input and styled output. Accepts moment-jalali formats (required) |
+| onChange | function | On change call of the input (required) |
+| id | string | Adds id attribute to the input elment |
+| preSelected | string | Previously selected date, it should be formatted exactly the same as the format option | 
+| customClass | string | To add "className" to the datepicker | 
+| inputTextAlign | string | Texte align of the date input. default "right" | 
+| containerClass | string | To add "className" to the datepicker input container | 
+| monthTitleEnable | bolean | to add a title before month controller row |
 
 **DateRangePicker:**
 
-| Name          | Description  |
-| ------------- |-------------|
-| placeholderStart, placeholderEnd   | Placeholder of the datepickers inputs |
-| format      | Format of showing date in the input. Applies on both inputs. Accepts moment-jalali formats (required) |
-| onChangeStart, onChangeEnd | On change call of inputs |
-| idStart, idEnd | Add id attributes to the input elments |
-| customClassStart, customClassEnd | To add class name to start and end dattepickers | 
-| inputTextAlign | Texte align of the date input. default "right" | 
-| containerClass | To add "className" to the datepicker input container | 
+| Name          | type  | Description  |
+| ------------- |-------------|-------------|
+| placeholderStart, placeholderEnd   | string | Placeholder of the datepickers inputs |
+| format      | string | Format of showing date in the input. Applies on both inputs. Accepts moment-jalali formats (required) |
+| onChangeStart, onChangeEnd | function | On change call of inputs |
+| idStart, idEnd | string | Add id attributes to the input elments |
+| customClassStart, customClassEnd | string | To add class name to start and end dattepickers | 
+| inputTextAlign | string | Texte align of the date input. default "right" | 
+| containerClass | string | To add "className" to the datepicker input container |
+| monthTitleEnable | bolean | to add a title before month controller row |
 
 ## More
 
