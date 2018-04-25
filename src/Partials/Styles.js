@@ -54,6 +54,15 @@ let Styles= (nDays)=>{
             transform: rotate(180deg);
             cursor: pointer;
         }
+		
+        .JDatePicker .JC-months span:first-child{
+            float: right;
+            width: 15%;
+        }
+        .JDatePicker .JC-months .holder:last-child{
+            float: right;
+            width: 85%;
+        }
         .JDatePicker .JC-days {
             position: relative;
             display: inline-block;

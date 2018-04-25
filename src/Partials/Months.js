@@ -24,10 +24,11 @@ class Months extends React.Component {
         return result;
     }
     render() {
-        let {month} = this.props;
+        let {month, monthTitleEnable} = this.props;
         let {months, monthPickerView} = this.state;
         return (
             <div className="JC-months">
+                {monthTitleEnable && <span>ماه: </span>}
                 <div className="holder">
                     <div onClick={()=>this.monthClicked(month-1)} className="prev">{">"}</div>
                     <div onClick={()=>{this.setState({monthPickerView: !monthPickerView})}} className="print-month">{months[month -1]}</div>

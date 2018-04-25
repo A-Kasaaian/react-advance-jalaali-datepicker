@@ -82,7 +82,7 @@ class JDatePicker extends React.Component {
     }
     render() {
         let {openPicker, daysCount, selectedDay, currentMonth, selectedYear, selectedMonthFirstDay, inputValue} = this.state;
-        let {id, placeholder, disableFromUnix, customClass, containerClass, inputTextAlign} = this.props;
+        let {id, placeholder, disableFromUnix, customClass, containerClass, inputTextAlign, monthTitleEnable} = this.props;
 		let inputAlign = !!inputTextAlign && typeof inputTextAlign != "undefined" ? inputTextAlign :"right";
         return (
             <div style={{textAlign: "initial"}} className={containerClass}>
@@ -95,7 +95,7 @@ class JDatePicker extends React.Component {
                         <div className="left">
                         </div>
                     </div>
-                    <Months clickEvent={(returnedMonth)=>this.monthsClicked(returnedMonth)} month={currentMonth} />
+                    <Months monthTitleEnable={monthTitleEnable} clickEvent={(returnedMonth)=>this.monthsClicked(returnedMonth)} month={currentMonth} />
                     <div className="days-titles">
                         <div>ش</div>
                         <div>ی</div>

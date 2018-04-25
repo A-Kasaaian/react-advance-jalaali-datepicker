@@ -118,7 +118,8 @@
                     customClassStart = _props.customClassStart,
                     customClassEnd = _props.customClassEnd,
                     containerClass = _props.containerClass,
-                    inputTextAlign = _props.inputTextAlign;
+                    inputTextAlign = _props.inputTextAlign,
+                    monthTitleEnable = _props.monthTitleEnable;
                 var disableFromUnix = this.state.disableFromUnix;
 
                 if (!placeholderStart) placeholderStart = "";
@@ -128,7 +129,7 @@
                 return _react2.default.createElement(
                     "div",
                     { className: "jdtrp", style: { textAlign: "initial" } },
-                    _react2.default.createElement(_DateTimePicker2.default, { containerClass: containerClass, inputTextAlign: inputTextAlign, customClass: customClassStart, placeholder: placeholderStart, format: format, onChange: this.change, id: idStart }),
+                    _react2.default.createElement(_DateTimePicker2.default, { monthTitleEnable: monthTitleEnable, containerClass: containerClass, inputTextAlign: inputTextAlign, customClass: customClassStart, placeholder: placeholderStart, format: format, onChange: this.change, id: idStart }),
                     _react2.default.createElement(
                         "div",
                         null,
@@ -139,7 +140,7 @@
                         null,
                         placeholderEnd
                     ),
-                    !!disableFromUnix && _react2.default.createElement(_DateTimePicker2.default, { containerClass: containerClass, inputTextAlign: inputTextAlign, customClass: customClassEnd, placeholder: placeholderEnd, disableFromUnix: disableFromUnix, format: format, onChange: this.secondchange, id: "datePicker" })
+                    !!disableFromUnix && _react2.default.createElement(_DateTimePicker2.default, { monthTitleEnable: monthTitleEnable, containerClass: containerClass, inputTextAlign: inputTextAlign, customClass: customClassEnd, placeholder: placeholderEnd, disableFromUnix: disableFromUnix, format: format, onChange: this.secondchange, id: "datePicker" })
                 );
             }
         }]);

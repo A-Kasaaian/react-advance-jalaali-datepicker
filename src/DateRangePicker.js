@@ -20,7 +20,7 @@ class DateRangePicker extends React.Component {
         if(!!onChangeEnd) onChangeEnd(unix, formatted)
     }
     render() {
-        let {placeholderEnd, placeholderStart, idStart, idEnd, format, customClassEnd, customClassStart, containerClass, inputTextAlign} = this.props;
+        let {placeholderEnd, placeholderStart, idStart, idEnd, format, customClassEnd, customClassStart, containerClass, inputTextAlign, monthTitleEnable} = this.props;
         let { disableFromUnix } = this.state;
         if(!placeholderStart) placeholderStart= "";
         if(!placeholderEnd) placeholderEnd= "";
@@ -28,7 +28,7 @@ class DateRangePicker extends React.Component {
         if(!idEnd) idEnd="";
         return (
             <div className="jdtrp" style={{textAlign: "initial"}}>
-                <DatePicker containerClass={containerClass} inputTextAlign={inputTextAlign} customClass={customClassStart} placeholder={placeholderStart} format={format} onChange={this.change} id={idStart} />
+                <DatePicker monthTitleEnable={monthTitleEnable} containerClass={containerClass} inputTextAlign={inputTextAlign} customClass={customClassStart} placeholder={placeholderStart} format={format} onChange={this.change} id={idStart} />
                 <div>{"->"}</div>
                 {!disableFromUnix && <div>{placeholderEnd}</div>}
                 {!!disableFromUnix && <DatePicker containerClass={containerClass} inputTextAlign={inputTextAlign} customClass={customClassEnd} placeholder={placeholderEnd} disableFromUnix={disableFromUnix} format={format} onChange={this.secondchange} id="datePicker" />}

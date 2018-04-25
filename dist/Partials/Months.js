@@ -132,7 +132,9 @@
             value: function render() {
                 var _this3 = this;
 
-                var month = this.props.month;
+                var _props = this.props,
+                    month = _props.month,
+                    monthTitleEnable = _props.monthTitleEnable;
                 var _state2 = this.state,
                     months = _state2.months,
                     monthPickerView = _state2.monthPickerView;
@@ -140,6 +142,11 @@
                 return _react2.default.createElement(
                     "div",
                     { className: "JC-months" },
+                    monthTitleEnable && _react2.default.createElement(
+                        "span",
+                        null,
+                        "\u0645\u0627\u0647: "
+                    ),
                     _react2.default.createElement(
                         "div",
                         { className: "holder" },

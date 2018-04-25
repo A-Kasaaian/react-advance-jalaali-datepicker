@@ -104,7 +104,7 @@ class DateTimePicker extends React.Component {
     }
     render() {
         let {openPicker, daysCount, selectedDay, currentMonth, selectedYear, selectedMonthFirstDay, inputValue, selectedTime} = this.state;
-        let {id, placeholder, disableFromUnix, customClass, containerClass, inputTextAlign} = this.props;
+        let {id, placeholder, disableFromUnix, customClass, containerClass, inputTextAlign, monthTitleEnable} = this.props;
 		let inputAlign = !!inputTextAlign && typeof inputTextAlign != "undefined" ? inputTextAlign :"right";
         return (
             <div style={{textAlign: "initial"}} className={containerClass}>
@@ -118,7 +118,7 @@ class DateTimePicker extends React.Component {
                             <TimePicker disableFromUnix={disableFromUnix} selectedYear={selectedYear} selectedDay={selectedDay} currentMonth={currentMonth} changeEvent={(returnedTime)=>this.timeSelected(returnedTime)} selectedTime={selectedTime} />
                         </div>
                     </div>
-                    <Months clickEvent={(returnedMonth)=>this.monthsClicked(returnedMonth)} month={currentMonth} />
+                    <Months monthTitleEnable={monthTitleEnable} clickEvent={(returnedMonth)=>this.monthsClicked(returnedMonth)} month={currentMonth} />
                     <div className="days-titles">
                         <div>ش</div>
                         <div>ی</div>

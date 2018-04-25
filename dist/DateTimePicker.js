@@ -234,7 +234,8 @@
                     disableFromUnix = _props3.disableFromUnix,
                     customClass = _props3.customClass,
                     containerClass = _props3.containerClass,
-                    inputTextAlign = _props3.inputTextAlign;
+                    inputTextAlign = _props3.inputTextAlign,
+                    monthTitleEnable = _props3.monthTitleEnable;
 
                 var inputAlign = !!inputTextAlign && typeof inputTextAlign != "undefined" ? inputTextAlign : "right";
                 return _react2.default.createElement(
@@ -264,7 +265,7 @@
                                     }, selectedTime: selectedTime })
                             )
                         ),
-                        _react2.default.createElement(_Months2.default, { clickEvent: function clickEvent(returnedMonth) {
+                        _react2.default.createElement(_Months2.default, { monthTitleEnable: monthTitleEnable, clickEvent: function clickEvent(returnedMonth) {
                                 return _this2.monthsClicked(returnedMonth);
                             }, month: currentMonth }),
                         _react2.default.createElement(

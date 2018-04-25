@@ -207,18 +207,19 @@
                     selectedMonthFirstDay = _state.selectedMonthFirstDay,
                     inputValue = _state.inputValue;
                 var _props2 = this.props,
-                    idStart = _props2.idStart,
+                    id = _props2.id,
                     placeholder = _props2.placeholder,
                     disableFromUnix = _props2.disableFromUnix,
                     customClass = _props2.customClass,
                     containerClass = _props2.containerClass,
-                    inputTextAlign = _props2.inputTextAlign;
+                    inputTextAlign = _props2.inputTextAlign,
+                    monthTitleEnable = _props2.monthTitleEnable;
 
                 var inputAlign = !!inputTextAlign && typeof inputTextAlign != "undefined" ? inputTextAlign : "right";
                 return _react2.default.createElement(
                     "div",
                     { style: { textAlign: "initial" }, className: containerClass },
-                    _react2.default.createElement("input", { type: "text", id: idStart, placeholder: placeholder, dir: "ltr", style: { textAlign: inputAlign }, readOnly: true, value: inputValue, onClick: function onClick() {
+                    _react2.default.createElement("input", { type: "text", id: id, placeholder: placeholder, dir: "ltr", style: { textAlign: inputAlign }, readOnly: true, value: inputValue, onClick: function onClick() {
                             _this2.setState({ openPicker: !openPicker });
                         } }),
                     openPicker && _react2.default.createElement(
@@ -236,7 +237,7 @@
                             ),
                             _react2.default.createElement("div", { className: "left" })
                         ),
-                        _react2.default.createElement(_Months2.default, { clickEvent: function clickEvent(returnedMonth) {
+                        _react2.default.createElement(_Months2.default, { monthTitleEnable: monthTitleEnable, clickEvent: function clickEvent(returnedMonth) {
                                 return _this2.monthsClicked(returnedMonth);
                             }, month: currentMonth }),
                         _react2.default.createElement(
