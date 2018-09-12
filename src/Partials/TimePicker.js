@@ -34,8 +34,8 @@ class TimePicker extends React.Component {
         let {changeEvent} = this.props;
         let minuteInt = parseInt((minute.value));
         let houraInt = parseInt((hour.value));
-            if( houraInt > 0 && houraInt < 24){
-                if( minuteInt > 0 && minuteInt < 60){
+        if( houraInt >= 0 && houraInt < 24){
+            if( minuteInt >= 0 && minuteInt < 60){
                     this.setState({editable: false, error: ""});
                     if(!!changeEvent)changeEvent(hour.value+":"+minute.value);
                 }else{this.setState({error: "دقیقه حداکثر ۶۰ باشد"})}
@@ -46,7 +46,7 @@ class TimePicker extends React.Component {
         let {changeEvent} = this.props;
         let minuteInt = parseInt((minute.value));
         let houraInt = parseInt((hour.value));
-            if( houraInt > 0 && houraInt < 24){
+            if( houraInt >= 0 && houraInt < 24){
                     if(!!changeEvent)changeEvent(hour.value+":"+minute.value);
                     this.setState({error: "", minuteDisabled: false, hour:hour.value});
             }else{this.setState({error: "ساعت حداکثر ۲۴ باشد"})}

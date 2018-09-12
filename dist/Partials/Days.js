@@ -110,6 +110,19 @@
         }
 
         _createClass(Days, [{
+            key: 'componentWillReceiveProps',
+            value: function componentWillReceiveProps(nextProps) {
+                var _this2 = this;
+
+                if (canUseDOM) {
+                    this.setState({ daysCount: 0 });
+                    var that = this;
+                    window.setTimeout(function () {
+                        _this2.setState({ daysCount: nextProps.daysCount, selectedYear: nextProps.selectedYear });
+                    }, 10);
+                }
+            }
+        }, {
             key: 'dayClicked',
             value: function dayClicked(i, element) {
                 var clickEvent = this.props.clickEvent;
@@ -122,7 +135,7 @@
         }, {
             key: 'renderDays',
             value: function renderDays() {
-                var _this2 = this;
+                var _this3 = this;
 
                 var _props = this.props,
                     firstDay = _props.firstDay,
@@ -153,6 +166,8 @@
                     if (i == 1) marginRight = firstDay * 14.28 + "%";
                     if (i < 10) date = year + month + "0" + i.toString();else date = year + month + i.toString();
                     if (date == selectedDay) addedClass = " selected";
+                    var today = (0, _momentJalaali2.default)().format("jYYYYjMMjDD");
+                    if (date == today) addedClass += " current-date";
                     if (check) {
                         if (i < disableFromDay) enable = false;else enable = true;
                     }
@@ -163,7 +178,7 @@
                     ));else if (enable) result.push(_react2.default.createElement(
                         'div',
                         { className: "day-items" + addedClass, ref: date, style: { marginRight: marginRight }, key: i, onClick: function onClick() {
-                                return _this2.dayClicked(1, date);
+                                return _this3.dayClicked(1, date);
                             } },
                         number
                     ));
@@ -173,19 +188,6 @@
                     _loop(i);
                 }
                 return result;
-            }
-        }, {
-            key: 'componentWillReceiveProps',
-            value: function componentWillReceiveProps(nextProps) {
-                var _this3 = this;
-
-                if (canUseDOM) {
-                    this.setState({ daysCount: 0 });
-                    var that = this;
-                    window.setTimeout(function () {
-                        _this3.setState({ daysCount: nextProps.daysCount, selectedYear: nextProps.selectedYear });
-                    }, 10);
-                }
             }
         }, {
             key: 'render',

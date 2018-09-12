@@ -30,6 +30,14 @@ class Days extends React.Component {
             this.state.disableFromDay= moment(unix*1000).format("jDD");
         }
     }
+    componentWillReceiveProps(nextProps){
+        if(canUseDOM){
+            this.setState({daysCount: 0});
+            let that = this;
+            window.setTimeout(()=>{this.setState({daysCount: nextProps.daysCount, selectedYear: nextProps.selectedYear})},10);
+        }
+        
+    }
     dayClicked(i, element){
         let {clickEvent} = this.props;
         if(clickEvent)clickEvent(i, element);
@@ -58,6 +66,8 @@ class Days extends React.Component {
             if(i < 10) date=year+month+"0"+i.toString();
             else date=year+month+i.toString();
             if(date == selectedDay)addedClass = " selected";
+            const today = moment().format("jYYYYjMMjDD")
+            if(date == today) addedClass += " current-date"
             if(check){
                 if(i < disableFromDay) enable = false;
                 else enable = true;
@@ -66,14 +76,6 @@ class Days extends React.Component {
             else if (enable) result.push(<div className={"day-items"+addedClass} ref={date} style={{marginRight: marginRight}} key={i} onClick={()=>this.dayClicked(1, date)}>{number}</div>)
         }
         return result;
-    }
-    componentWillReceiveProps(nextProps){
-        if(canUseDOM){
-            this.setState({daysCount: 0});
-            let that = this;
-            window.setTimeout(()=>{this.setState({daysCount: nextProps.daysCount, selectedYear: nextProps.selectedYear})},10);
-        }
-        
     }
     render() {
         return (

@@ -37,35 +37,6 @@
     };
   }
 
-  var _extends = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-
-    return target;
-  };
-
-  function _defineProperty(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-
-    return obj;
-  }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -121,8 +92,6 @@
     _inherits(JDatePicker, _React$Component);
 
     function JDatePicker(props) {
-      var _this$state;
-
       _classCallCheck(this, JDatePicker);
 
       var _this = _possibleConstructorReturn(this, (JDatePicker.__proto__ || Object.getPrototypeOf(JDatePicker)).call(this, props));
@@ -130,23 +99,19 @@
       _this.daysInMonth = _this.daysInMonth.bind(_this);
       var preSelected = "";
       if (_this.props.preSelected) preSelected = _this.props.preSelected;
-      _this.state = (_this$state = {
+      _this.state = {
         openPicker: false,
         selectedYear: parseInt((0, _momentJalaali2.default)().format("jYYYY")),
         currentMonth: parseInt((0, _momentJalaali2.default)().format("jMM")),
         selectedMonthFirstDay: (0, _momentJalaali2.default)((0, _momentJalaali2.default)().format("jYYYY") + "/" + (0, _momentJalaali2.default)().format("jMM") + "/01", "jYYYY/jMM/jDD").weekday(),
-        selectedDay: ""
-      }, _defineProperty(_this$state, "selectedDay", ""), _defineProperty(_this$state, "inputValue", preSelected), _this$state);
+        selectedDay: preSelected.length > 1 ? (0, _momentJalaali2.default)(preSelected, _this.props.format).format("jYYYYjMMjDD") : "",
+        inputValue: preSelected
+      };
       _this.state.daysCount = _this.daysInMonth((0, _momentJalaali2.default)().format("jMM"), (0, _momentJalaali2.default)().format("jYYYY"));
       return _this;
     }
 
     _createClass(JDatePicker, [{
-      key: "daysInMonth",
-      value: function daysInMonth(month, selectedYear) {
-        if (0 < month && month < 7) return 31;else if (6 < month && month < 12) return 30;else if (month == 12 && _momentJalaali2.default.jIsLeapYear(selectedYear)) return 30;else if (month == 12 && !_momentJalaali2.default.jIsLeapYear(selectedYear)) return 29;
-      }
-    }, {
       key: "componentWillMount",
       value: function componentWillMount() {
         var selectedMonthFirstDay = this.state.selectedMonthFirstDay;
@@ -166,6 +131,11 @@
 
           head.appendChild(style);
         }
+      }
+    }, {
+      key: "daysInMonth",
+      value: function daysInMonth(month, selectedYear) {
+        if (0 < month && month < 7) return 31;else if (6 < month && month < 12) return 30;else if (month == 12 && _momentJalaali2.default.jIsLeapYear(selectedYear)) return 30;else if (month == 12 && !_momentJalaali2.default.jIsLeapYear(selectedYear)) return 29;
       }
     }, {
       key: "daysClicked",
@@ -250,15 +220,13 @@
             containerClass = _props2.containerClass,
             inputTextAlign = _props2.inputTextAlign,
             monthTitleEnable = _props2.monthTitleEnable,
-            inputComponent = _props2.inputComponent,
-            _props2$inputProps = _props2.inputProps,
-            inputProps = _props2$inputProps === undefined ? {} : _props2$inputProps;
+            inputComponent = _props2.inputComponent;
 
         var inputAlign = !!inputTextAlign && typeof inputTextAlign != "undefined" ? inputTextAlign : "right";
         return _react2.default.createElement(
           "div",
           { style: { textAlign: "initial" }, className: containerClass },
-          _react2.default.createElement(_Input2.default, _extends({
+          _react2.default.createElement(_Input2.default, {
             type: "text",
             id: id,
             placeholder: placeholder,
@@ -270,7 +238,7 @@
               _this2.setState({ openPicker: !openPicker });
             },
             component: inputComponent
-          }, inputProps)),
+          }),
           openPicker && _react2.default.createElement(
             "div",
             { className: "JDatePicker " + customClass },

@@ -39,20 +39,6 @@
     };
   }
 
-  var _extends = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-
-    return target;
-  };
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -122,7 +108,7 @@
         selectedYear: parseInt((0, _momentJalaali2.default)().format("jYYYY")),
         currentMonth: parseInt((0, _momentJalaali2.default)().format("jMM")),
         selectedMonthFirstDay: (0, _momentJalaali2.default)((0, _momentJalaali2.default)().format("jYYYY") + "/" + (0, _momentJalaali2.default)().format("jMM") + "/01", "jYYYY/jMM/jDD").weekday(),
-        selectedDay: "",
+        selectedDay: preSelected.length > 1 ? (0, _momentJalaali2.default)(preSelected, _this.props.format).format("jYYYYjMMjDD") : "",
         selectedTime: (0, _momentJalaali2.default)().format("HH:mm"),
         inputValue: preSelected
       };
@@ -132,11 +118,6 @@
     }
 
     _createClass(DateTimePicker, [{
-      key: "daysInMonth",
-      value: function daysInMonth(month, selectedYear) {
-        if (0 < month && month < 7) return 31;else if (6 < month && month < 12) return 30;else if (month == 12 && _momentJalaali2.default.jIsLeapYear(selectedYear)) return 30;else if (month == 12 && !_momentJalaali2.default.jIsLeapYear(selectedYear)) return 29;
-      }
-    }, {
       key: "componentWillMount",
       value: function componentWillMount() {
         var selectedMonthFirstDay = this.state.selectedMonthFirstDay;
@@ -156,6 +137,11 @@
 
           head.appendChild(style);
         }
+      }
+    }, {
+      key: "daysInMonth",
+      value: function daysInMonth(month, selectedYear) {
+        if (0 < month && month < 7) return 31;else if (6 < month && month < 12) return 30;else if (month == 12 && _momentJalaali2.default.jIsLeapYear(selectedYear)) return 30;else if (month == 12 && !_momentJalaali2.default.jIsLeapYear(selectedYear)) return 29;
       }
     }, {
       key: "daysClicked",
@@ -275,14 +261,13 @@
             containerClass = _props3.containerClass,
             inputTextAlign = _props3.inputTextAlign,
             monthTitleEnable = _props3.monthTitleEnable,
-            inputComponent = _props3.inputComponent,
-            inputProps = _props3.inputProps;
+            inputComponent = _props3.inputComponent;
 
         var inputAlign = !!inputTextAlign && typeof inputTextAlign != "undefined" ? inputTextAlign : "right";
         return _react2.default.createElement(
           "div",
           { style: { textAlign: "initial" }, className: containerClass },
-          _react2.default.createElement(_Input2.default, _extends({
+          _react2.default.createElement(_Input2.default, {
             type: "text",
             id: id,
             placeholder: placeholder,
@@ -294,7 +279,7 @@
               _this2.setState({ openPicker: !openPicker });
             },
             component: inputComponent
-          }, inputProps)),
+          }),
           openPicker && _react2.default.createElement(
             "div",
             { className: "JDatePicker " + customClass },

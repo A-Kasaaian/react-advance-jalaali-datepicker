@@ -29,7 +29,10 @@ class DateTimePicker extends React.Component {
         moment().format("jYYYY") + "/" + moment().format("jMM") + "/01",
         "jYYYY/jMM/jDD"
       ).weekday(),
-      selectedDay: "",
+      selectedDay: preSelected.length > 1 ? moment(
+        preSelected,
+        this.props.format
+      ).format("jYYYYjMMjDD") : "" ,
       selectedTime: moment().format("HH:mm"),
       inputValue: preSelected
     };
@@ -38,12 +41,6 @@ class DateTimePicker extends React.Component {
       moment().format("jMM"),
       moment().format("jYYYY")
     );
-  }
-  daysInMonth(month, selectedYear) {
-    if (0 < month && month < 7) return 31;
-    else if (6 < month && month < 12) return 30;
-    else if (month == 12 && moment.jIsLeapYear(selectedYear)) return 30;
-    else if (month == 12 && !moment.jIsLeapYear(selectedYear)) return 29;
   }
   componentWillMount() {
     let { selectedMonthFirstDay } = this.state;
@@ -62,6 +59,12 @@ class DateTimePicker extends React.Component {
 
       head.appendChild(style);
     }
+  }
+  daysInMonth(month, selectedYear) {
+    if (0 < month && month < 7) return 31;
+    else if (6 < month && month < 12) return 30;
+    else if (month == 12 && moment.jIsLeapYear(selectedYear)) return 30;
+    else if (month == 12 && !moment.jIsLeapYear(selectedYear)) return 29;
   }
   daysClicked(day, momentDay) {
     let { onChange, format } = this.props;
@@ -172,8 +175,7 @@ class DateTimePicker extends React.Component {
       containerClass,
       inputTextAlign,
       monthTitleEnable,
-      inputComponent,
-      inputProps
+      inputComponent
     } = this.props;
     let inputAlign =
       !!inputTextAlign && typeof inputTextAlign != "undefined"
@@ -193,7 +195,6 @@ class DateTimePicker extends React.Component {
             this.setState({ openPicker: !openPicker });
           }}
           component={inputComponent}
-          {...inputProps}
         />
         {openPicker && (
           <div className={"JDatePicker " + customClass}>

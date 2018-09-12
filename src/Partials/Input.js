@@ -4,7 +4,7 @@ class InputComponent extends React.Component {
   state = {};
   render() {
     const { component: Component, ...rest } = this.props;
-    return Component ? <Component {...rest} /> : <input {...rest} />;
+    return !!Component ? <Component {...rest} /> : <input {...rest} />;
   }
 }
 

@@ -17,28 +17,55 @@ In order to use this module, import the packege into your react component and us
 ![demo of react advance jalaali (persian) datepicker](https://raw.githubusercontent.com/A-Kasaaian/react-advance-jalaali-datepicker/master//demo.gif)
 
 ```javascript
+	import React from "react";
 	import {DatePicker, DateTimePicker, DateRangePicker, DateTimeRangePicker} from "react-advance-jalaali-datepicker";
-    export var Home = createReactClass({
- 		getInitialState(){
-    		return{
-    		  hideModal: true
-		    }
-		  },
+    export class Home extends React.component {
 		change(unix, formatted){
 		    console.log(unix) // returns timestamp of the selected value, for example.
             console.log(formatted) // returns the selected value in the format you've entered, forexample, "تاریخ: 1396/02/24 ساعت: 18:30".
-		},
+		}
+		DatePickerInput(props) {
+			return <input className="popo" {...props} ></input>;
+		}
 		render() {
 		    return (
 		      <div className="datePicker">
-		        <DatePicker placeholder="انتخاب تاریخ" format="jYYYY/jMM/jDD" onChange={this.change} id="datePicker" preSelected="1396/05/15" />
-		        <DateTimePicker placeholder="انتخاب تاریخ و ساعت" format="تاریخ: jYYYY/jMM/jDD ساعت: HH:mm" id="dateTimePicker" onChange={this.changeTimeDate} preSelected="تاریخ: 1396/02/24 ساعت: 18:30" />
-		        <DateRangePicker placeholderStart="تاریخ شروع" placeholderEnd="تاریخ پایان" format="jYYYY/jMM/jDD" onChangeStart={this.change} onChangeEnd={this.changeTimeDate} idStart="rangePickerStart" idEnd="rangePickerEnd" />
-		        <DateTimeRangePicker placeholderStart="تاریخ و ساعت شروع" placeholderEnd="تاریخ و ساعت پایان" format="تاریخ: jYYYY/jMM/jDD ساعت: HH:mm" onChangeStart={this.change} onChangeEnd={this.changeTimeDate} idStart="rangePickerStart" idEnd="rangePickerEnd" />
+				<DatePicker
+					inputComponent={this.DatePickerInput}
+					placeholder="انتخاب تاریخ"
+					format="jYYYY/jMM/jDD"
+					onChange={this.change}
+					id="datePicker"
+					preSelected="1396/05/15"
+					/>
+				<DateTimePicker
+					placeholder="انتخاب تاریخ و ساعت"
+					format="تاریخ: jYYYY/jMM/jDD ساعت: HH:mm"
+					id="dateTimePicker"
+					onChange={this.changeTimeDate}
+					preSelected="تاریخ: 1396/02/24 ساعت: 18:30"
+					/>
+				<DateRangePicker
+					placeholderStart="تاریخ شروع"
+					placeholderEnd="تاریخ پایان"
+					format="jYYYY/jMM/jDD"
+					onChangeStart={this.change}
+					onChangeEnd={this.changeTimeDate}
+					idStart="rangePickerStart"
+					idEnd="rangePickerEnd"
+					/>
+				<DateTimeRangePicker
+					placeholderStart="تاریخ و ساعت شروع"
+					placeholderEnd="تاریخ و ساعت پایان"
+					format="تاریخ: jYYYY/jMM/jDD ساعت: HH:mm"
+					onChangeStart={this.change}
+					onChangeEnd={this.changeTimeDate}
+					idStart="rangePickerStart"
+					idEnd="rangePickerEnd" />
 		      </div>
-    )
-  }
-});
+			)
+		}
+	}
 ```
 #### component types:
 
@@ -66,7 +93,8 @@ Each type has its' own options.
 | customClass | string | To add "className" to the datepicker | 
 | inputTextAlign | string | Texte align of the date input. default "right" | 
 | containerClass | string | To add "className" to the datepicker input container | 
-| monthTitleEnable | bolean | to add a title before month controller row |
+| monthTitleEnable | bolean | To add a title before month controller row |
+| inputComponent | JSX element | To add customized input field to your datepicker |
 
 **DateRangePicker:**
 
@@ -80,6 +108,12 @@ Each type has its' own options.
 | inputTextAlign | string | Texte align of the date input. default "right" | 
 | containerClass | string | To add "className" to the datepicker input container |
 | monthTitleEnable | bolean | to add a title before month controller row |
+| inputComponent | JSX element | To add customized input field to your datepicker |
+
+### Highlight specific date
+
+Add format of the date. Add preSelected date with the mentioned format. The day will get "selected" calss.
+Today is containing "current-date" calss.
 
 ## More
 

@@ -109,7 +109,7 @@
             Component = _props.component,
             rest = _objectWithoutProperties(_props, ["component"]);
 
-        return Component ? _react2.default.createElement(Component, rest) : _react2.default.createElement("input", rest);
+        return !!Component ? _react2.default.createElement(Component, rest) : _react2.default.createElement("input", rest);
       }
     }]);
 
