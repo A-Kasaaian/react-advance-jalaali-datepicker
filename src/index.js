@@ -82,7 +82,7 @@ class JDatePicker extends React.Component {
     if (onChange)
       this.props.onChange(
         moment(momentDay + " 23:59:59", "jYYYYjMMjDD HH:mm:ss").unix(),
-        formatted
+        formatted, this.props.id
       );
   }
   monthsClicked(month) {
