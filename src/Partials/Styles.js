@@ -1,13 +1,13 @@
-let Styles= (nDays)=>{
-    return(
-        `
+let Styles = nDays => {
+  return `
         .JDatePicker {
             width: 300px;
-            min-height: 260px;
+            min-height: 210px;
             padding: 5px;
             position: absolute;
             background: #fff;
             border-radius: 5px;
+            z-index: 1;
         }
         .days-titles div {
             width: 14.28%;
@@ -52,6 +52,15 @@ let Styles= (nDays)=>{
             text-align: center;
             transform: rotate(180deg);
             cursor: pointer;
+        }
+		
+        .JDatePicker .JC-months span:first-child{
+            float: right;
+            width: 15%;
+        }
+        .JDatePicker .JC-months .holder:last-child{
+            float: right;
+            width: 85%;
         }
         .JDatePicker .JC-days {
             position: relative;
@@ -132,7 +141,6 @@ let Styles= (nDays)=>{
             display: initial;
             margin: 0 6px;
         }
-        `
-    )
-}
+        `;
+};
 export default Styles;
