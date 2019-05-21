@@ -38,7 +38,7 @@ class JDatePicker extends React.Component {
       moment().format("jYYYY")
     );
   }
-  componentWillMount() {
+  componentDidMount() {
     let { selectedMonthFirstDay } = this.state;
     if (canUseDOM && !document.getElementById("jdstyle")) {
       let css = Styles(selectedMonthFirstDay),
@@ -56,9 +56,22 @@ class JDatePicker extends React.Component {
       head.appendChild(style);
     }
   }
+
+  componentDidUpdate(preProps) {
+    const { preSelected, format } = this.props;
+    if (
+      preProps.preSelected !== preSelected &&
+      preSelected !== this.state.selectedDay
+    )
+      this.setState({
+        selectedDay: moment(preSelected, format).format("jYYYYjMMjDD"),
+        inputValue: preSelected
+      });
+  }
+
   daysInMonth(month, selectedYear) {
-    if (0 < month && month < 7) return 31;
-    else if (6 < month && month < 12) return 30;
+    if (month > 0 && month < 7) return 31;
+    else if (month > 6 && month < 12) return 30;
     else if (month == 12 && moment.jIsLeapYear(selectedYear)) return 30;
     else if (month == 12 && !moment.jIsLeapYear(selectedYear)) return 29;
   }
