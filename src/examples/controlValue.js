@@ -9,8 +9,6 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.map = {};
-
     this.state = {
       valueDate: "1398/06/25",
       valueDateTime: "تاریخ: 1396/08/26 ساعت: 18:30",
