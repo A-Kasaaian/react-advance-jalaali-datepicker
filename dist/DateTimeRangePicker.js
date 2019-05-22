@@ -166,7 +166,8 @@
             format: format,
             onChange: this.change,
             cancelOnBackgroundClick: cancelOnBackgroundClick,
-            id: idStart
+            id: idStart,
+            preSelected: preSelectedStart
           }, rest)),
           _react2.default.createElement(
             "div",
@@ -188,7 +189,8 @@
             format: format,
             cancelOnBackgroundClick: cancelOnBackgroundClick,
             onChange: this.secondchange,
-            id: "datePicker"
+            id: "datePicker",
+            preSelected: preSelectedStart
           }, rest))
         );
       }
