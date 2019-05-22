@@ -114,8 +114,8 @@
     }
 
     _createClass(JDatePicker, [{
-      key: "componentWillMount",
-      value: function componentWillMount() {
+      key: "componentDidMount",
+      value: function componentDidMount() {
         var selectedMonthFirstDay = this.state.selectedMonthFirstDay;
 
         if (canUseDOM && !document.getElementById("jdstyle")) {
@@ -135,16 +135,28 @@
         }
       }
     }, {
+      key: "componentDidUpdate",
+      value: function componentDidUpdate(preProps) {
+        var _props = this.props,
+            preSelected = _props.preSelected,
+            format = _props.format;
+
+        if (this.props.controllValue && preProps.preSelected !== preSelected && preSelected !== this.state.selectedDay) this.setState({
+          selectedDay: (0, _momentJalaali2.default)(preSelected, format).format("jYYYYjMMjDD"),
+          inputValue: preSelected
+        });
+      }
+    }, {
       key: "daysInMonth",
       value: function daysInMonth(month, selectedYear) {
-        if (0 < month && month < 7) return 31;else if (6 < month && month < 12) return 30;else if (month == 12 && _momentJalaali2.default.jIsLeapYear(selectedYear)) return 30;else if (month == 12 && !_momentJalaali2.default.jIsLeapYear(selectedYear)) return 29;
+        if (month > 0 && month < 7) return 31;else if (month > 6 && month < 12) return 30;else if (month == 12 && _momentJalaali2.default.jIsLeapYear(selectedYear)) return 30;else if (month == 12 && !_momentJalaali2.default.jIsLeapYear(selectedYear)) return 29;
       }
     }, {
       key: "daysClicked",
       value: function daysClicked(day, momentDay) {
-        var _props = this.props,
-            onChange = _props.onChange,
-            format = _props.format;
+        var _props2 = this.props,
+            onChange = _props2.onChange,
+            format = _props2.format;
 
         if (!format) format = "jYYYY-jMM-jDD";
         if (this.state.selectedDay != momentDay) {
@@ -217,16 +229,16 @@
             selectedYear = _state.selectedYear,
             selectedMonthFirstDay = _state.selectedMonthFirstDay,
             inputValue = _state.inputValue;
-        var _props2 = this.props,
-            id = _props2.id,
-            placeholder = _props2.placeholder,
-            disableFromUnix = _props2.disableFromUnix,
-            customClass = _props2.customClass,
-            containerClass = _props2.containerClass,
-            inputTextAlign = _props2.inputTextAlign,
-            monthTitleEnable = _props2.monthTitleEnable,
-            inputComponent = _props2.inputComponent,
-            cancelOnBackgroundClick = _props2.cancelOnBackgroundClick;
+        var _props3 = this.props,
+            id = _props3.id,
+            placeholder = _props3.placeholder,
+            disableFromUnix = _props3.disableFromUnix,
+            customClass = _props3.customClass,
+            containerClass = _props3.containerClass,
+            inputTextAlign = _props3.inputTextAlign,
+            monthTitleEnable = _props3.monthTitleEnable,
+            inputComponent = _props3.inputComponent,
+            cancelOnBackgroundClick = _props3.cancelOnBackgroundClick;
 
         var inputAlign = !!inputTextAlign && typeof inputTextAlign != "undefined" ? inputTextAlign : "right";
         return _react2.default.createElement(
