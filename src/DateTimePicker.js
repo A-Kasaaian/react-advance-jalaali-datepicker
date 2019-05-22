@@ -43,7 +43,7 @@ class DateTimePicker extends React.Component {
       moment().format("jYYYY")
     );
   }
-  componentDidMount() {
+  componentWillMount() {
     let { selectedMonthFirstDay } = this.state;
     if (canUseDOM && !document.getElementById("jdstyle")) {
       let css = Styles(selectedMonthFirstDay),
@@ -61,21 +61,6 @@ class DateTimePicker extends React.Component {
       head.appendChild(style);
     }
   }
-
-  componentDidUpdate(preProps) {
-    const { preSelected, format } = this.props;
-    if (
-      this.props.controllValue &&
-      preProps.preSelected !== preSelected &&
-      preSelected !== this.state.selectedDay
-    )
-      this.setState({
-        selectedDay: moment(preSelected, format).format("jYYYYjMMjDD"),
-        selectedTime: moment().format("HH:mm"),
-        inputValue: preSelected
-      });
-  }
-
   daysInMonth(month, selectedYear) {
     if (0 < month && month < 7) return 31;
     else if (6 < month && month < 12) return 30;
