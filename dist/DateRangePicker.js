@@ -27,6 +27,32 @@
     };
   }
 
+  var _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  function _objectWithoutProperties(obj, keys) {
+    var target = {};
+
+    for (var i in obj) {
+      if (keys.indexOf(i) >= 0) continue;
+      if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;
+      target[i] = obj[i];
+    }
+
+    return target;
+  }
+
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -119,7 +145,9 @@
             inputTextAlign = _props.inputTextAlign,
             monthTitleEnable = _props.monthTitleEnable,
             cancelOnBackgroundClick = _props.cancelOnBackgroundClick,
-            preSelectedStart = _props.preSelectedStart;
+            preSelectedStart = _props.preSelectedStart,
+            rest = _objectWithoutProperties(_props, ["placeholderEnd", "placeholderStart", "idStart", "idEnd", "format", "customClassEnd", "customClassStart", "containerClass", "inputTextAlign", "monthTitleEnable", "cancelOnBackgroundClick", "preSelectedStart"]);
+
         var disableFromUnix = this.state.disableFromUnix;
 
         if (!placeholderStart) placeholderStart = "";
@@ -129,7 +157,7 @@
         return _react2.default.createElement(
           "div",
           { className: "jdtrp", style: { textAlign: "initial" } },
-          _react2.default.createElement(_index2.default, {
+          _react2.default.createElement(_index2.default, _extends({
             monthTitleEnable: monthTitleEnable,
             containerClass: containerClass,
             inputTextAlign: inputTextAlign,
@@ -140,7 +168,7 @@
             cancelOnBackgroundClick: cancelOnBackgroundClick,
             id: idStart,
             preSelected: preSelectedStart
-          }),
+          }, rest)),
           _react2.default.createElement(
             "div",
             null,
@@ -151,7 +179,7 @@
             null,
             placeholderEnd
           ),
-          !!disableFromUnix && _react2.default.createElement(_index2.default, {
+          !!disableFromUnix && _react2.default.createElement(_index2.default, _extends({
             containerClass: containerClass,
             inputTextAlign: inputTextAlign,
             customClass: customClassEnd,
@@ -162,7 +190,7 @@
             cancelOnBackgroundClick: cancelOnBackgroundClick,
             id: "datePicker",
             preSelected: preSelectedStart
-          })
+          }, rest))
         );
       }
     }]);

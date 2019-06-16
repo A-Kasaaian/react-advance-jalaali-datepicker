@@ -30,7 +30,8 @@ class DateRangePicker extends React.Component {
       inputTextAlign,
       monthTitleEnable,
       cancelOnBackgroundClick,
-      preSelectedStart
+      preSelectedStart,
+      ...rest
     } = this.props;
     let { disableFromUnix } = this.state;
     if (!placeholderStart) placeholderStart = "";
@@ -50,6 +51,7 @@ class DateRangePicker extends React.Component {
           cancelOnBackgroundClick={cancelOnBackgroundClick}
           id={idStart}
           preSelected={preSelectedStart}
+          {...rest}
         />
         <div>{"->"}</div>
         {!disableFromUnix && <div>{placeholderEnd}</div>}
@@ -65,6 +67,7 @@ class DateRangePicker extends React.Component {
             cancelOnBackgroundClick={cancelOnBackgroundClick}
             id="datePicker"
             preSelected={preSelectedStart}
+            {...rest}
           />
         )}
       </div>
