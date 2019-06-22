@@ -142,7 +142,7 @@
             format = _props.format;
 
         if (this.props.controllValue && preProps.preSelected !== preSelected && preSelected !== this.state.selectedDay) this.setState({
-          selectedDay: (0, _momentJalaali2.default)(preSelected, format).format("jYYYYjMMjDD"),
+          selectedDay: preSelected.length > 1 ? (0, _momentJalaali2.default)(preSelected, this.props.format).format("jYYYYjMMjDD") : "",
           inputValue: preSelected
         });
       }
