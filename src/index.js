@@ -65,7 +65,9 @@ class JDatePicker extends React.Component {
       preSelected !== this.state.selectedDay
     )
       this.setState({
-        selectedDay: moment(preSelected, format).format("jYYYYjMMjDD"),
+        selectedDay: preSelected.length > 1
+          ? moment(preSelected, this.props.format).format("jYYYYjMMjDD")
+          : "",
         inputValue: preSelected
       });
   }
