@@ -123,7 +123,7 @@ Each type has its' own options.
 | controllValue                    | boolean     | By stting to true, It will make preselected value control the input value                                       |
 
 ### Current date
-You can use `current-date` class to style today. in the calendar you can find today has additional class of `current-date`.
+You can use `current-date` class to style today. In the calendar you can find today has additional class of `current-date`.
 
 ### Outside control sample
 
