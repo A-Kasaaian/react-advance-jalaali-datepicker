@@ -122,6 +122,9 @@ Each type has its' own options.
 | cancelOnBackgroundClick          | boolean     | To add background, which closes the datepicker on click event. It's customizable with class name "JDBackground" |
 | controllValue                    | boolean     | By stting to true, It will make preselected value control the input value                                       |
 
+### Current date
+You can use `current-date` class to style today. in the calendar you can find today has additional class of `current-date`.
+
 ### Outside control sample
 
 [here](https://github.com/A-Kasaaian/react-advance-jalaali-datepicker/blob/master/examples/controlValue.js) you can find an example of code to control input from your parent component. This example shows how to reset values by a button.
