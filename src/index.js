@@ -6,6 +6,9 @@ import Styles from "./Partials/Styles";
 import Years from "./Partials/Years";
 import Input from "./Partials/Input";
 import Background from "./Partials/Background";
+
+// some comment added for test
+
 const canUseDOM = !!(
   typeof window !== "undefined" &&
   window.document &&
