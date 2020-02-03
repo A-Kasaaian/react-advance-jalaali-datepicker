@@ -1,5 +1,6 @@
 import React from "react";
 import DatePicker from "./index.js";
+import "_dateRangePicker.scss";
 
 class DateRangePicker extends React.Component {
   constructor(props) {
@@ -31,6 +32,7 @@ class DateRangePicker extends React.Component {
       monthTitleEnable,
       cancelOnBackgroundClick,
       preSelectedStart,
+      width,
       ...rest
     } = this.props;
     let { disableFromUnix } = this.state;
@@ -39,7 +41,7 @@ class DateRangePicker extends React.Component {
     if (!idStart) idStart = "";
     if (!idEnd) idEnd = "";
     return (
-      <div className="jdtrp" style={{ textAlign: "initial" }}>
+      <div className="jdtrp" style={{ textAlign: "initial", minWidth: width }}>
         <DatePicker
           monthTitleEnable={monthTitleEnable}
           containerClass={containerClass}
@@ -53,7 +55,6 @@ class DateRangePicker extends React.Component {
           preSelected={preSelectedStart}
           {...rest}
         />
-        <div>{"->"}</div>
         {!disableFromUnix && <div>{placeholderEnd}</div>}
         {!!disableFromUnix && (
           <DatePicker

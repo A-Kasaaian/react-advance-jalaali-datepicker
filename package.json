@@ -56,6 +56,8 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
-    "moment-jalaali": "^0.7.4"
+    "moment-jalaali": "^0.7.4",
+    "node-sass": "^4.13.1",
+    "sass-loader": "^8.0.2"
   }
 }
