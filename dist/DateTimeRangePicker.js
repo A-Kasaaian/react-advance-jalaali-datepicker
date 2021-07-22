@@ -142,7 +142,8 @@
             monthTitleEnable = _props.monthTitleEnable,
             cancelOnBackgroundClick = _props.cancelOnBackgroundClick,
             preSelectedStart = _props.preSelectedStart,
-            renderPointer = _props.renderPointer,
+            _props$renderPointer = _props.renderPointer,
+            renderPointer = _props$renderPointer === undefined ? true : _props$renderPointer,
             pointer = _props.pointer,
             rest = _objectWithoutProperties(_props, ["placeholderEnd", "placeholderStart", "idStart", "idEnd", "format", "customClassStart", "customClassEnd", "containerClass", "inputTextAlign", "monthTitleEnable", "cancelOnBackgroundClick", "preSelectedStart", "renderPointer", "pointer"]);
 
