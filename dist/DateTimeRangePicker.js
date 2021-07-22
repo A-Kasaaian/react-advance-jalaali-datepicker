@@ -109,28 +109,24 @@
 
       var _this = _possibleConstructorReturn(this, (DateTimeRangePicker.__proto__ || Object.getPrototypeOf(DateTimeRangePicker)).call(this, props));
 
-      _this.change = _this.change.bind(_this);
-      _this.secondchange = _this.secondchange.bind(_this);
+      _this.change = function (unix, formatted) {
+        var onChangeStart = _this.props.onChangeStart;
+
+        _this.setState({ disableFromUnix: unix });
+        if (!!onChangeStart) onChangeStart(unix, formatted);
+      };
+
+      _this.secondchange = function (unix, formatted) {
+        var onChangeEnd = _this.props.onChangeEnd;
+
+        if (!!onChangeEnd) onChangeEnd(unix, formatted);
+      };
+
       _this.state = { disableFromUnix: "" };
       return _this;
     }
 
     _createClass(DateTimeRangePicker, [{
-      key: "change",
-      value: function change(unix, formatted) {
-        var onChangeStart = this.props.onChangeStart;
-
-        this.setState({ disableFromUnix: unix });
-        if (!!onChangeStart) onChangeStart(unix, formatted);
-      }
-    }, {
-      key: "secondchange",
-      value: function secondchange(unix, formatted) {
-        var onChangeEnd = this.props.onChangeEnd;
-
-        if (!!onChangeEnd) onChangeEnd(unix, formatted);
-      }
-    }, {
       key: "render",
       value: function render() {
         var _props = this.props,
@@ -146,7 +142,9 @@
             monthTitleEnable = _props.monthTitleEnable,
             cancelOnBackgroundClick = _props.cancelOnBackgroundClick,
             preSelectedStart = _props.preSelectedStart,
-            rest = _objectWithoutProperties(_props, ["placeholderEnd", "placeholderStart", "idStart", "idEnd", "format", "customClassStart", "customClassEnd", "containerClass", "inputTextAlign", "monthTitleEnable", "cancelOnBackgroundClick", "preSelectedStart"]);
+            renderPointer = _props.renderPointer,
+            pointer = _props.pointer,
+            rest = _objectWithoutProperties(_props, ["placeholderEnd", "placeholderStart", "idStart", "idEnd", "format", "customClassStart", "customClassEnd", "containerClass", "inputTextAlign", "monthTitleEnable", "cancelOnBackgroundClick", "preSelectedStart", "renderPointer", "pointer"]);
 
         var disableFromUnix = this.state.disableFromUnix;
 
@@ -169,10 +167,10 @@
             id: idStart,
             preSelected: preSelectedStart
           }, rest)),
-          _react2.default.createElement(
+          renderPointer && _react2.default.createElement(
             "div",
             null,
-            "->"
+            pointer || "->"
           ),
           !disableFromUnix && _react2.default.createElement(
             "div",

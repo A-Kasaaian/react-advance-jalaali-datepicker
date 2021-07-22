@@ -16,11 +16,9 @@ const mapObj = {
 class TimePicker extends React.Component {
   constructor(props) {
     super(props);
-    this.minuteChanged = this.minuteChanged.bind(this);
-    this.hourChanged = this.hourChanged.bind(this);
     this.state = {
       editable: false,
-      minuteDisabled: true,
+      minuteDisabled: false,
       time: this.props.selectedTime,
       error: "",
       minute:
@@ -37,7 +35,10 @@ class TimePicker extends React.Component {
       this.state.disableFromMinute = moment(unix * 1000).format("mm");
     }
   }
-  minuteChanged() {
+  componentWillReceiveProps(nextprops) {
+    this.setState({ time: nextprops.selectedTime });
+  }
+  minuteChanged= () =>  {
     let { minute, hour } = this.refs;
     let { changeEvent } = this.props;
     let minuteInt = parseInt(minute.value);
@@ -53,7 +54,7 @@ class TimePicker extends React.Component {
       this.setState({ error: "ساعت حداکثر ۲۴ باشد" });
     }
   }
-  hourChanged() {
+  hourChanged= () => {
     let { minute, hour } = this.refs;
     let { changeEvent } = this.props;
     let minuteInt = parseInt(minute.value);
@@ -62,14 +63,11 @@ class TimePicker extends React.Component {
       if (!!changeEvent) changeEvent(hour.value + ":" + minute.value);
       this.setState({ error: "", minuteDisabled: false, hour: hour.value });
     } else {
-      this.setState({ error: "ساعت حداکثر ۲۴ باشد" });
+      this.setState({ error: "ساعت حداکثر ۲۴ باشد", minuteDisabled: true });
     }
   }
-  componentWillReceiveProps(nextprops) {
-    this.setState({ time: nextprops.selectedTime });
-  }
-  TimePicker() {
-    let {
+  TimePicker= () => {
+    const {
       minute,
       hour,
       minuteDisabled,
@@ -80,7 +78,7 @@ class TimePicker extends React.Component {
       disableFromDay
     } = this.state;
     let { selectedYear, currentMonth, selectedDay } = this.props;
-    let hourOptions = [];
+    const hourOptions = [];
     let initCheck = false;
     if (currentMonth < 10) currentMonth = "0" + currentMonth;
     if (!!selectedDay)
@@ -91,7 +89,7 @@ class TimePicker extends React.Component {
       selectedDay == disableFromDay
     )
       initCheck = true;
-    for (let i = 0; 23 >= i; i++) {
+    for (let i = 0; i <= 23; i++) {
       let number = i.toString();
       let enable = true;
       if (i < 10) number = "0" + number;
@@ -106,14 +104,14 @@ class TimePicker extends React.Component {
           </option>
         );
     }
-    let hourElement = (
+    const hourElement = (
       <select onChange={this.hourChanged} value={hour} ref="hour">
         {hourOptions}
       </select>
     );
 
-    let minuteOptions = [];
-    for (let i = 0; 11 >= i; i++) {
+    const minuteOptions = [];
+    for (let i = 0; i <= 11; i++) {
       let min = 5 * i;
       let number = min.toString();
       if (min < 10) number = "0" + number;
@@ -126,7 +124,7 @@ class TimePicker extends React.Component {
         </option>
       );
     }
-    let minuteElement = (
+    const minuteElement = (
       <select
         disabled={minuteDisabled}
         value={minute}

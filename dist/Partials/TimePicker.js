@@ -96,94 +96,63 @@
 
       var _this = _possibleConstructorReturn(this, (TimePicker.__proto__ || Object.getPrototypeOf(TimePicker)).call(this, props));
 
-      _this.minuteChanged = _this.minuteChanged.bind(_this);
-      _this.hourChanged = _this.hourChanged.bind(_this);
-      _this.state = {
-        editable: false,
-        minuteDisabled: true,
-        time: _this.props.selectedTime,
-        error: "",
-        minute: Math.floor(parseInt(_this.props.selectedTime.substring(3, 5)) / 5) * 5,
-        hour: _this.props.selectedTime.substring(0, 2)
-      };
-      var unix = "";
-      if (!!_this.props.disableFromUnix) unix = _this.props.disableFromUnix;
-      if (!!unix) {
-        _this.state.disableFromYear = (0, _momentJalaali2.default)(unix * 1000).format("jYYYY");
-        _this.state.disableFromMonth = (0, _momentJalaali2.default)(unix * 1000).format("jMM");
-        _this.state.disableFromDay = (0, _momentJalaali2.default)(unix * 1000).format("jDD");
-        _this.state.disableFromHour = (0, _momentJalaali2.default)(unix * 1000).format("HH");
-        _this.state.disableFromMinute = (0, _momentJalaali2.default)(unix * 1000).format("mm");
-      }
-      return _this;
-    }
-
-    _createClass(TimePicker, [{
-      key: "minuteChanged",
-      value: function minuteChanged() {
-        var _refs = this.refs,
-            minute = _refs.minute,
-            hour = _refs.hour;
-        var changeEvent = this.props.changeEvent;
+      _this.minuteChanged = function () {
+        var _this$refs = _this.refs,
+            minute = _this$refs.minute,
+            hour = _this$refs.hour;
+        var changeEvent = _this.props.changeEvent;
 
         var minuteInt = parseInt(minute.value);
         var houraInt = parseInt(hour.value);
         if (houraInt >= 0 && houraInt < 24) {
           if (minuteInt >= 0 && minuteInt < 60) {
-            this.setState({ editable: false, error: "" });
+            _this.setState({ editable: false, error: "" });
             if (!!changeEvent) changeEvent(hour.value + ":" + minute.value);
           } else {
-            this.setState({ error: "دقیقه حداکثر ۶۰ باشد" });
+            _this.setState({ error: "دقیقه حداکثر ۶۰ باشد" });
           }
         } else {
-          this.setState({ error: "ساعت حداکثر ۲۴ باشد" });
+          _this.setState({ error: "ساعت حداکثر ۲۴ باشد" });
         }
-      }
-    }, {
-      key: "hourChanged",
-      value: function hourChanged() {
-        var _refs2 = this.refs,
-            minute = _refs2.minute,
-            hour = _refs2.hour;
-        var changeEvent = this.props.changeEvent;
+      };
+
+      _this.hourChanged = function () {
+        var _this$refs2 = _this.refs,
+            minute = _this$refs2.minute,
+            hour = _this$refs2.hour;
+        var changeEvent = _this.props.changeEvent;
 
         var minuteInt = parseInt(minute.value);
         var houraInt = parseInt(hour.value);
         if (houraInt >= 0 && houraInt < 24) {
           if (!!changeEvent) changeEvent(hour.value + ":" + minute.value);
-          this.setState({ error: "", minuteDisabled: false, hour: hour.value });
+          _this.setState({ error: "", minuteDisabled: false, hour: hour.value });
         } else {
-          this.setState({ error: "ساعت حداکثر ۲۴ باشد" });
+          _this.setState({ error: "ساعت حداکثر ۲۴ باشد", minuteDisabled: true });
         }
-      }
-    }, {
-      key: "componentWillReceiveProps",
-      value: function componentWillReceiveProps(nextprops) {
-        this.setState({ time: nextprops.selectedTime });
-      }
-    }, {
-      key: "TimePicker",
-      value: function TimePicker() {
-        var _state = this.state,
-            minute = _state.minute,
-            hour = _state.hour,
-            minuteDisabled = _state.minuteDisabled,
-            disableFromMinute = _state.disableFromMinute,
-            disableFromHour = _state.disableFromHour,
-            disableFromYear = _state.disableFromYear,
-            disableFromMonth = _state.disableFromMonth,
-            disableFromDay = _state.disableFromDay;
-        var _props = this.props,
-            selectedYear = _props.selectedYear,
-            currentMonth = _props.currentMonth,
-            selectedDay = _props.selectedDay;
+      };
+
+      _this.TimePicker = function () {
+        var _this$state = _this.state,
+            minute = _this$state.minute,
+            hour = _this$state.hour,
+            minuteDisabled = _this$state.minuteDisabled,
+            disableFromMinute = _this$state.disableFromMinute,
+            disableFromHour = _this$state.disableFromHour,
+            disableFromYear = _this$state.disableFromYear,
+            disableFromMonth = _this$state.disableFromMonth,
+            disableFromDay = _this$state.disableFromDay;
+        var _this$props = _this.props,
+            selectedYear = _this$props.selectedYear,
+            currentMonth = _this$props.currentMonth,
+            selectedDay = _this$props.selectedDay;
 
         var hourOptions = [];
         var initCheck = false;
         if (currentMonth < 10) currentMonth = "0" + currentMonth;
         if (!!selectedDay) selectedDay = (0, _momentJalaali2.default)(selectedDay, "jYYYYjMMjDD").format("jDD");
         if (selectedYear == disableFromYear && currentMonth == disableFromMonth && selectedDay == disableFromDay) initCheck = true;
-        for (var i = 0; 23 >= i; i++) {
+        for (var i = 0; i <= 23; i++) {
           var number = i.toString();
           var enable = true;
           if (i < 10) number = "0" + number;
@@ -199,12 +168,12 @@
         }
         var hourElement = _react2.default.createElement(
           "select",
-          { onChange: this.hourChanged, value: hour, ref: "hour" },
+          { onChange: _this.hourChanged, value: hour, ref: "hour" },
           hourOptions
         );
 
         var minuteOptions = [];
-        for (var _i = 0; 11 >= _i; _i++) {
+        for (var _i = 0; _i <= 11; _i++) {
           var min = 5 * _i;
           var _number = min.toString();
           if (min < 10) _number = "0" + _number;
@@ -222,7 +191,7 @@
           {
             disabled: minuteDisabled,
             value: minute,
-            onChange: this.minuteChanged,
+            onChange: _this.minuteChanged,
             ref: "minute"
           },
           minuteOptions
@@ -243,16 +212,42 @@
             hourElement
           )
         );
+      };
+
+      _this.state = {
+        editable: false,
+        minuteDisabled: false,
+        time: _this.props.selectedTime,
+        error: "",
+        minute: Math.floor(parseInt(_this.props.selectedTime.substring(3, 5)) / 5) * 5,
+        hour: _this.props.selectedTime.substring(0, 2)
+      };
+      var unix = "";
+      if (!!_this.props.disableFromUnix) unix = _this.props.disableFromUnix;
+      if (!!unix) {
+        _this.state.disableFromYear = (0, _momentJalaali2.default)(unix * 1000).format("jYYYY");
+        _this.state.disableFromMonth = (0, _momentJalaali2.default)(unix * 1000).format("jMM");
+        _this.state.disableFromDay = (0, _momentJalaali2.default)(unix * 1000).format("jDD");
+        _this.state.disableFromHour = (0, _momentJalaali2.default)(unix * 1000).format("HH");
+        _this.state.disableFromMinute = (0, _momentJalaali2.default)(unix * 1000).format("mm");
+      }
+      return _this;
+    }
+
+    _createClass(TimePicker, [{
+      key: "componentWillReceiveProps",
+      value: function componentWillReceiveProps(nextprops) {
+        this.setState({ time: nextprops.selectedTime });
       }
     }, {
       key: "render",
       value: function render() {
         var _this2 = this;
 
-        var _state2 = this.state,
-            error = _state2.error,
-            time = _state2.time,
-            editable = _state2.editable;
+        var _state = this.state,
+            error = _state.error,
+            time = _state.time,
+            editable = _state.editable;
         var selectedDay = this.props.selectedDay;
 
         var timeString = time.toString().replace(/1|2|3|4|5|6|7|8|9|0/gi, function (e) {

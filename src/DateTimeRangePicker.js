@@ -4,16 +4,14 @@ import DateTimePicker from "./DateTimePicker.js";
 class DateTimeRangePicker extends React.Component {
   constructor(props) {
     super(props);
-    this.change = this.change.bind(this);
-    this.secondchange = this.secondchange.bind(this);
     this.state = { disableFromUnix: "" };
   }
-  change(unix, formatted) {
+  change = (unix, formatted) => {
     let { onChangeStart } = this.props;
     this.setState({ disableFromUnix: unix });
     if (!!onChangeStart) onChangeStart(unix, formatted);
   }
-  secondchange(unix, formatted) {
+  secondchange = (unix, formatted) => {
     let { onChangeEnd } = this.props;
     if (!!onChangeEnd) onChangeEnd(unix, formatted);
   }
@@ -31,9 +29,11 @@ class DateTimeRangePicker extends React.Component {
       monthTitleEnable,
       cancelOnBackgroundClick,
       preSelectedStart,
+      renderPointer,
+      pointer,
       ...rest
     } = this.props;
-    let { disableFromUnix } = this.state;
+    const { disableFromUnix } = this.state;
     if (!placeholderStart) placeholderStart = "";
     if (!placeholderEnd) placeholderEnd = "";
     if (!idStart) idStart = "";
@@ -53,7 +53,7 @@ class DateTimeRangePicker extends React.Component {
           preSelected={preSelectedStart}
           {...rest}
         />
-        <div>{"->"}</div>
+        {renderPointer && <div>{pointer || "->"}</div> }
         {!disableFromUnix && <div>{placeholderEnd}</div>}
         {!!disableFromUnix && (
           <DateTimePicker
