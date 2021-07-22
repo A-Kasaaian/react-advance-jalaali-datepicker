@@ -29,7 +29,7 @@ class DateRangePicker extends React.Component {
       monthTitleEnable,
       cancelOnBackgroundClick,
       preSelectedStart,
-      renderPointer,
+      renderPointer = true,
       pointer,
       ...rest
     } = this.props;

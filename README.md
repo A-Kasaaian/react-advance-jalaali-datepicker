@@ -121,6 +121,8 @@ Each type has its' own options.
 | preSelectedStart                 | string      | Previously selected date, it should be formatted exactly the same as the format option                          |
 | cancelOnBackgroundClick          | boolean     | To add background, which closes the datepicker on click event. It's customizable with class name "JDBackground" |
 | controllValue                    | boolean     | By stting to true, It will make preselected value control the input value                                       |
+| renderPointer                    | boolean     | Shows the pointer to the end of range, if enabled. default: true
+| pointer                          | JSX element | Renders the passed pointer element instead of the default one
 
 ### Current date
 You can use `current-date` class to style today. In the calendar you can find today has additional class of `current-date`.
