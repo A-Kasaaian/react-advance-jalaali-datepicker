@@ -16,6 +16,8 @@ const mapObj = {
 class TimePicker extends React.Component {
   constructor(props) {
     super(props);
+    this.hourRef= React.createRef();
+    this.minuteRef= React.createRef();
     this.state = {
       editable: false,
       minuteDisabled: false,
@@ -39,10 +41,11 @@ class TimePicker extends React.Component {
     this.setState({ time: nextprops.selectedTime });
   }
   minuteChanged= () =>  {
-    let { minute, hour } = this.refs;
-    let { changeEvent } = this.props;
-    let minuteInt = parseInt(minute.value);
-    let houraInt = parseInt(hour.value);
+    const minute = this.minuteRef.current;
+    const hour = this.hourRef.current;
+    const { changeEvent } = this.props;
+    const minuteInt = parseInt(minute.value);
+    const houraInt = parseInt(hour.value);
     if (houraInt >= 0 && houraInt < 24) {
       if (minuteInt >= 0 && minuteInt < 60) {
         this.setState({ editable: false, error: "" });
@@ -105,7 +108,7 @@ class TimePicker extends React.Component {
         );
     }
     const hourElement = (
-      <select onChange={this.hourChanged} value={hour} ref="hour">
+      <select onChange={this.hourChanged} value={hour} ref={this.hourRef}>
         {hourOptions}
       </select>
     );
@@ -129,7 +132,7 @@ class TimePicker extends React.Component {
         disabled={minuteDisabled}
         value={minute}
         onChange={this.minuteChanged}
-        ref="minute"
+        ref={this.minuteRef}
       >
         {minuteOptions}
       </select>

@@ -131,13 +131,11 @@
       }
     }, {
       key: "dayClicked",
-      value: function dayClicked(i, element) {
+      value: function dayClicked(i, date) {
         var clickEvent = this.props.clickEvent;
 
-        if (clickEvent) clickEvent(i, element);
-        if (!!this.state.selectedDay && !!this.refs[this.state.selectedDay]) this.refs[this.state.selectedDay].className = this.refs[this.state.selectedDay].className.replace("selected", "");
-        this.setState({ selectedDay: element });
-        this.refs[element].className += " selected";
+        if (clickEvent) clickEvent(i, date);
+        this.setState({ selectedDay: date });
       }
     }, {
       key: "renderDays",
@@ -157,9 +155,12 @@
 
         var year = selectedYear.toString();
         var month = currentMonth.toString();
+
         if (month.length == 1) month = "0" + month;
+
         var enable = true;
         var check = false;
+
         if (disableFromYear > year) enable = false;else if (disableFromYear == year && disableFromMonth > month) enable = false;else if (disableFromYear == year && disableFromMonth == month) check = true;
         var result = [];
 
@@ -170,36 +171,34 @@
           var number = i.toString().replace(/1|2|3|4|5|6|7|8|9|0/gi, function (e) {
             return mapObj[e];
           });
+
           if (i == 1) marginRight = firstDay * 14.28 + "%";
+
           if (i < 10) date = year + month + "0" + i.toString();else date = year + month + i.toString();
+
           if (date == selectedDay) addedClass = " selected";
+
           var today = (0, _momentJalaali2.default)().format("jYYYYjMMjDD");
+
           if (date == today) addedClass += " current-date";
+
           if (check) {
             if (i < disableFromDay) enable = false;else enable = true;
           }
-          if (!enable) result.push(_react2.default.createElement(
+
+          result.push(_react2.default.createElement(
             "div",
             {
               className: "day-items" + addedClass,
-              style: {
+              key: i,
+              id: date,
+              style: enable ? { marginRight: marginRight } : {
                 background: "#ccc",
                 cursor: "default",
                 marginRight: marginRight
               },
-              ref: date,
-              key: i
-            },
-            number
-          ));else if (enable) result.push(_react2.default.createElement(
-            "div",
-            {
-              className: "day-items" + addedClass,
-              ref: date,
-              style: { marginRight: marginRight },
-              key: i,
               onClick: function onClick() {
-                return _this3.dayClicked(1, date);
+                return enable ? _this3.dayClicked(1, date) : {};
               }
             },
             number
@@ -209,6 +208,7 @@
         for (var i = 1; daysCount >= i; i++) {
           _loop(i);
         }
+
         return result;
       }
     }, {

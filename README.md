@@ -103,7 +103,7 @@ Each type has its' own options.
 | monthTitleEnable        | boolean     | To add a title before month controller row                                                                      |
 | inputComponent          | JSX element | To add customized input field to your datepicker                                                                |
 | cancelOnBackgroundClick | boolean     | To add background, which closes the datepicker on click event. It's customizable with class name "JDBackground" |
-| controllValue           | boolean     | By stting to true, It will make preselected value control the input value                                       |
+| controlValue           | boolean     | By stting to true, It will make preselected value control the input value                                       |
 
 **DateRangePicker:**
 
@@ -111,7 +111,7 @@ Each type has its' own options.
 | -------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------- |
 | placeholderStart, placeholderEnd | string      | Placeholder of the datepickers inputs                                                                           |
 | format                           | string      | Format of showing date in the input. Applies on both inputs. Accepts moment-jalali formats (required)           |
-| onChangeStart, onChangeEnd       | function    | On change call of inputs                                                                                        |
+| onChangeStart, onChangeEnd       | function    | On change call of inputs (required)                                                                                        |
 | idStart, idEnd                   | string      | Add id attributes to the input elments                                                                          |
 | customClassStart, customClassEnd | string      | To add class name to start and end dattepickers                                                                 |
 | inputTextAlign                   | string      | Texte align of the date input. default "right"                                                                  |
@@ -120,7 +120,7 @@ Each type has its' own options.
 | inputComponent                   | JSX element | To add customized input field to your datepicker                                                                |
 | preSelectedStart                 | string      | Previously selected date, it should be formatted exactly the same as the format option                          |
 | cancelOnBackgroundClick          | boolean     | To add background, which closes the datepicker on click event. It's customizable with class name "JDBackground" |
-| controllValue                    | boolean     | By stting to true, It will make preselected value control the input value                                       |
+| controlValue                    | boolean     | By stting to true, It will make preselected value control the input value                                       |
 | renderPointer                    | boolean     | Shows the pointer to the end of range, if enabled. default: true
 | pointer                          | JSX element | Renders the passed pointer element instead of the default one
 

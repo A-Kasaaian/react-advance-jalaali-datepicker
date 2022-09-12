@@ -60,7 +60,7 @@ class JDatePicker extends React.Component {
   componentDidUpdate(preProps) {
     const { preSelected, format } = this.props;
     if (
-      this.props.controllValue &&
+      this.props.controlValue &&
       preProps.preSelected !== preSelected &&
       preSelected !== this.state.selectedDay
     )

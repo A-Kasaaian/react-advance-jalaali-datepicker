@@ -97,9 +97,8 @@
       var _this = _possibleConstructorReturn(this, (TimePicker.__proto__ || Object.getPrototypeOf(TimePicker)).call(this, props));
 
       _this.minuteChanged = function () {
-        var _this$refs = _this.refs,
-            minute = _this$refs.minute,
-            hour = _this$refs.hour;
+        var minute = _this.minuteRef.current;
+        var hour = _this.hourRef.current;
         var changeEvent = _this.props.changeEvent;
 
         var minuteInt = parseInt(minute.value);
@@ -117,9 +116,9 @@
       };
 
       _this.hourChanged = function () {
-        var _this$refs2 = _this.refs,
-            minute = _this$refs2.minute,
-            hour = _this$refs2.hour;
+        var _this$refs = _this.refs,
+            minute = _this$refs.minute,
+            hour = _this$refs.hour;
         var changeEvent = _this.props.changeEvent;
 
         var minuteInt = parseInt(minute.value);
@@ -168,7 +167,7 @@
         }
         var hourElement = _react2.default.createElement(
           "select",
-          { onChange: _this.hourChanged, value: hour, ref: "hour" },
+          { onChange: _this.hourChanged, value: hour, ref: _this.hourRef },
           hourOptions
         );
 
@@ -192,7 +191,7 @@
             disabled: minuteDisabled,
             value: minute,
             onChange: _this.minuteChanged,
-            ref: "minute"
+            ref: _this.minuteRef
           },
           minuteOptions
         );
@@ -214,6 +213,8 @@
         );
       };
 
+      _this.hourRef = _react2.default.createRef();
+      _this.minuteRef = _react2.default.createRef();
       _this.state = {
         editable: false,
         minuteDisabled: false,

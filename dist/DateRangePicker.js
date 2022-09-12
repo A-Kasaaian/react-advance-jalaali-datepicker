@@ -116,7 +116,7 @@
         if (!!onChangeStart) onChangeStart(unix, formatted);
       };
 
-      _this.secondchange = function (unix, formatted) {
+      _this.secondChange = function (unix, formatted) {
         var onChangeEnd = _this.props.onChangeEnd;
 
         if (!!onChangeEnd) onChangeEnd(unix, formatted);
@@ -185,7 +185,7 @@
             placeholder: placeholderEnd,
             disableFromUnix: disableFromUnix,
             format: format,
-            onChange: this.secondchange,
+            onChange: this.secondChange,
             cancelOnBackgroundClick: cancelOnBackgroundClick,
             id: "datePicker",
             preSelected: preSelectedStart

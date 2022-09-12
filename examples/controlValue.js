@@ -54,7 +54,7 @@ class App extends Component {
             cancelOnBackgroundClick={true}
             id="datePicker"
             preSelected={this.state.valueDate}
-            controllValue={true}
+            controlValue={true}
           />
           <DateTimePicker
             placeholder="انتخاب تاریخ و ساعت"
@@ -67,7 +67,7 @@ class App extends Component {
             }
             cancelOnBackgroundClick={true}
             preSelected={this.state.valueDateTime}
-            controllValue={true}
+            controlValue={true}
           />
           <DateRangePicker
             placeholderStart="تاریخ شروع"
@@ -87,7 +87,7 @@ class App extends Component {
             preSelectedStart={this.state.valueRDateStart}
             idStart="rangePickerStart"
             idEnd="rangePickerEnd"
-            controllValue={true}
+            controlValue={true}
           />
           <DateTimeRangePicker
             placeholderStart="تاریخ و ساعت شروع"
@@ -107,7 +107,7 @@ class App extends Component {
             cancelOnBackgroundClick={true}
             idStart="rangePickerStart"
             idEnd="rangePickerEnd"
-            controllValue={true}
+            controlValue={true}
           />
         </div>
       </div>

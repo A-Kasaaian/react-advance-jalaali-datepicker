@@ -94,24 +94,23 @@
 
       var _this = _possibleConstructorReturn(this, (Years.__proto__ || Object.getPrototypeOf(Years)).call(this, props));
 
-      _this.yearChanged = _this.yearChanged.bind(_this);
+      _this.yearChanged = function () {
+        var value = _this.yearRef.current.value;
+        var changeEvent = _this.props.changeEvent;
+
+        _this.setState({ year: value });
+        if (value.length == 4 && value > 1300 && value < 1500) {
+          _this.setState({ editable: false, error: "" });
+          if (!!changeEvent) changeEvent(parseInt(value));
+        } else _this.setState({ error: "سال ۴ رقم و درفاصله ۱۳۰۰ تا ۱۵۰۰ باشد" });
+      };
+
+      _this.yearRef = _react2.default.createRef();
       _this.state = { year: _this.props.year, error: "" };
       return _this;
     }
 
     _createClass(Years, [{
-      key: "yearChanged",
-      value: function yearChanged() {
-        var year = this.refs.year;
-        var changeEvent = this.props.changeEvent;
-
-        this.setState({ year: year.value });
-        if (year.value.length == 4 && year.value > 1300 && year.value < 1500) {
-          this.setState({ editable: false, error: "" });
-          if (!!changeEvent) changeEvent(parseInt(year.value));
-        } else this.setState({ error: "سال ۴ رقم و درفاصله ۱۳۰۰ تا ۱۵۰۰ باشد" });
-      }
-    }, {
       key: "componentWillReceiveProps",
       value: function componentWillReceiveProps(nextprops) {
         this.setState({ year: nextprops.year });
@@ -150,7 +149,7 @@
           ),
           editable && _react2.default.createElement("input", {
             type: "tel",
-            ref: "year",
+            ref: this.yearRef,
             placeholder: "\u0633\u0627\u0644",
             onChange: this.yearChanged,
             onBlur: this.yearChanged,

@@ -11,7 +11,7 @@ class DateRangePicker extends React.Component {
     this.setState({ disableFromUnix: unix });
     if (!!onChangeStart) onChangeStart(unix, formatted);
   }
-  secondchange = (unix, formatted) => {
+  secondChange = (unix, formatted) => {
     let { onChangeEnd } = this.props;
     if (!!onChangeEnd) onChangeEnd(unix, formatted);
   }
@@ -63,7 +63,7 @@ class DateRangePicker extends React.Component {
             placeholder={placeholderEnd}
             disableFromUnix={disableFromUnix}
             format={format}
-            onChange={this.secondchange}
+            onChange={this.secondChange}
             cancelOnBackgroundClick={cancelOnBackgroundClick}
             id="datePicker"
             preSelected={preSelectedStart}

@@ -15,16 +15,16 @@ const mapObj = {
 class Years extends React.Component {
   constructor(props) {
     super(props);
-    this.yearChanged = this.yearChanged.bind(this);
+    this.yearRef = React.createRef()
     this.state = { year: this.props.year, error: "" };
   }
-  yearChanged() {
-    let { year } = this.refs;
+  yearChanged = () => {
+    const { value } = this.yearRef.current;
     let { changeEvent } = this.props;
-    this.setState({ year: year.value });
-    if (year.value.length == 4 && year.value > 1300 && year.value < 1500) {
+    this.setState({ year: value });
+    if (value.length == 4 && value > 1300 && value < 1500) {
       this.setState({ editable: false, error: "" });
-      if (!!changeEvent) changeEvent(parseInt(year.value));
+      if (!!changeEvent) changeEvent(parseInt(value));
     } else this.setState({ error: "سال ۴ رقم و درفاصله ۱۳۰۰ تا ۱۵۰۰ باشد" });
   }
   componentWillReceiveProps(nextprops) {
@@ -52,7 +52,7 @@ class Years extends React.Component {
         {editable && (
           <input
             type="tel"
-            ref="year"
+            ref={this.yearRef}
             placeholder="سال"
             onChange={this.yearChanged}
             onBlur={this.yearChanged}

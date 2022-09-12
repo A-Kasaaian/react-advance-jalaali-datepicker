@@ -147,7 +147,7 @@
             preSelected = _props.preSelected,
             format = _props.format;
 
-        if (this.props.controllValue && preProps.preSelected !== preSelected && preSelected !== this.state.selectedDay) this.setState({
+        if (this.props.controlValue && preProps.preSelected !== preSelected && preSelected !== this.state.selectedDay) this.setState({
           selectedDay: (0, _momentJalaali2.default)(preSelected, format).format("jYYYYjMMjDD"),
           selectedTime: (0, _momentJalaali2.default)().format("HH:mm"),
           inputValue: preSelected

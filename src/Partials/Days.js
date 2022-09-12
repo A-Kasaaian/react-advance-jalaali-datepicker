@@ -47,19 +47,14 @@ class Days extends React.Component {
       }, 10);
     }
   }
-  dayClicked(i, element) {
+  dayClicked(i, date) {
     let { clickEvent } = this.props;
-    if (clickEvent) clickEvent(i, element);
-    if (!!this.state.selectedDay && !!this.refs[this.state.selectedDay])
-      this.refs[this.state.selectedDay].className = this.refs[
-        this.state.selectedDay
-      ].className.replace("selected", "");
-    this.setState({ selectedDay: element });
-    this.refs[element].className += " selected";
+    if (clickEvent) clickEvent(i, date);
+    this.setState({ selectedDay: date });
   }
   renderDays() {
-    let { firstDay, currentMonth, selectedDay } = this.props;
-    let {
+    const { firstDay, currentMonth, selectedDay } = this.props;
+    const {
       daysCount,
       disableFromYear,
       disableFromMonth,
@@ -68,14 +63,18 @@ class Days extends React.Component {
     } = this.state;
     let year = selectedYear.toString();
     let month = currentMonth.toString();
+
     if (month.length == 1) month = "0" + month;
+
     let enable = true;
     let check = false;
+
     if (disableFromYear > year) enable = false;
     else if (disableFromYear == year && disableFromMonth > month)
       enable = false;
     else if (disableFromYear == year && disableFromMonth == month) check = true;
     let result = [];
+
     for (let i = 1; daysCount >= i; i++) {
       let addedClass = "";
       let marginRight = "0%";
@@ -83,44 +82,40 @@ class Days extends React.Component {
       let number = i.toString().replace(/1|2|3|4|5|6|7|8|9|0/gi, function(e) {
         return mapObj[e];
       });
+
       if (i == 1) marginRight = firstDay * 14.28 + "%";
+
       if (i < 10) date = year + month + "0" + i.toString();
       else date = year + month + i.toString();
+
       if (date == selectedDay) addedClass = " selected";
+
       const today = moment().format("jYYYYjMMjDD");
+
       if (date == today) addedClass += " current-date";
+
       if (check) {
         if (i < disableFromDay) enable = false;
         else enable = true;
       }
-      if (!enable)
-        result.push(
-          <div
-            className={"day-items" + addedClass}
-            style={{
-              background: "#ccc",
-              cursor: "default",
-              marginRight: marginRight
-            }}
-            ref={date}
-            key={i}
-          >
-            {number}
-          </div>
-        );
-      else if (enable)
-        result.push(
-          <div
-            className={"day-items" + addedClass}
-            ref={date}
-            style={{ marginRight: marginRight }}
-            key={i}
-            onClick={() => this.dayClicked(1, date)}
-          >
-            {number}
-          </div>
-        );
+
+      result.push(
+        <div
+          className={"day-items" + addedClass}
+          key={i}
+          id={date}
+          style={enable ? { marginRight: marginRight } : {
+            background: "#ccc",
+            cursor: "default",
+            marginRight: marginRight
+          }}
+          onClick={() => enable ? this.dayClicked(1, date) : {}}
+        >
+          {number}
+        </div>
+      );
     }
+
     return result;
   }
   render() {
