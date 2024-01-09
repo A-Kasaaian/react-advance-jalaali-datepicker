@@ -1,8 +1,8 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["exports", "react", "moment-jalaali", "./Partials/Days", "./Partials/Months", "./Partials/Styles", "./Partials/Years", "./Partials/Input", "./Partials/Background"], factory);
+    define(['exports', 'react', 'moment-jalaali', './Partials/Days', './Partials/Months', './Partials/Styles', './Partials/Years', './Partials/Input', './Partials/Background'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require("react"), require("moment-jalaali"), require("./Partials/Days"), require("./Partials/Months"), require("./Partials/Styles"), require("./Partials/Years"), require("./Partials/Input"), require("./Partials/Background"));
+    factory(exports, require('react'), require('moment-jalaali'), require('./Partials/Days'), require('./Partials/Months'), require('./Partials/Styles'), require('./Partials/Years'), require('./Partials/Input'), require('./Partials/Background'));
   } else {
     var mod = {
       exports: {}
@@ -11,7 +11,7 @@
     global.index = mod.exports;
   }
 })(this, function (exports, _react, _momentJalaali, _Days, _Months, _Styles, _Years, _Input, _Background) {
-  "use strict";
+  'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
@@ -39,311 +39,267 @@
     };
   }
 
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
+  var _slicedToArray = function () {
+    function sliceIterator(arr, i) {
+      var _arr = [];
+      var _n = true;
+      var _d = false;
+      var _e = undefined;
 
-  var _createClass = function () {
-    function defineProperties(target, props) {
-      for (var i = 0; i < props.length; i++) {
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
-        Object.defineProperty(target, descriptor.key, descriptor);
+      try {
+        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+          _arr.push(_s.value);
+
+          if (i && _arr.length === i) break;
+        }
+      } catch (err) {
+        _d = true;
+        _e = err;
+      } finally {
+        try {
+          if (!_n && _i["return"]) _i["return"]();
+        } finally {
+          if (_d) throw _e;
+        }
       }
+
+      return _arr;
     }
 
-    return function (Constructor, protoProps, staticProps) {
-      if (protoProps) defineProperties(Constructor.prototype, protoProps);
-      if (staticProps) defineProperties(Constructor, staticProps);
-      return Constructor;
+    return function (arr, i) {
+      if (Array.isArray(arr)) {
+        return arr;
+      } else if (Symbol.iterator in Object(arr)) {
+        return sliceIterator(arr, i);
+      } else {
+        throw new TypeError("Invalid attempt to destructure non-iterable instance");
+      }
     };
   }();
 
-  function _possibleConstructorReturn(self, call) {
-    if (!self) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
-
-    return call && (typeof call === "object" || typeof call === "function") ? call : self;
-  }
-
-  function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-    }
-
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-    if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-  }
-
-  var canUseDOM = !!(typeof window !== "undefined" && window.document && window.document.createElement);
+  var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
   _momentJalaali2.default.loadPersian([]);
 
-  var JDatePicker = function (_React$Component) {
-    _inherits(JDatePicker, _React$Component);
+  var daysInMonth = function daysInMonth(month, year) {
+    if (month > 0 && month < 7) return 31;else if (month > 6 && month < 12) return 30;else if (month === 12 && _momentJalaali2.default.jIsLeapYear(year)) return 30;else if (month === 12 && !_momentJalaali2.default.jIsLeapYear(year)) return 29;
+  };
 
-    function JDatePicker(props) {
-      _classCallCheck(this, JDatePicker);
+  function JDatePicker(props) {
+    var id = props.id,
+        placeholder = props.placeholder,
+        disableFromUnix = props.disableFromUnix,
+        controlValue = props.controlValue,
+        customClass = props.customClass,
+        containerClass = props.containerClass,
+        inputTextAlign = props.inputTextAlign,
+        monthTitleEnable = props.monthTitleEnable,
+        inputComponent = props.inputComponent,
+        cancelOnBackgroundClick = props.cancelOnBackgroundClick,
+        onChange = props.onChange,
+        _props$preSelected = props.preSelected,
+        preSelected = _props$preSelected === undefined ? "" : _props$preSelected,
+        _props$format = props.format,
+        format = _props$format === undefined ? "jYYYY-jMM-jDD" : _props$format;
 
-      var _this = _possibleConstructorReturn(this, (JDatePicker.__proto__ || Object.getPrototypeOf(JDatePicker)).call(this, props));
 
-      _this.daysInMonth = _this.daysInMonth.bind(_this);
-      var preSelected = "";
-      if (_this.props.preSelected) preSelected = _this.props.preSelected;
-      _this.state = {
-        openPicker: false,
-        selectedYear: parseInt((0, _momentJalaali2.default)().format("jYYYY")),
-        currentMonth: parseInt((0, _momentJalaali2.default)().format("jMM")),
-        selectedMonthFirstDay: (0, _momentJalaali2.default)((0, _momentJalaali2.default)().format("jYYYY") + "/" + (0, _momentJalaali2.default)().format("jMM") + "/01", "jYYYY/jMM/jDD").weekday(),
-        selectedDay: preSelected.length > 1 ? (0, _momentJalaali2.default)(preSelected, _this.props.format).format("jYYYYjMMjDD") : "",
-        inputValue: preSelected
-      };
-      _this.state.daysCount = _this.daysInMonth((0, _momentJalaali2.default)().format("jMM"), (0, _momentJalaali2.default)().format("jYYYY"));
-      return _this;
-    }
+    var defaultSelected = preSelected.length > 1 ? (0, _momentJalaali2.default)(preSelected, format).format("jYYYYjMMjDD") : "";
 
-    _createClass(JDatePicker, [{
-      key: "componentDidMount",
-      value: function componentDidMount() {
-        var selectedMonthFirstDay = this.state.selectedMonthFirstDay;
+    var _useState = (0, _react.useState)(false),
+        _useState2 = _slicedToArray(_useState, 2),
+        openPicker = _useState2[0],
+        setOpenPicker = _useState2[1];
 
-        if (canUseDOM && !document.getElementById("jdstyle")) {
-          var css = (0, _Styles2.default)(selectedMonthFirstDay),
-              head = document.head || document.getElementsByTagName("head")[0],
-              style = document.createElement("style");
+    var _useState3 = (0, _react.useState)(parseInt((0, _momentJalaali2.default)().format("jYYYY"))),
+        _useState4 = _slicedToArray(_useState3, 2),
+        selectedYear = _useState4[0],
+        setSelectedYear = _useState4[1];
 
-          style.type = "text/css";
-          style.id = "jdstyle";
-          if (style.styleSheet) {
-            style.styleSheet.cssText = css;
-          } else {
-            style.appendChild(document.createTextNode(css));
-          }
+    var _useState5 = (0, _react.useState)(parseInt((0, _momentJalaali2.default)().format("jMM"))),
+        _useState6 = _slicedToArray(_useState5, 2),
+        currentMonth = _useState6[0],
+        setCurrentMonth = _useState6[1];
 
-          head.appendChild(style);
-        }
+    var _useState7 = (0, _react.useState)((0, _momentJalaali2.default)((0, _momentJalaali2.default)().format("jYYYY") + '/' + (0, _momentJalaali2.default)().format("jMM") + '/01', "jYYYY/jMM/jDD").weekday()),
+        _useState8 = _slicedToArray(_useState7, 2),
+        selectedMonthFirstDay = _useState8[0],
+        setSelectedMonthFirstDay = _useState8[1];
+
+    var _useState9 = (0, _react.useState)(defaultSelected),
+        _useState10 = _slicedToArray(_useState9, 2),
+        selectedDay = _useState10[0],
+        setSelectedDay = _useState10[1];
+
+    var _useState11 = (0, _react.useState)(preSelected),
+        _useState12 = _slicedToArray(_useState11, 2),
+        inputValue = _useState12[0],
+        setInputValue = _useState12[1];
+
+    var _useState13 = (0, _react.useState)(daysInMonth((0, _momentJalaali2.default)().format("jMM"), (0, _momentJalaali2.default)().format("jYYYY"))),
+        _useState14 = _slicedToArray(_useState13, 2),
+        daysCount = _useState14[0],
+        setDaysCount = _useState14[1];
+
+    (0, _react.useEffect)(function () {
+      if (canUseDOM && !document.getElementById("jdstyle")) {
+        var css = (0, _Styles2.default)(selectedMonthFirstDay);
+        var head = document.head || document.getElementsByTagName("head")[0];
+        var style = document.createElement("style");
+
+        style.type = "text/css";
+        style.id = "jdstyle";
+        style.appendChild(document.createTextNode(css));
+        head.appendChild(style);
       }
-    }, {
-      key: "componentDidUpdate",
-      value: function componentDidUpdate(preProps) {
-        var _props = this.props,
-            preSelected = _props.preSelected,
-            format = _props.format;
+    }, [selectedMonthFirstDay]);
 
-        if (this.props.controlValue && preProps.preSelected !== preSelected && preSelected !== this.state.selectedDay) this.setState({
-          selectedDay: preSelected.length > 1 ? (0, _momentJalaali2.default)(preSelected, this.props.format).format("jYYYYjMMjDD") : "",
-          inputValue: preSelected
-        });
+    (0, _react.useEffect)(function () {
+      if (controlValue && preSelected !== selectedDay) {
+        setSelectedDay(defaultSelected);
+        setInputValue(preSelected);
       }
-    }, {
-      key: "daysInMonth",
-      value: function daysInMonth(month, selectedYear) {
-        if (month > 0 && month < 7) return 31;else if (month > 6 && month < 12) return 30;else if (month == 12 && _momentJalaali2.default.jIsLeapYear(selectedYear)) return 30;else if (month == 12 && !_momentJalaali2.default.jIsLeapYear(selectedYear)) return 29;
-      }
-    }, {
-      key: "daysClicked",
-      value: function daysClicked(day, momentDay) {
-        var _props2 = this.props,
-            onChange = _props2.onChange,
-            format = _props2.format;
+    }, [preSelected, controlValue, selectedDay]);
 
-        if (!format) format = "jYYYY-jMM-jDD";
-        if (this.state.selectedDay != momentDay) {
-          this.setState({
-            selectedDay: momentDay,
-            inputValue: (0, _momentJalaali2.default)(momentDay + " 23:59:59", "jYYYYjMMjDD HH:mm:ss").format(format)
-          });
-          this.setState({ openPicker: false });
-        }
-        var formatted = void 0;
-        if (!!format) formatted = (0, _momentJalaali2.default)(momentDay + " 23:59:59", "jYYYYjMMjDD HH:mm:ss").format(format);
-        if (onChange) this.props.onChange((0, _momentJalaali2.default)(momentDay + " 23:59:59", "jYYYYjMMjDD HH:mm:ss").unix(), formatted);
-      }
-    }, {
-      key: "monthsClicked",
-      value: function monthsClicked(month) {
-        var selectedYear = this.state.selectedYear;
+    (0, _react.useEffect)(function () {
+      setSelectedDay(defaultSelected);
+      setInputValue(preSelected);
+    }, [disableFromUnix]);
 
-        var year = selectedYear;
-        var thisMonth = month;
-        this.setState({ daysCount: 0 });
-        if (month == 0) {
-          this.setState({
-            currentMonth: 12,
-            daysCount: this.daysInMonth(12, selectedYear - 1),
-            selectedYear: selectedYear - 1
-          });
-          thisMonth = 12;
-          year = selectedYear - 1;
-        } else if (month == 13) {
-          this.setState({
-            currentMonth: 1,
-            daysCount: this.daysInMonth(1, selectedYear + 1),
-            selectedYear: selectedYear + 1
-          });
-          thisMonth = 1;
-          year = selectedYear + 1;
-        } else this.setState({
-          currentMonth: month,
-          daysCount: this.daysInMonth(month, selectedYear)
-        });
-        this.firstDayOfMonth(thisMonth, year);
+    var daysClicked = function daysClicked(day, momentDay) {
+      if (selectedDay !== momentDay) {
+        setSelectedDay(momentDay);
+        setInputValue((0, _momentJalaali2.default)(momentDay + ' 23:59:59', "jYYYYjMMjDD HH:mm:ss").format(format));
+        setOpenPicker(false);
       }
-    }, {
-      key: "firstDayOfMonth",
-      value: function firstDayOfMonth(mo, ye) {
-        var month = mo.toString();
-        var year = ye.toString();
-        if (month.length == 1) month = "0" + month;
-        this.setState({
-          selectedMonthFirstDay: (0, _momentJalaali2.default)(year + "/" + month + "/01", "jYYYY/jMM/jDD").weekday()
-        });
-      }
-    }, {
-      key: "yearSelected",
-      value: function yearSelected(year) {
-        this.setState({ selectedYear: year });
-        this.firstDayOfMonth(this.state.currentMonth, year);
-      }
-    }, {
-      key: "render",
-      value: function render() {
-        var _this2 = this;
+      if (onChange) onChange((0, _momentJalaali2.default)(momentDay + ' 23:59:59', "jYYYYjMMjDD HH:mm:ss").unix(), (0, _momentJalaali2.default)(momentDay + ' 23:59:59', "jYYYYjMMjDD HH:mm:ss").format(format));
+    };
 
-        var _state = this.state,
-            openPicker = _state.openPicker,
-            daysCount = _state.daysCount,
-            selectedDay = _state.selectedDay,
-            currentMonth = _state.currentMonth,
-            selectedYear = _state.selectedYear,
-            selectedMonthFirstDay = _state.selectedMonthFirstDay,
-            inputValue = _state.inputValue;
-        var _props3 = this.props,
-            id = _props3.id,
-            placeholder = _props3.placeholder,
-            disableFromUnix = _props3.disableFromUnix,
-            customClass = _props3.customClass,
-            containerClass = _props3.containerClass,
-            inputTextAlign = _props3.inputTextAlign,
-            monthTitleEnable = _props3.monthTitleEnable,
-            inputComponent = _props3.inputComponent,
-            cancelOnBackgroundClick = _props3.cancelOnBackgroundClick;
+    var monthsClicked = function monthsClicked(month) {
+      var year = selectedYear;
+      if (month === 0) {
+        setCurrentMonth(12);
+        setDaysCount(daysInMonth(12, selectedYear - 1));
+        setSelectedYear(selectedYear - 1);
+        year = selectedYear - 1;
+      } else if (month === 13) {
+        setCurrentMonth(1);
+        setDaysCount(daysInMonth(1, selectedYear + 1));
+        setSelectedYear(selectedYear + 1);
+        year = selectedYear + 1;
+      } else {
+        setCurrentMonth(month);
+        setDaysCount(daysInMonth(month, selectedYear));
+      }
+      firstDayOfMonth(month, year);
+    };
 
-        var inputAlign = !!inputTextAlign && typeof inputTextAlign != "undefined" ? inputTextAlign : "right";
-        return _react2.default.createElement(
-          "div",
-          { style: { textAlign: "initial" }, className: containerClass },
-          _react2.default.createElement(_Input2.default, {
-            type: "text",
-            id: id,
-            placeholder: placeholder,
-            dir: "ltr",
-            style: { textAlign: inputAlign },
-            readOnly: true,
-            value: inputValue,
-            onClick: function onClick() {
-              _this2.setState({ openPicker: !openPicker });
-            },
-            component: inputComponent
-          }),
-          cancelOnBackgroundClick && openPicker && _react2.default.createElement(_Background2.default, {
-            onClick: function onClick() {
-              _this2.setState({ openPicker: false });
-            }
-          }),
-          openPicker && _react2.default.createElement(
-            "div",
-            { className: "JDatePicker " + customClass },
-            _react2.default.createElement(
-              "div",
-              { className: "JDheader" },
-              _react2.default.createElement(
-                "div",
-                { className: "right" },
-                _react2.default.createElement(_Years2.default, {
-                  changeEvent: function changeEvent(returnedYear) {
-                    return _this2.yearSelected(returnedYear);
-                  },
-                  year: selectedYear
-                })
-              ),
-              _react2.default.createElement("div", { className: "left" })
-            ),
-            _react2.default.createElement(_Months2.default, {
-              monthTitleEnable: monthTitleEnable,
-              clickEvent: function clickEvent(returnedMonth) {
-                return _this2.monthsClicked(returnedMonth);
-              },
-              month: currentMonth
-            }),
-            _react2.default.createElement(
-              "div",
-              { className: "days-titles" },
-              _react2.default.createElement(
-                "div",
-                null,
-                "\u0634"
-              ),
-              _react2.default.createElement(
-                "div",
-                null,
-                "\u06CC"
-              ),
-              _react2.default.createElement(
-                "div",
-                null,
-                "\u062F"
-              ),
-              _react2.default.createElement(
-                "div",
-                null,
-                "\u0633"
-              ),
-              _react2.default.createElement(
-                "div",
-                null,
-                "\u0686"
-              ),
-              _react2.default.createElement(
-                "div",
-                null,
-                "\u067E"
-              ),
-              _react2.default.createElement(
-                "div",
-                null,
-                "\u062C"
-              )
-            ),
-            _react2.default.createElement(_Days2.default, {
-              disableFromUnix: disableFromUnix,
-              selectedYear: selectedYear,
-              selectedDay: selectedDay,
-              currentMonth: currentMonth,
-              daysCount: daysCount,
-              firstDay: selectedMonthFirstDay,
-              clickEvent: function clickEvent(day, momentDay) {
-                return _this2.daysClicked(day, momentDay);
-              }
-            })
+    var firstDayOfMonth = function firstDayOfMonth(mo, ye) {
+      var month = mo.toString();
+      var year = ye.toString();
+      if (month.length === 1) month = "0" + month;
+      setSelectedMonthFirstDay((0, _momentJalaali2.default)(year + '/' + month + '/01', "jYYYY/jMM/jDD").weekday());
+    };
+
+    var yearSelected = function yearSelected(year) {
+      setSelectedYear(year);
+      firstDayOfMonth(currentMonth, year);
+    };
+
+    var inputAlign = inputTextAlign ? inputTextAlign : "right";
+
+    return _react2.default.createElement(
+      'div',
+      { style: { textAlign: "initial" }, className: containerClass },
+      _react2.default.createElement(_Input2.default, {
+        type: 'text',
+        id: id,
+        placeholder: placeholder,
+        dir: 'ltr',
+        style: { textAlign: inputAlign },
+        readOnly: true,
+        value: inputValue,
+        onClick: function onClick() {
+          return setOpenPicker(!openPicker);
+        },
+        component: inputComponent
+      }),
+      cancelOnBackgroundClick && openPicker && _react2.default.createElement(_Background2.default, { onClick: function onClick() {
+          return setOpenPicker(false);
+        } }),
+      openPicker && _react2.default.createElement(
+        'div',
+        { className: 'JDatePicker ' + customClass },
+        _react2.default.createElement(
+          'div',
+          { className: 'JDheader' },
+          _react2.default.createElement(
+            'div',
+            { className: 'right' },
+            _react2.default.createElement(_Years2.default, { changeEvent: function changeEvent(returnedYear) {
+                return yearSelected(returnedYear);
+              }, year: selectedYear })
+          ),
+          _react2.default.createElement('div', { className: 'left' })
+        ),
+        _react2.default.createElement(_Months2.default, {
+          monthTitleEnable: monthTitleEnable,
+          clickEvent: function clickEvent(returnedMonth) {
+            return monthsClicked(returnedMonth);
+          },
+          month: currentMonth
+        }),
+        _react2.default.createElement(
+          'div',
+          { className: 'days-titles' },
+          _react2.default.createElement(
+            'div',
+            null,
+            '\u0634'
+          ),
+          _react2.default.createElement(
+            'div',
+            null,
+            '\u06CC'
+          ),
+          _react2.default.createElement(
+            'div',
+            null,
+            '\u062F'
+          ),
+          _react2.default.createElement(
+            'div',
+            null,
+            '\u0633'
+          ),
+          _react2.default.createElement(
+            'div',
+            null,
+            '\u0686'
+          ),
+          _react2.default.createElement(
+            'div',
+            null,
+            '\u067E'
+          ),
+          _react2.default.createElement(
+            'div',
+            null,
+            '\u062C'
           )
-        );
-      }
-    }]);
-
-    return JDatePicker;
-  }(_react2.default.Component);
+        ),
+        _react2.default.createElement(_Days2.default, {
+          disableFromUnix: disableFromUnix,
+          selectedYear: selectedYear,
+          selectedDay: selectedDay,
+          currentMonth: currentMonth,
+          daysCount: daysCount,
+          firstDay: selectedMonthFirstDay,
+          clickEvent: function clickEvent(day, momentDay) {
+            return daysClicked(day, momentDay);
+          }
+        })
+      )
+    );
+  }
 
   exports.default = JDatePicker;
 });

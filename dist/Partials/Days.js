@@ -88,6 +88,7 @@
     9: "۹",
     0: "۰"
   };
+  _momentJalaali2.default.loadPersian([]);
 
   var Days = function (_React$Component) {
     _inherits(Days, _React$Component);
@@ -120,7 +121,6 @@
 
         if (canUseDOM) {
           this.setState({ daysCount: 0 });
-          var that = this;
           window.setTimeout(function () {
             _this2.setState({
               daysCount: nextProps.daysCount,
@@ -197,9 +197,9 @@
                 cursor: "default",
                 marginRight: marginRight
               },
-              onClick: function onClick() {
-                return enable ? _this3.dayClicked(1, date) : {};
-              }
+              onClick: enable ? function () {
+                return _this3.dayClicked(1, date);
+              } : null
             },
             number
           ));

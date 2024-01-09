@@ -17,6 +17,7 @@ const mapObj = {
   9: "۹",
   0: "۰"
 };
+moment.loadPersian([]);
 
 class Days extends React.Component {
   constructor(props) {
@@ -38,7 +39,6 @@ class Days extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (canUseDOM) {
       this.setState({ daysCount: 0 });
-      let that = this;
       window.setTimeout(() => {
         this.setState({
           daysCount: nextProps.daysCount,
@@ -109,7 +109,7 @@ class Days extends React.Component {
             cursor: "default",
             marginRight: marginRight
           }}
-          onClick={() => enable ? this.dayClicked(1, date) : {}}
+          onClick={enable ? () => this.dayClicked(1, date) : null}
         >
           {number}
         </div>

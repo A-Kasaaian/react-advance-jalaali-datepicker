@@ -41,6 +41,44 @@
     return target;
   };
 
+  var _slicedToArray = function () {
+    function sliceIterator(arr, i) {
+      var _arr = [];
+      var _n = true;
+      var _d = false;
+      var _e = undefined;
+
+      try {
+        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+          _arr.push(_s.value);
+
+          if (i && _arr.length === i) break;
+        }
+      } catch (err) {
+        _d = true;
+        _e = err;
+      } finally {
+        try {
+          if (!_n && _i["return"]) _i["return"]();
+        } finally {
+          if (_d) throw _e;
+        }
+      }
+
+      return _arr;
+    }
+
+    return function (arr, i) {
+      if (Array.isArray(arr)) {
+        return arr;
+      } else if (Symbol.iterator in Object(arr)) {
+        return sliceIterator(arr, i);
+      } else {
+        throw new TypeError("Invalid attempt to destructure non-iterable instance");
+      }
+    };
+  }();
+
   function _objectWithoutProperties(obj, keys) {
     var target = {};
 
@@ -53,149 +91,81 @@
     return target;
   }
 
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
+  var DateRangePicker = function DateRangePicker(props) {
+    var placeholderEnd = props.placeholderEnd,
+        placeholderStart = props.placeholderStart,
+        idStart = props.idStart,
+        idEnd = props.idEnd,
+        format = props.format,
+        customClassEnd = props.customClassEnd,
+        customClassStart = props.customClassStart,
+        containerClass = props.containerClass,
+        inputTextAlign = props.inputTextAlign,
+        monthTitleEnable = props.monthTitleEnable,
+        cancelOnBackgroundClick = props.cancelOnBackgroundClick,
+        preSelectedStart = props.preSelectedStart,
+        onChangeStart = props.onChangeStart,
+        onChangeEnd = props.onChangeEnd,
+        _props$renderPointer = props.renderPointer,
+        renderPointer = _props$renderPointer === undefined ? true : _props$renderPointer,
+        pointer = props.pointer,
+        rest = _objectWithoutProperties(props, ["placeholderEnd", "placeholderStart", "idStart", "idEnd", "format", "customClassEnd", "customClassStart", "containerClass", "inputTextAlign", "monthTitleEnable", "cancelOnBackgroundClick", "preSelectedStart", "onChangeStart", "onChangeEnd", "renderPointer", "pointer"]);
 
-  var _createClass = function () {
-    function defineProperties(target, props) {
-      for (var i = 0; i < props.length; i++) {
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
-        Object.defineProperty(target, descriptor.key, descriptor);
-      }
-    }
+    var _React$useState = _react2.default.useState(""),
+        _React$useState2 = _slicedToArray(_React$useState, 2),
+        disableFromUnix = _React$useState2[0],
+        setDisableFromUnix = _React$useState2[1];
 
-    return function (Constructor, protoProps, staticProps) {
-      if (protoProps) defineProperties(Constructor.prototype, protoProps);
-      if (staticProps) defineProperties(Constructor, staticProps);
-      return Constructor;
+    var change = function change(unix, formatted) {
+      setDisableFromUnix(unix);
+      if (!!onChangeStart) onChangeStart(unix, formatted);
     };
-  }();
 
-  function _possibleConstructorReturn(self, call) {
-    if (!self) {
-      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-    }
+    var secondChange = function secondChange(unix, formatted) {
+      if (!!onChangeEnd) onChangeEnd(unix, formatted);
+    };
 
-    return call && (typeof call === "object" || typeof call === "function") ? call : self;
-  }
+    var placeholderEndValue = placeholderEnd || "";
 
-  function _inherits(subClass, superClass) {
-    if (typeof superClass !== "function" && superClass !== null) {
-      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-    }
-
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-      constructor: {
-        value: subClass,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-    if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-  }
-
-  var DateRangePicker = function (_React$Component) {
-    _inherits(DateRangePicker, _React$Component);
-
-    function DateRangePicker(props) {
-      _classCallCheck(this, DateRangePicker);
-
-      var _this = _possibleConstructorReturn(this, (DateRangePicker.__proto__ || Object.getPrototypeOf(DateRangePicker)).call(this, props));
-
-      _this.change = function (unix, formatted) {
-        var onChangeStart = _this.props.onChangeStart;
-
-        _this.setState({ disableFromUnix: unix });
-        if (!!onChangeStart) onChangeStart(unix, formatted);
-      };
-
-      _this.secondChange = function (unix, formatted) {
-        var onChangeEnd = _this.props.onChangeEnd;
-
-        if (!!onChangeEnd) onChangeEnd(unix, formatted);
-      };
-
-      _this.state = { disableFromUnix: "" };
-      return _this;
-    }
-
-    _createClass(DateRangePicker, [{
-      key: "render",
-      value: function render() {
-        var _props = this.props,
-            placeholderEnd = _props.placeholderEnd,
-            placeholderStart = _props.placeholderStart,
-            idStart = _props.idStart,
-            idEnd = _props.idEnd,
-            format = _props.format,
-            customClassEnd = _props.customClassEnd,
-            customClassStart = _props.customClassStart,
-            containerClass = _props.containerClass,
-            inputTextAlign = _props.inputTextAlign,
-            monthTitleEnable = _props.monthTitleEnable,
-            cancelOnBackgroundClick = _props.cancelOnBackgroundClick,
-            preSelectedStart = _props.preSelectedStart,
-            _props$renderPointer = _props.renderPointer,
-            renderPointer = _props$renderPointer === undefined ? true : _props$renderPointer,
-            pointer = _props.pointer,
-            rest = _objectWithoutProperties(_props, ["placeholderEnd", "placeholderStart", "idStart", "idEnd", "format", "customClassEnd", "customClassStart", "containerClass", "inputTextAlign", "monthTitleEnable", "cancelOnBackgroundClick", "preSelectedStart", "renderPointer", "pointer"]);
-
-        var disableFromUnix = this.state.disableFromUnix;
-
-        if (!placeholderStart) placeholderStart = "";
-        if (!placeholderEnd) placeholderEnd = "";
-        if (!idStart) idStart = "";
-        if (!idEnd) idEnd = "";
-        return _react2.default.createElement(
-          "div",
-          { className: "jdtrp", style: { textAlign: "initial" } },
-          _react2.default.createElement(_index2.default, _extends({
-            monthTitleEnable: monthTitleEnable,
-            containerClass: containerClass,
-            inputTextAlign: inputTextAlign,
-            customClass: customClassStart,
-            placeholder: placeholderStart,
-            format: format,
-            onChange: this.change,
-            cancelOnBackgroundClick: cancelOnBackgroundClick,
-            id: idStart,
-            preSelected: preSelectedStart
-          }, rest)),
-          renderPointer && _react2.default.createElement(
-            "div",
-            null,
-            pointer || "->"
-          ),
-          !disableFromUnix && _react2.default.createElement(
-            "div",
-            null,
-            placeholderEnd
-          ),
-          !!disableFromUnix && _react2.default.createElement(_index2.default, _extends({
-            containerClass: containerClass,
-            inputTextAlign: inputTextAlign,
-            customClass: customClassEnd,
-            placeholder: placeholderEnd,
-            disableFromUnix: disableFromUnix,
-            format: format,
-            onChange: this.secondChange,
-            cancelOnBackgroundClick: cancelOnBackgroundClick,
-            id: "datePicker",
-            preSelected: preSelectedStart
-          }, rest))
-        );
-      }
-    }]);
-
-    return DateRangePicker;
-  }(_react2.default.Component);
+    return _react2.default.createElement(
+      "div",
+      { className: "jdtrp", style: { textAlign: "initial" } },
+      _react2.default.createElement(_index2.default, _extends({
+        monthTitleEnable: monthTitleEnable,
+        containerClass: containerClass,
+        inputTextAlign: inputTextAlign,
+        customClass: customClassStart,
+        placeholder: placeholderStart || "",
+        format: format,
+        onChange: change,
+        cancelOnBackgroundClick: cancelOnBackgroundClick,
+        id: idStart || "",
+        preSelected: preSelectedStart
+      }, rest)),
+      renderPointer && _react2.default.createElement(
+        "div",
+        null,
+        pointer || "->"
+      ),
+      !disableFromUnix && _react2.default.createElement(
+        "div",
+        null,
+        placeholderEndValue
+      ),
+      !!disableFromUnix && _react2.default.createElement(_index2.default, _extends({
+        containerClass: containerClass,
+        inputTextAlign: inputTextAlign,
+        customClass: customClassEnd,
+        placeholder: placeholderEndValue,
+        disableFromUnix: disableFromUnix,
+        format: format,
+        onChange: secondChange,
+        cancelOnBackgroundClick: cancelOnBackgroundClick,
+        id: idEnd || "",
+        preSelected: preSelectedStart
+      }, rest))
+    );
+  };
 
   exports.default = DateRangePicker;
 });
