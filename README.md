@@ -1,6 +1,6 @@
 # Advance React Date and Time Picker for jalaali (persian, shamsi) calender
 
-It contains 3 types of jalaali (persian) date pickers, which are range (from, to) date and time pickerو range date picker, date picker and date and time picker.
+It contains 3 types of jalaali (persian) date pickers, which are date and time range (from, to) picker, date range picker, date picker, and date and time picker.
 
 <p dir="rtl">
 این ماژول شامل ۴ نوع مختلف از باکس انتخاب تاریخ و زمان جلالی (شمسی) است. انواع باکس های انتخاب تاریخ و زمان (پیاده سازی شده تا کنون) عبارتند از: بازه تاریخ و زمان (از، تا)، بازه تاریخ (از، تا)، انتخاب تاریخ و انتخاب تاریخ زمان.</p>
@@ -9,11 +9,11 @@ This module is written using [moment-jalali](https://github.com/jalaali/moment-j
 
 ## Instalation
 
-Use `npm i react-advance-jalaali-datepicker` in order to install the module. Yes that's it. There is no extera font or css file to include. It's designed simple to prevent any issue during customization. Customize it in any way you want.
+Use `npm i react-advance-jalaali-datepicker` in order to install the module. Yes that's it. There is no extra font or css file to include. It's designed simple to prevent any issue during customization. Customize it in the way you need.
 
 ## Usage
 
-In order to use this module, import the packege into your react component and use the module as below. The belowing example is the code that is used in the sample usage video below.
+In order to use this module, import the package into your react component and use the module as below. The below example is the code that is used in the sample usage video.
 
 ![demo of react advance jalaali (persian) datepicker](https://raw.githubusercontent.com/A-Kasaaian/react-advance-jalaali-datepicker/master//demo.gif)
 
@@ -133,8 +133,8 @@ You can use `current-date` class to style today. In the calendar you can find to
 
 ### Highlight specific date
 
-Add format of the date. Add preSelected date with the mentioned format. The day will get "selected" calss.
-Today is containing "current-date" calss name.
+Add format of the date. Add preSelected date with the mentioned format. The day will get "selected" class.
+Today is containing "current-date" class name.
 
 ## More
 
