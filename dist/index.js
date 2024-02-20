@@ -103,6 +103,7 @@
       onChange = props.onChange,
       _props$preSelected = props.preSelected,
       preSelected = _props$preSelected === void 0 ? "" : _props$preSelected,
+      newThemeColor = props.newThemeColor,
       _props$format = props.format,
       format = _props$format === void 0 ? "jYYYY-jMM-jDD" : _props$format;
     var defaultSelected = preSelected.length > 1 ? (0, _momentJalaali2["default"])(preSelected, format).format("jYYYYjMMjDD") : "";
@@ -136,7 +137,7 @@
       setDaysCount = _useState14[1];
     (0, _react.useEffect)(function () {
       if (canUseDOM && !document.getElementById("jdstyle")) {
-        var css = (0, _Styles2["default"])(selectedMonthFirstDay);
+        var css = (0, _Styles2["default"])(newThemeColor);
         var head = document.head || document.getElementsByTagName("head")[0];
         var style = document.createElement("style");
         style.type = "text/css";
@@ -144,7 +145,7 @@
         style.appendChild(document.createTextNode(css));
         head.appendChild(style);
       }
-    }, [selectedMonthFirstDay]);
+    }, []);
     (0, _react.useEffect)(function () {
       if (controlValue && preSelected !== selectedDay) {
         setSelectedDay(defaultSelected);
