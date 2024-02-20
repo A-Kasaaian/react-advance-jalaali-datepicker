@@ -18,6 +18,7 @@
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
+  exports.daysInMonth = undefined;
   var _react2 = _interopRequireDefault(_react);
   var _momentJalaali2 = _interopRequireDefault(_momentJalaali);
   var _Days2 = _interopRequireDefault(_Days);
@@ -82,8 +83,11 @@
   }
   var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
   _momentJalaali2["default"].loadPersian([]);
-  var daysInMonth = function daysInMonth(month, year) {
-    if (month > 0 && month < 7) return 31;else if (month > 6 && month < 12) return 30;else if (month === 12 && _momentJalaali2["default"].jIsLeapYear(year)) return 30;else if (month === 12 && !_momentJalaali2["default"].jIsLeapYear(year)) return 29;
+  var daysInMonth = exports.daysInMonth = function daysInMonth(month, year) {
+    if (month > 0 && month < 7) return 31;
+    if (month > 6 && month < 12) return 30;
+    if (month == 12 && _momentJalaali2["default"].jIsLeapYear(year)) return 30;
+    if (month == 12 && !_momentJalaali2["default"].jIsLeapYear(year)) return 29;
   };
   function JDatePicker(props) {
     var id = props.id,

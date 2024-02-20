@@ -10,11 +10,11 @@ import Background from "./Partials/Background";
 const canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 moment.loadPersian([]);
 
-const daysInMonth = (month, year) => {
+export const daysInMonth = (month, year) => {
   if (month > 0 && month < 7) return 31;
-  else if (month > 6 && month < 12) return 30;
-  else if (month === 12 && moment.jIsLeapYear(year)) return 30;
-  else if (month === 12 && !moment.jIsLeapYear(year)) return 29;
+  if (month > 6 && month < 12) return 30;
+  if (month == 12 && moment.jIsLeapYear(year)) return 30;
+  if (month == 12 && !moment.jIsLeapYear(year)) return 29;
 };
 
 function JDatePicker(props) {
