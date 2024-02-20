@@ -11,6 +11,7 @@ export interface PickerProps {
     monthTitleEnable?: boolean;
     cancelOnBackgroundClick?: boolean;
     controlValue?: boolean;
+    newThemeColor?: string;
 }
 
 export interface RangePickerProps {
@@ -32,6 +33,7 @@ export interface RangePickerProps {
     renderPointer?: boolean;
     pointer?: React.Component | React.FC;
     inputComponent?: React.Component | React.FC;
+    newstringColor?: Theme;
 }
 
 export class DatePicker extends React.Component<PickerProps, any> {

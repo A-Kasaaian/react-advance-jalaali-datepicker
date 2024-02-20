@@ -7,16 +7,10 @@ import Years from "./Partials/Years";
 import TimePicker from "./Partials/TimePicker";
 import Input from "./Partials/Input";
 import Background from "./Partials/Background";
+import { daysInMonth } from './index'
 
 const canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 moment.loadPersian([]);
-
-const daysInMonth = (month, year) => {
-  if (0 < month && month < 7) return 31;
-  else if (6 < month && month < 12) return 30;
-  else if (month === 12 && moment.jIsLeapYear(year)) return 30;
-  else if (month === 12 && !moment.jIsLeapYear(year)) return 29;
-};
 
 function DateTimePicker(props) {
   const {
@@ -29,6 +23,7 @@ function DateTimePicker(props) {
     monthTitleEnable,
     inputComponent,
     preSelected = "",
+    newThemeColor,
     cancelOnBackgroundClick
   } = props;
   const [openPicker, setOpenPicker] = useState(false);
@@ -42,7 +37,7 @@ function DateTimePicker(props) {
 
   useEffect(() => {
     if (canUseDOM && !document.getElementById("jdstyle")) {
-      const css = Styles(selectedMonthFirstDay);
+      const css = Styles(newThemeColor);
       const head = document.head || document.getElementsByTagName("head")[0];
       const style = document.createElement("style");
 
@@ -51,7 +46,7 @@ function DateTimePicker(props) {
       style.appendChild(document.createTextNode(css));
       head.appendChild(style);
     }
-  }, [selectedMonthFirstDay]);
+  }, []);
 
   useEffect(() => {
     if (props.controlValue && props.preSelected !== selectedDay) {
@@ -183,7 +178,7 @@ function DateTimePicker(props) {
             firstDay={selectedMonthFirstDay}
             clickEvent={daysClicked}
           />
-          <div>
+          <div className='JDfooter'>
             <button onClick={submitHandler} className="JDsubmit">تایید</button>
             <button onClick={cancelPicker} className="JDcancel">بستن</button>
           </div>

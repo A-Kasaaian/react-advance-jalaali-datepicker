@@ -98,12 +98,13 @@ Each type has its' own options.
 | id                      | string      | Adds id attribute to the input elment                                                                           |
 | preSelected             | string      | Previously selected date, it should be formatted exactly the same as the format option                          |
 | customClass             | string      | To add "className" to the datepicker                                                                            |
-| inputTextAlign          | string      | Texte align of the date input. default "right"                                                                  |
+| inputTextAlign          | string      | Text align of the date input. default "right"                                                                  |
 | containerClass          | string      | To add "className" to the datepicker input container                                                            |
 | monthTitleEnable        | boolean     | To add a title before month controller row                                                                      |
 | inputComponent          | JSX element | To add customized input field to your datepicker                                                                |
 | cancelOnBackgroundClick | boolean     | To add background, which closes the datepicker on click event. It's customizable with class name "JDBackground" |
-| controlValue           | boolean     | By stting to true, It will make preselected value control the input value                                       |
+| controlValue           | boolean     | By setting to true, It will make preselected value control the input value                                       |
+| newThemeColor           | string    | Set the new theme colorto render new theme with the provided color. Otherwise, render the default simple theme and customize it yourself                                       |
 
 **DateRangePicker:**
 
@@ -114,15 +115,16 @@ Each type has its' own options.
 | onChangeStart, onChangeEnd       | function    | On change call of inputs (required)                                                                                        |
 | idStart, idEnd                   | string      | Add id attributes to the input elments                                                                          |
 | customClassStart, customClassEnd | string      | To add class name to start and end dattepickers                                                                 |
-| inputTextAlign                   | string      | Texte align of the date input. default "right"                                                                  |
+| inputTextAlign                   | string      | Text align of the date input. default "right"                                                                  |
 | containerClass                   | string      | To add "className" to the datepicker input container                                                            |
 | monthTitleEnable                 | boolean     | to add a title before month controller row                                                                      |
 | inputComponent                   | JSX element | To add customized input field to your datepicker                                                                |
 | preSelectedStart                 | string      | Previously selected date, it should be formatted exactly the same as the format option                          |
 | cancelOnBackgroundClick          | boolean     | To add background, which closes the datepicker on click event. It's customizable with class name "JDBackground" |
-| controlValue                    | boolean     | By stting to true, It will make preselected value control the input value                                       |
+| controlValue                    | boolean     | By setting to true, It will make preselected value control the input value                                       |
 | renderPointer                    | boolean     | Shows the pointer to the end of range, if enabled. default: true
 | pointer                          | JSX element | Renders the passed pointer element instead of the default one
+| newThemeColor           | string    | Set the new theme colorto render new theme with the provided color. Otherwise, render the default simple theme and customize it yourself                                       |
 
 ### Current date
 You can use `current-date` class to style today. In the calendar you can find today has additional class of `current-date`.

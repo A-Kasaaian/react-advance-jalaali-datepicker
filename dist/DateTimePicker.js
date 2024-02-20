@@ -2,17 +2,17 @@
 
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["exports", "react", "moment-jalaali", "./Partials/Days", "./Partials/Months", "./Partials/Styles", "./Partials/Years", "./Partials/TimePicker", "./Partials/Input", "./Partials/Background"], factory);
+    define(["exports", "react", "moment-jalaali", "./Partials/Days", "./Partials/Months", "./Partials/Styles", "./Partials/Years", "./Partials/TimePicker", "./Partials/Input", "./Partials/Background", "./index"], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require("react"), require("moment-jalaali"), require("./Partials/Days"), require("./Partials/Months"), require("./Partials/Styles"), require("./Partials/Years"), require("./Partials/TimePicker"), require("./Partials/Input"), require("./Partials/Background"));
+    factory(exports, require("react"), require("moment-jalaali"), require("./Partials/Days"), require("./Partials/Months"), require("./Partials/Styles"), require("./Partials/Years"), require("./Partials/TimePicker"), require("./Partials/Input"), require("./Partials/Background"), require("./index"));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.react, global.momentJalaali, global.Days, global.Months, global.Styles, global.Years, global.TimePicker, global.Input, global.Background);
+    factory(mod.exports, global.react, global.momentJalaali, global.Days, global.Months, global.Styles, global.Years, global.TimePicker, global.Input, global.Background, global.index);
     global.undefined = mod.exports;
   }
-})(void 0, function (exports, _react, _momentJalaali, _Days, _Months, _Styles, _Years, _TimePicker, _Input, _Background) {
+})(void 0, function (exports, _react, _momentJalaali, _Days, _Months, _Styles, _Years, _TimePicker, _Input, _Background, _index) {
   "use strict";
 
   Object.defineProperty(exports, "__esModule", {
@@ -83,9 +83,6 @@
   }
   var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
   _momentJalaali2["default"].loadPersian([]);
-  var daysInMonth = function daysInMonth(month, year) {
-    if (0 < month && month < 7) return 31;else if (6 < month && month < 12) return 30;else if (month === 12 && _momentJalaali2["default"].jIsLeapYear(year)) return 30;else if (month === 12 && !_momentJalaali2["default"].jIsLeapYear(year)) return 29;
-  };
   function DateTimePicker(props) {
     var id = props.id,
       placeholder = props.placeholder,
@@ -97,6 +94,7 @@
       inputComponent = props.inputComponent,
       _props$preSelected = props.preSelected,
       preSelected = _props$preSelected === void 0 ? "" : _props$preSelected,
+      newThemeColor = props.newThemeColor,
       cancelOnBackgroundClick = props.cancelOnBackgroundClick;
     var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -126,13 +124,13 @@
       _useState14 = _slicedToArray(_useState13, 2),
       inputValue = _useState14[0],
       setInputValue = _useState14[1];
-    var _useState15 = (0, _react.useState)(daysInMonth((0, _momentJalaali2["default"])().format("jMM"), (0, _momentJalaali2["default"])().format("jYYYY"))),
+    var _useState15 = (0, _react.useState)((0, _index.daysInMonth)((0, _momentJalaali2["default"])().format("jMM"), (0, _momentJalaali2["default"])().format("jYYYY"))),
       _useState16 = _slicedToArray(_useState15, 2),
       daysCount = _useState16[0],
       setDaysCount = _useState16[1];
     (0, _react.useEffect)(function () {
       if (canUseDOM && !document.getElementById("jdstyle")) {
-        var css = (0, _Styles2["default"])(selectedMonthFirstDay);
+        var css = (0, _Styles2["default"])(newThemeColor);
         var head = document.head || document.getElementsByTagName("head")[0];
         var style = document.createElement("style");
         style.type = "text/css";
@@ -140,7 +138,7 @@
         style.appendChild(document.createTextNode(css));
         head.appendChild(style);
       }
-    }, [selectedMonthFirstDay]);
+    }, []);
     (0, _react.useEffect)(function () {
       if (props.controlValue && props.preSelected !== selectedDay) {
         setSelectedDay((0, _momentJalaali2["default"])(preSelected, props.format).format("jYYYYjMMjDD"));
@@ -164,15 +162,15 @@
       var year = selectedYear;
       if (month === 0) {
         setCurrentMonth(12);
-        setDaysCount(daysInMonth(12, year - 1));
+        setDaysCount((0, _index.daysInMonth)(12, year - 1));
         setSelectedYear(year - 1);
       } else if (month === 13) {
         setCurrentMonth(1);
-        setDaysCount(daysInMonth(1, year + 1));
+        setDaysCount((0, _index.daysInMonth)(1, year + 1));
         setSelectedYear(year + 1);
       } else {
         setCurrentMonth(month);
-        setDaysCount(daysInMonth(month, year));
+        setDaysCount((0, _index.daysInMonth)(month, year));
       }
       firstDayOfMonth(month === 0 ? 12 : month === 13 ? 1 : month, month === 0 ? year - 1 : month === 13 ? year + 1 : year);
     };
@@ -258,7 +256,9 @@
       daysCount: daysCount,
       firstDay: selectedMonthFirstDay,
       clickEvent: daysClicked
-    }), /*#__PURE__*/_react2["default"].createElement("div", null, /*#__PURE__*/_react2["default"].createElement("button", {
+    }), /*#__PURE__*/_react2["default"].createElement("div", {
+      className: "JDfooter"
+    }, /*#__PURE__*/_react2["default"].createElement("button", {
       onClick: submitHandler,
       className: "JDsubmit"
     }, "\u062A\u0627\u06CC\u06CC\u062F"), /*#__PURE__*/_react2["default"].createElement("button", {

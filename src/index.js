@@ -31,6 +31,7 @@ function JDatePicker(props) {
     cancelOnBackgroundClick,
     onChange,
     preSelected = "",
+    newThemeColor,
     format = "jYYYY-jMM-jDD"
   } = props;
 
@@ -45,7 +46,7 @@ function JDatePicker(props) {
 
   useEffect(() => {
     if (canUseDOM && !document.getElementById("jdstyle")) {
-      const css = Styles(selectedMonthFirstDay);
+      const css = Styles(newThemeColor);
       const head = document.head || document.getElementsByTagName("head")[0];
       const style = document.createElement("style");
 
@@ -54,7 +55,7 @@ function JDatePicker(props) {
       style.appendChild(document.createTextNode(css));
       head.appendChild(style);
     }
-  }, [selectedMonthFirstDay]);
+  }, []);
 
   useEffect(() => {
     if (controlValue && preSelected !== selectedDay) {
